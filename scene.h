@@ -13,6 +13,8 @@ struct Player { // 要素数を可変にしたい場合は、packSceneとreceive
 
 	char name;
 	int x, y; //キャラの座標
+	int imagenumber; //キャラの絵
+	int rx,ry; //ラケットの座標
 	int ballspeed; //キャラ固有の打球球速
 	int runspeed; //キャラの移動速度
 	int spin; //キャラ固有のスピン量
