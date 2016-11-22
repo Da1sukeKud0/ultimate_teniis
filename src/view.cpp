@@ -7,6 +7,7 @@
 #include "view.h"
 #include "manager.h"
 #include "mynetwork.h"
+#include "input.h" //追記
 #include <string.h>
 
 using namespace std;
@@ -71,9 +72,9 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		return true;
 	}
 	//	std::cout << "Exposed" << std::endl;
-	int ls = fmin(this->get_width() * 0.5f, this->get_height() * 0.5f);
-	int lm = fmin(this->get_width() * 0.4f, this->get_height() * 0.4f);
-	int lh = fmin(this->get_width() * 0.25f, this->get_height() * 0.25f);
+	//int ls = fmin(this->get_width() * 0.5f, this->get_height() * 0.5f);
+	//int lm = fmin(this->get_width() * 0.4f, this->get_height() * 0.4f);
+	//int lh = fmin(this->get_width() * 0.25f, this->get_height() * 0.25f);
 
 #ifdef USE_OPENGL
 	int z=ls/30;
@@ -235,23 +236,32 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 }*/
 
 	//こっから追記
-	Cairo::RefPtr<Cairo::ImageSurface> png, png2, court;
-	png = Cairo::ImageSurface::create_from_png("sample.png"); // 画像読み込み
-	png2 = Cairo::ImageSurface::create_from_png("sample2.png");
-	court = Cairo::ImageSurface::create_from_png("court.png");
+
 
 	cc->save();
+	Cairo::RefPtr<Cairo::ImageSurface> court, myplayer,myplayer2;
+	court = Cairo::ImageSurface::create_from_png("court.png");
 	cc->scale(1.0, 1.0);
 	cc->set_source(court, 0, 0);
-	//cc->set_source(png, scene.pic.picx, scene.pic.picy);
-
-	//if (scene.pic.change == 1) {
-
-	//cc->set_source(png2, scene.pic.picx, scene.pic.picy);
-
-	//}
 	cc->paint();
+	cc->restore();
 
+	cc->save();
+	myplayer = Cairo::ImageSurface::create_from_png("player.png");
+	cc->scale(1.0, 1.0);
+	cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+	cc->paint();
+	if (scene.pic.change == 1) {
+		myplayer2 = Cairo::ImageSurface::create_from_png("sample.png");
+		cc->set_source(myplayer2, scene.mp.x, scene.mp.y);
+		cc->paint();
+	}
+
+	cc->restore();
+
+
+	//得点板
+	cc->save();
 	cc->set_source_rgb(0.1, 0.1, 0.1);
 	cc->set_line_width(2.0);
 	cc->move_to(8, 8);
@@ -291,7 +301,24 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	cc->set_font_size(22);
 	cc->move_to(10, 68);
 	cc->show_text(string("P2"));
+	//ゲーム数・得点表示
+	cc->set_font_size(22);
+	cc->move_to(43, 35);
+	cc->show_text(string("1"));
+
+	cc->set_font_size(22);
+	cc->move_to(43, 68);
+	cc->show_text(string("2"));
+
+	cc->set_font_size(22);
+	cc->move_to(76, 35);
+	cc->show_text(string("１"));
+
+	cc->set_font_size(22);
+	cc->move_to(76, 68);
+	cc->show_text(string("２"));
 	cc->restore();
+
 //追記終わり
 
 	/*針・点

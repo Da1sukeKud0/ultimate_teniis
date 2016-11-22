@@ -14,15 +14,13 @@ struct Dot {
 const int max_dots = 5;
 struct Player { // 要素数を可変にしたい場合は、packSceneとreceiveSceneを注意深く書き直す必要がある
 	char name[20];
-	int x, y;
-	double ax, ay, az;
+	double x, y;
 	Dot dots[max_dots];
 	int curDots;
-
 };
 
-struct imgcircle{
-	int picx,picy,change;
+struct imgcircle {
+	int picx, picy, change;
 };
 
 typedef std::map<int, Player> Players;
@@ -33,12 +31,16 @@ public:
 	struct tm tm;
 	imgcircle pic;
 	Players p;
+	Player mp;
 	int id;
 	void receiveScene(char *);
 	char *packScene(int &len);
 	bool valid;
 	void init();
-	Scene(){init();};
+	Scene() {
+		init();
+	}
+	;
 
 private:
 	char buffer[max_scenelen];

@@ -57,9 +57,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//追記
 	for (int i = 0; i < max_dots; ++i) {
-		scene.pic.picx += (input.right - input.left) * 2;
-		scene.pic.picy += (input.down - input.up) * 2;
+		scene.mp.x += (input.right - input.left) * 2;
+		scene.mp.y += (input.down - input.up) * 2;
 	}
+
 
 	if (input.x != (-1)) {
 		player.dots[player.curDots].x = input.x;
@@ -68,17 +69,15 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		player.curDots = (player.curDots + 1) % max_dots;
 
 		//追記
-		scene.pic.picx = input.x;
-		scene.pic.picy = input.y;
+		scene.mp.x = input.x;
+		scene.mp.y = input.y;
 	}
 
-	if (input.w != (-1)) {
+	if (input.w != (-1)) { //追記
 	scene.pic.change = input.w;
 	}
 
-	player.ax = input.ax;
-	player.ay = input.ay;
-	player.az = input.az;
+
 	if (input.key != 0) {
 		scene.c[0] = input.key;
 	}

@@ -100,9 +100,9 @@ void Input::reset_key(GdkEventKey* k) {
 		break;
 	case GDK_KEY_w:
 		if (input.w == 0) {
-			input.w = 0;
-		} else if (input.w == 1) {
 			input.w = 1;
+		} else if (input.w == 1) {
+			input.w = 0;
 		}
 		break;
 	default:

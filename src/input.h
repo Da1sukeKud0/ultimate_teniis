@@ -37,6 +37,7 @@ public:
 	void set_input(int argx, int argy);
 	void set_SmaphoInput(int argx, int argy);
 	void set_angle(double, double, double);
+	//void player_move(double movex,double movey); //追記
 	InputData input;
 private:
 	Input(){
