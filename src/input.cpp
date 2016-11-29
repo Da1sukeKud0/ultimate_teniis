@@ -2,7 +2,7 @@
  * input.cpp
  * InputDataをパケットに詰め込むpack関数と、パケットからメンバに取り込むreceive関数
  * 各種入力デバイスからのイベントを、InputDataへ反映させる方法を定める関数
- */
+*/
 
 //キーボード上との対応をcaseで取る
 #include "input.h"
@@ -66,12 +66,15 @@ void Input::set_key(GdkEventKey* k) {
 		input.right = 1;
 		break;
 	case GDK_KEY_w:
-		if (input.w == 0) {
+		//if (input.w == 0) {
 			input.w = 1;
-		} else if (input.w == 1) {
-			input.w = 0;
-		}
+		//} else if (input.w == 1) {
+			//input.w = 0;
+		//}
 		break;
+	case GDK_KEY_space:
+			input.space = 1;
+			break;
 	default:
 		if (GDK_KEY_A <= k->keyval && k->keyval <= GDK_KEY_z) {
 			input.key = k->keyval;
@@ -99,12 +102,15 @@ void Input::reset_key(GdkEventKey* k) {
 		input.right = 0;
 		break;
 	case GDK_KEY_w:
-		if (input.w == 0) {
-			input.w = 1;
-		} else if (input.w == 1) {
+		//if (input.w == 0) {
+			//input.w = 1;
+		//} else if (input.w == 1) {
 			input.w = 0;
-		}
+		//}
 		break;
+	case GDK_KEY_space:
+			input.space = 0;
+			break;
 	default:
 		if (GDK_KEY_A <= k->keyval && k->keyval <= GDK_KEY_z) {
 			input.key = 0;

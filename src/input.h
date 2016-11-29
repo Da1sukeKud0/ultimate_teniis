@@ -18,6 +18,7 @@ struct InputData { // 要素数を可変にしたい場合は、packInputとrece
 	int up, down, left, right;
 	int x, y;
 	int key;
+	int space;
 	double ax, ay, az;
 	int w;
 };

@@ -398,6 +398,7 @@ bool MyDrawingArea::on_key_release_event(GdkEventKey* k) {
 bool MyDrawingArea::on_button_press_event(GdkEventButton* event) {
 	Input &input = Input::getInstance();
 	input.set_input(event->x, event->y);
+	cout << event->x << "," << event->y << endl;
 	return true;
 }
 
