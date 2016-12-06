@@ -70,23 +70,25 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//通常得点
 	void scorecalc() {
+		//xの得点
 		if (scene.pic.getpointx == 1) {
 
 			if (scene.s.sx < 2) {
-				scene.s.sx++;
+				scene.s.sx++; //通常得点
 				scene.pic.getpointx = 0;
 			}
 
-			if (scene.s.sy != 4 && scene.s.sy != 5 && scene.s.sx == 3) {
+			if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
 				gameset(1);
 			} //通常勝利
 
-			if (scene.s.sy == 2 && scene.s.sy == 2) {
+			if (scene.s.sy == 3 && scene.s.sy == 3) { //40vs40
+				scene.s.sx = 4;
 				Avemode();
 			}
 
 		}
-
+		//yの得点
 		if (scene.pic.getpointy == 1) {
 
 			if (scene.s.sy < 2) {
@@ -94,26 +96,42 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 				scene.pic.getpointy = 0;
 			}
 
-			if (scene.s.sx != 4 && scene.s.sx != 5 && scene.s.sy == 3) {
+			if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
 				gameset(2);
 			} //通常勝利
 
-			if (scene.s.sx == 2 && scene.s.sx == 2) {
+			if (scene.s.sx == 3 && scene.s.sx == 3) { //40vs40
+				scene.s.sy = 4;
 				Avemode();
 			}
 		}
 	}
 
-	int Avemode() {
-		if (scene.s.sx == 3) {
-			gameset()
-		} //Ave勝利
+	void Avemode() {
+
+		if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
+			if (scene.pic.getpointx == 1) {
+				gameset(1);
+			}
+			if (scene.pic.getpointy == 1) {
+				gameset(2);
+			}
+		}
+
+		if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
+			if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+				scene.s.sx = 4;
+				scene.s.sy = 4;
+			}
+		}
 	}
 
-	void gameset(int x) {
-		if (x == 1) {
+
+
+	void gameset(int i) {
+		if (i == 1) {
 		} //xのセット＋１
-		if (x == 2) {
+		if (i == 2) {
 		} //yのセット＋１
 
 		scene.pic.getpointx = 0;
