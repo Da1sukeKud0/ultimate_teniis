@@ -334,23 +334,23 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	if (scene.s.sy == 0) {
 		cc->set_font_size(22);
-		cc->move_to(43, 35);
+		cc->move_to(43, 68);
 		cc->show_text(string("0"));
 	} else if (scene.s.sy == 1) {
-		cc->set_font_size(22);
+		cc->set_font_size(68);
 		cc->move_to(43, 35);
 		cc->show_text(string("15"));
 	} else if (scene.s.sy == 2) {
 		cc->set_font_size(22);
-		cc->move_to(43, 35);
+		cc->move_to(43, 68);
 		cc->show_text(string("30"));
 	} else if (scene.s.sy == 3) {
-		cc->set_font_size(22);
+		cc->set_font_size(68);
 		cc->move_to(43, 35);
 		cc->show_text(string("40"));
 	} else if (scene.s.sy == 4) {
 		cc->set_font_size(22);
-		cc->move_to(43, 35);
+		cc->move_to(43, 68);
 		cc->show_text(string("Ave"));
 	}
 
