@@ -9,6 +9,7 @@
 #include "model.h"
 #include "manager.h"
 #include "input.h"
+#include "scene.h"
 
 void Model::initModel(void) {
 //	std::cout << "Init" << std::endl;
@@ -48,7 +49,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			break;
 	}
 	Player &player = scene.p[id];
-	//imgcircle &ic=scene.pic; 短縮
+
+	//ゲーム開始時の動作
+	if (scene.pic.service == 0){
+		scene.mp.y = 364;
+	}
+
 
 	for (int i = 0; i < max_dots; ++i) {
 		player.dots[i].x += (input.right - input.left) * 5;
@@ -60,7 +66,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.mp.x += (input.right - input.left) * 2;
 		scene.mp.y += (input.down - input.up) * 2;
 	}
-
 
 	if (input.x != (-1)) {
 		player.dots[player.curDots].x = input.x;
@@ -74,9 +79,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 
 	if (input.w != (-1)) { //追記
-	scene.pic.change = input.w;
+		scene.pic.change = input.w;
 	}
-
 
 	if (input.key != 0) {
 		scene.c[0] = input.key;

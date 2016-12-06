@@ -19,8 +19,8 @@ struct Player { // 要素数を可変にしたい場合は、packSceneとreceive
 	int curDots;
 };
 
-struct imgcircle {
-	int picx, picy, change;
+struct game {
+	int change,service;
 };
 
 typedef std::map<int, Player> Players;
@@ -29,7 +29,7 @@ class Scene {
 public:
 	char c[2];
 	struct tm tm;
-	imgcircle pic;
+	game pic;
 	Players p;
 	Player mp;
 	int id;
