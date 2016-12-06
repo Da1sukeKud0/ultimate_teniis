@@ -72,6 +72,9 @@ void Input::set_key(GdkEventKey* k) {
 			//input.w = 0;
 		//}
 		break;
+	case GDK_KEY_s://追記1129
+			input.score += 1;
+			break;
 	case GDK_KEY_space:
 			input.space = 1;
 			break;
@@ -110,6 +113,9 @@ void Input::reset_key(GdkEventKey* k) {
 		break;
 	case GDK_KEY_space:
 			input.space = 0;
+			break;
+	case GDK_KEY_s://追記1129
+			input.score += 0;
 			break;
 	default:
 		if (GDK_KEY_A <= k->keyval && k->keyval <= GDK_KEY_z) {

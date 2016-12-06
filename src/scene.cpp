@@ -65,5 +65,11 @@ void Scene::init(void) {
 	pic.change = 0;
 	mp.x = 0;
 	mp.y = 0;
+	s.sx = 0; //追記1129
+	s.sy = 0; //追記1129
+	b.x = 200;
+	b.y = 364;
+	b.vx = 10;
+	b.vy = 10;
 
-}
+	}

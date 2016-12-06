@@ -77,6 +77,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	scene.pic.change = input.w;
 	}
 
+	if (input.score != (-1)) { //追記1129
+		scene.s.sx = input.score;
+		}
+
 
 	if (input.key != 0) {
 		scene.c[0] = input.key;

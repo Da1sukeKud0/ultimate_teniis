@@ -19,8 +19,22 @@ struct Player { // 要素数を可変にしたい場合は、packSceneとreceive
 	int curDots;
 };
 
+struct score {//追記1129
+	int sx, sy;
+};
+
 struct imgcircle {
 	int picx, picy, change;
+};
+
+struct ball{
+	int x, y;
+	int vx, vy;
+};
+
+struct ballshadow{
+	int x,y;
+	int ax,ay;
 };
 
 typedef std::map<int, Player> Players;
@@ -32,6 +46,9 @@ public:
 	imgcircle pic;
 	Players p;
 	Player mp;
+	score s;
+	ball b;
+	ballshadow bs;
 	int id;
 	void receiveScene(char *);
 	char *packScene(int &len);

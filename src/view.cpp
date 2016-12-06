@@ -39,17 +39,17 @@ void MyDrawingArea::on_realize(void) {
 }
 
 #if GTKMM3
-bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc ) {
+bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	Gtk::DrawingArea::on_draw(cc);
 	Manager &mgr = Manager::getInstance();
-	Scene &scene=mgr.scene;
-#else
-bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
-	Cairo::RefPtr<Cairo::Context> cc =
-			this->get_window()->create_cairo_context();
-	Gtk::DrawingArea::on_expose_event(e);
-	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
+#else
+	bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
+		Cairo::RefPtr<Cairo::Context> cc =
+		this->get_window()->create_cairo_context();
+		Gtk::DrawingArea::on_expose_event(e);
+		Manager &mgr = Manager::getInstance();
+		Scene &scene = mgr.scene;
 
 #endif
 	if (!scene.valid) {
@@ -203,7 +203,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	if (gdk_gl_drawable_is_double_buffered(gl_drawable)) {
 		gdk_gl_drawable_swap_buffers(gl_drawable);
-	} else {
+	} else {cc->restore();
 		glFlush();
 	}
 	gdk_gl_drawable_gl_end(gl_drawable);
@@ -236,10 +236,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 }*/
 
 	//こっから追記
-
-
 	cc->save();
-	Cairo::RefPtr<Cairo::ImageSurface> court, myplayer,myplayer2;
+	Cairo::RefPtr<Cairo::ImageSurface> court, myplayer, myplayer2, ball;
 	court = Cairo::ImageSurface::create_from_png("court.png");
 	cc->scale(1.0, 1.0);
 	cc->set_source(court, 0, 0);
@@ -259,6 +257,12 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	cc->restore();
 
+	cc->save();
+	ball = Cairo::ImageSurface::create_from_png("ball.png");
+	cc->scale(1.0, 1.0);
+	cc->set_source(ball, 200, 364);
+	cc->paint();
+	cc->restore();
 
 	//得点板
 	cc->save();
@@ -302,21 +306,60 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	cc->move_to(10, 68);
 	cc->show_text(string("P2"));
 	//ゲーム数・得点表示
-	cc->set_font_size(22);
-	cc->move_to(43, 35);
-	cc->show_text(string("1"));
+	int aa = 0, bb = 0, dd = 0, ee = 0;
+
+	if (scene.s.sx == 0) {
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(to_string(aa));
+	} else if (scene.s.sx == 1) {
+		aa = 15;
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(to_string(aa));
+	} else if (scene.s.sx == 2) {
+		aa = 30;
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(to_string(aa));
+	} else if (scene.s.sx == 3) {
+		aa = 40;
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(to_string(aa));
+	} else if (scene.s.sx == 4) {
+		aa = 0;
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(to_string(aa));
+	}
 
 	cc->set_font_size(22);
 	cc->move_to(43, 68);
-	cc->show_text(string("2"));
+	cc->show_text(to_string(aa));
 
 	cc->set_font_size(22);
 	cc->move_to(76, 35);
-	cc->show_text(string("１"));
+	cc->show_text(to_string(aa));
 
 	cc->set_font_size(22);
 	cc->move_to(76, 68);
-	cc->show_text(string("２"));
+	cc->show_text(to_string(aa));
+
+	if (scene.s.sx == 1) {
+		bb += 15;
+	}
+
+	if (aa == 60) {
+		dd += 1;
+		aa = 0;
+	}
+
+	if (ee == 60) {
+		ee += 1;
+		bb = 0;
+	}
+
 	cc->restore();
 
 //追記終わり
