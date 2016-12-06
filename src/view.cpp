@@ -44,12 +44,12 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 #else
-	bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
-		Cairo::RefPtr<Cairo::Context> cc =
-		this->get_window()->create_cairo_context();
-		Gtk::DrawingArea::on_expose_event(e);
-		Manager &mgr = Manager::getInstance();
-		Scene &scene = mgr.scene;
+bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
+	Cairo::RefPtr<Cairo::Context> cc =
+			this->get_window()->create_cairo_context();
+	Gtk::DrawingArea::on_expose_event(e);
+	Manager &mgr = Manager::getInstance();
+	Scene &scene = mgr.scene;
 
 #endif
 	if (!scene.valid) {
@@ -246,10 +246,10 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 	cc->save();
 	if (scene.pic.change == 0) {
-	myplayer = Cairo::ImageSurface::create_from_png("player.png");
-	cc->scale(1.0, 1.0);
-	cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-	cc->paint();
+		myplayer = Cairo::ImageSurface::create_from_png("player.png");
+		cc->scale(1.0, 1.0);
+		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+		cc->paint();
 	}
 	if (scene.pic.change == 1) {
 		myplayer = Cairo::ImageSurface::create_from_png("sample.png");
@@ -308,313 +308,307 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	cc->set_font_size(22);
 	cc->move_to(10, 68);
 	cc->show_text(string("P2"));
-	//ゲーム数・得点表示
-	int aa = 0, bb = 0, dd = 0, ee = 0;
 
+	//ゲーム数・得点表示
 	if (scene.s.sx == 0) {
 		cc->set_font_size(22);
 		cc->move_to(43, 35);
-		cc->show_text(to_string(aa));
+		cc->show_text(string("0"));
 	} else if (scene.s.sx == 1) {
-		aa = 15;
 		cc->set_font_size(22);
 		cc->move_to(43, 35);
-		cc->show_text(to_string(aa));
+		cc->show_text(string("15"));
 	} else if (scene.s.sx == 2) {
-		aa = 30;
 		cc->set_font_size(22);
 		cc->move_to(43, 35);
-		cc->show_text(to_string(aa));
+		cc->show_text(string("30"));
 	} else if (scene.s.sx == 3) {
-		aa = 40;
 		cc->set_font_size(22);
 		cc->move_to(43, 35);
-		cc->show_text(to_string(aa));
+		cc->show_text(string("40"));
 	} else if (scene.s.sx == 4) {
-		aa = 0;
 		cc->set_font_size(22);
 		cc->move_to(43, 35);
-		cc->show_text(to_string(aa));
+		cc->show_text(string("Ave"));
 	}
 
-	cc->set_font_size(22);
-	cc->move_to(43, 68);
-	cc->show_text(to_string(aa));
-
-	cc->set_font_size(22);
-	cc->move_to(76, 35);
-	cc->show_text(to_string(aa));
-
-	cc->set_font_size(22);
-	cc->move_to(76, 68);
-	cc->show_text(to_string(aa));
-
-	if (scene.s.sx == 1) {
-		bb += 15;
+	if (scene.s.sy == 0) {
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(string("0"));
+	} else if (scene.s.sy == 1) {
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(string("15"));
+	} else if (scene.s.sy == 2) {
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(string("30"));
+	} else if (scene.s.sy == 3) {
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(string("40"));
+	} else if (scene.s.sy == 4) {
+		cc->set_font_size(22);
+		cc->move_to(43, 35);
+		cc->show_text(string("Ave"));
 	}
 
-	if (aa == 60) {
-		dd += 1;
-		aa = 0;
-	}
 
-	if (ee == 60) {
-		ee += 1;
-		bb = 0;
-	}
-
-	cc->restore();
+		cc->restore();
 
 //追記終わり
 
-	/*針・点
-	 cc->set_font_size(16);
-	 cc->move_to((double)(ls+ls*sin(2.0*M_PI*scene.tm.tm_sec/60)),
-	 (double)(ls-ls*cos(2.0*M_PI*scene.tm.tm_sec/60)));
-	 cc->show_text(std::string(scene.c).c_str());
-	 cc->move_to(4, 20);
+		/*針・点
+		 cc->set_font_size(16);
+		 cc->move_to((double)(ls+ls*sin(2.0*M_PI*scene.tm.tm_sec/60)),
+		 (double)(ls-ls*cos(2.0*M_PI*scene.tm.tm_sec/60)));
+		 cc->show_text(std::string(scene.c).c_str());
+		 cc->move_to(4, 20);
 
-	 if(scene.id==-1){
-	 cc->show_text(std::string("Standalone"));
-	 }else if(scene.id==0){
-	 cc->show_text(std::string("Server"));
-	 }else{
-	 cc->show_text(std::string("Client #")+std::to_string(scene.id));
-	 }
+		 if(scene.id==-1){
+		 cc->show_text(std::string("Standalone"));
+		 }else if(scene.id==0){
+		 cc->show_text(std::string("Server"));
+		 }else{
+		 cc->show_text(std::string("Client #")+std::to_string(scene.id));
+		 }
 
-	 cc->set_line_width(3.0); // second hand
-	 cc->set_source_rgb(0.0, 0.0, 1.0);
-	 cc->move_to(ls, ls);
-	 cc->line_to((double)(ls+ls*sin(2.0*M_PI*scene.tm.tm_sec/60)),
-	 (double)(ls-ls*cos(2.0*M_PI*scene.tm.tm_sec/60)));
-	 cc->stroke();
+		 cc->set_line_width(3.0); // second hand
+		 cc->set_source_rgb(0.0, 0.0, 1.0);
+		 cc->move_to(ls, ls);
+		 cc->line_to((double)(ls+ls*sin(2.0*M_PI*scene.tm.tm_sec/60)),
+		 (double)(ls-ls*cos(2.0*M_PI*scene.tm.tm_sec/60)));
+		 cc->stroke();
 
-	 cc->set_line_width(8.0); // minute hand
-	 cc->set_source_rgb(0.0, 1.0, 0.0);
-	 cc->move_to(ls, ls);
-	 cc->line_to((double)(ls+lm*sin(2.0*M_PI*(scene.tm.tm_min/60.0+scene.tm.tm_sec/3600.0))),
-	 (double)(ls-lm*cos(2.0*M_PI*(scene.tm.tm_min/60.0+scene.tm.tm_sec/3600.0))));
-	 cc->stroke();
+		 cc->set_line_width(8.0); // minute hand
+		 cc->set_source_rgb(0.0, 1.0, 0.0);
+		 cc->move_to(ls, ls);
+		 cc->line_to((double)(ls+lm*sin(2.0*M_PI*(scene.tm.tm_min/60.0+scene.tm.tm_sec/3600.0))),
+		 (double)(ls-lm*cos(2.0*M_PI*(scene.tm.tm_min/60.0+scene.tm.tm_sec/3600.0))));
+		 cc->stroke();
 
-	 cc->set_line_width(10.0); // hour hand
-	 cc->set_source_rgb(1.0, 0.0, 0.0);
-	 cc->move_to(ls, ls);
-	 cc->line_to((double)(ls+lh*sin(2.0*M_PI*(scene.tm.tm_hour/12.0+scene.tm.tm_min/720.0))),
-	 (double)(ls-lh*cos(2.0*M_PI*(scene.tm.tm_hour/12.0+scene.tm.tm_min/720.0))));
-	 cc->stroke();
+		 cc->set_line_width(10.0); // hour hand
+		 cc->set_source_rgb(1.0, 0.0, 0.0);
+		 cc->move_to(ls, ls);
+		 cc->line_to((double)(ls+lh*sin(2.0*M_PI*(scene.tm.tm_hour/12.0+scene.tm.tm_min/720.0))),
+		 (double)(ls-lh*cos(2.0*M_PI*(scene.tm.tm_hour/12.0+scene.tm.tm_min/720.0))));
+		 cc->stroke();
 
-	 cc->set_line_width(5.0);
-	 cc->set_source_rgb(1.0, 0.0, 0.0);
+		 cc->set_line_width(5.0);
+		 cc->set_source_rgb(1.0, 0.0, 0.0);
 
-	 for(Players::iterator p=scene.p.begin(); p!=scene.p.end(); ++p){
-	 cc->set_source_rgb(((p->first+1)&1)>0, ((p->first+1)&2)>0, ((p->first+1)&4)>0);
-	 for(int j=0; j<max_dots; ++j){
-	 if(p->second.dots[j].visible==1){
-	 cc->arc((double)p->second.dots[j].x, (double)p->second.dots[j].y,
-	 5.0, 0.0, (double)(2.0*M_PI));
-	 cc->stroke();
-	 }
-	 }
-	 }
-	 */
+		 for(Players::iterator p=scene.p.begin(); p!=scene.p.end(); ++p){
+		 cc->set_source_rgb(((p->first+1)&1)>0, ((p->first+1)&2)>0, ((p->first+1)&4)>0);
+		 for(int j=0; j<max_dots; ++j){
+		 if(p->second.dots[j].visible==1){
+		 cc->arc((double)p->second.dots[j].x, (double)p->second.dots[j].y,
+		 5.0, 0.0, (double)(2.0*M_PI));
+		 cc->stroke();
+		 }
+		 }
+		 }
+		 */
 #endif
-	scene.valid = false;
+		scene.valid = false;
 
-	return true;
-}
+		return true;
+	}
 
-void MyDrawingArea::update() {
-	this->queue_draw();
-}
+	void MyDrawingArea::update() {
+		this->queue_draw();
+	}
 
 // PressイベントとReleaseイベントの両方を見ることで
 // 押し続けている状態を把握できるようにできる
-bool MyDrawingArea::on_key_press_event(GdkEventKey* k) {
-	Input &input = Input::getInstance();
-	input.set_key(k);
-	return false;
-}
+	bool MyDrawingArea::on_key_press_event(GdkEventKey* k) {
+		Input &input = Input::getInstance();
+		input.set_key(k);
+		return false;
+	}
 
-bool MyDrawingArea::on_key_release_event(GdkEventKey* k) {
-	Input &input = Input::getInstance();
-	input.reset_key(k);
-	return true;
-}
+	bool MyDrawingArea::on_key_release_event(GdkEventKey* k) {
+		Input &input = Input::getInstance();
+		input.reset_key(k);
+		return true;
+	}
 
-bool MyDrawingArea::on_button_press_event(GdkEventButton* event) {
-	Input &input = Input::getInstance();
-	input.set_input(event->x, event->y);
-	cout << event->x << "," << event->y << endl;
-	return true;
-}
+	bool MyDrawingArea::on_button_press_event(GdkEventButton* event) {
+		Input &input = Input::getInstance();
+		input.set_input(event->x, event->y);
+		cout << event->x << "," << event->y << endl;
+		return true;
+	}
 
-MyImageMenuItem::MyImageMenuItem(BaseObjectType* o,
-		const Glib::RefPtr<Gtk::Builder>& g) :
-		Gtk::ImageMenuItem(o) {
-	menuId = -1;
-}
+	MyImageMenuItem::MyImageMenuItem(BaseObjectType* o,
+			const Glib::RefPtr<Gtk::Builder>& g) :
+	Gtk::ImageMenuItem(o) {
+		menuId = -1;
+	}
 
-void MyImageMenuItem::on_activate(void) {
-	Gtk::ImageMenuItem::on_activate();
+	void MyImageMenuItem::on_activate(void) {
+		Gtk::ImageMenuItem::on_activate();
 
-	Manager &mgr = Manager::getInstance();
-	MyNetwork &net = MyNetwork::getInstance();
-	ViewManager &vmr = ViewManager::getInstance();
+		Manager &mgr = Manager::getInstance();
+		MyNetwork &net = MyNetwork::getInstance();
+		ViewManager &vmr = ViewManager::getInstance();
 
-	switch (menuId) {
-	case 0:
-		vmr.menu[0]->set_sensitive(false);
-		vmr.menu[1]->set_sensitive(true);
-		vmr.menu[2]->set_sensitive(false);
-		vmr.menu[4]->set_sensitive(false);
-		mgr.set_state(Manager::Run);
-		vmr.push(std::string("Run"));
+		switch (menuId) {
+		case 0:
+			vmr.menu[0]->set_sensitive(false);
+			vmr.menu[1]->set_sensitive(true);
+			vmr.menu[2]->set_sensitive(false);
+			vmr.menu[4]->set_sensitive(false);
+			mgr.set_state(Manager::Run);
+			vmr.push(std::string("Run"));
+			switch (mgr.get_mode()) {
+			case Manager::Standalone:
+				mgr.init_objects();
+				mgr.startStandaloneTick(vmr.name->get_text());
+				break;
+			case Manager::Server:
+				mgr.init_objects();
+				net.runServer();
+				break;
+			case Manager::Client:
+				net.runClient();
+				break;
+			}
+			break;
+		case 1:
+			vmr.menu[0]->set_sensitive(true);
+			vmr.menu[1]->set_sensitive(false);
+			vmr.menu[2]->set_sensitive(true);
+			vmr.menu[4]->set_sensitive(true);
+			mgr.set_state(Manager::Stop);
+			vmr.push(std::string("Stop"));
+			switch (mgr.get_mode()) {
+			case Manager::Server:
+				net.stopServer();
+				break;
+			case Manager::Client:
+				net.stopClient();
+				break;
+			default:
+				break;
+			}
+			break;
+		case 2:
+			vmr.subWindow->show();
+			break;
+		case 3:
+			vmr.chooser->show();
+			break;
+		case 4:
+			net.disconnect();
+			net.closeServer();
+			exit(0);
+		}
+	}
+
+	MyStatusbar::MyStatusbar(BaseObjectType* o, const Glib::RefPtr<Gtk::Builder>& g) :
+	Gtk::Statusbar(o) {
+		statusId = 0;
+	}
+
+	void MyStatusbar::pushTemp(std::string s) {
+		push(s, statusId);
+		sigc::slot<bool> slot = sigc::bind(
+				sigc::mem_fun(*this, &MyStatusbar::erase), statusId);
+		Glib::signal_timeout().connect(slot, 5000);
+		statusId++;
+	}
+
+	bool MyStatusbar::erase(int i) {
+		pop(i);
+		return false;
+	}
+
+	void ViewManager::subCancel(void) {
+		chooser->hide();
+	}
+
+	void ViewManager::subSend(void) {
+		MySmartphone &smapho = MySmartphone::getInstance();
+		if (smapho.isConnected()) {
+			smapho.sendImage((const char *) (chooser->get_filename().c_str()));
+		}
+		chooser->hide();
+	}
+
+	void ViewManager::subHide(void) {
+		Manager &mgr = Manager::getInstance();
+		MyNetwork &net = MyNetwork::getInstance();
+
+		if (server->get_active() && mgr.get_mode() != Manager::Server) {
+			net.disconnect();
+			if (net.startServer(std::atoi(sport->get_text().c_str()),
+					name->get_text().c_str())) {
+				mgr.set_mode(Manager::Server);
+			} else {
+				mgr.set_mode(Manager::Standalone);
+			}
+		} else if (client->get_active() && mgr.get_mode() != Manager::Client) {
+			net.closeServer();
+
+			if (net.connectClient(cip->get_text().c_str(),
+					std::atoi(cport->get_text().c_str()),
+					name->get_text().c_str())) {
+				mgr.set_mode(Manager::Client);
+			} else {
+				mgr.set_mode(Manager::Standalone);
+			}
+		} else {
+			net.closeServer();
+			net.disconnect();
+			mgr.set_mode(Manager::Standalone);
+		}
 		switch (mgr.get_mode()) {
 		case Manager::Standalone:
-			mgr.init_objects();
-			mgr.startStandaloneTick(vmr.name->get_text());
+			standalone->set_active();
 			break;
 		case Manager::Server:
-			mgr.init_objects();
-			net.runServer();
+			server->set_active();
 			break;
 		case Manager::Client:
-			net.runClient();
+			client->set_active();
 			break;
 		}
-		break;
-	case 1:
-		vmr.menu[0]->set_sensitive(true);
-		vmr.menu[1]->set_sensitive(false);
-		vmr.menu[2]->set_sensitive(true);
-		vmr.menu[4]->set_sensitive(true);
-		mgr.set_state(Manager::Stop);
-		vmr.push(std::string("Stop"));
-		switch (mgr.get_mode()) {
-		case Manager::Server:
-			net.stopServer();
-			break;
-		case Manager::Client:
-			net.stopClient();
-			break;
-		default:
-			break;
+		subWindow->hide();
+	}
+
+	Gtk::Window *ViewManager::init(Glib::RefPtr<Gtk::Builder> builder) {
+		builder->get_widget("window1", mainWindow);
+		builder->get_widget("window2", subWindow);
+		builder->get_widget("window3", chooser);
+		builder->get_widget("button1", ok);
+		ok->signal_clicked().connect(
+				sigc::mem_fun0(*this, &ViewManager::subHide));
+		builder->get_widget("button2", ok);
+		ok->signal_clicked().connect(
+				sigc::mem_fun0(*this, &ViewManager::subCancel));
+		builder->get_widget("button3", ok);
+		ok->signal_clicked().connect(
+				sigc::mem_fun0(*this, &ViewManager::subSend));
+		builder->get_widget("sip", sip);
+		builder->get_widget("sport", sport);
+		builder->get_widget("cip", cip);
+		builder->get_widget("cport", cport);
+		builder->get_widget("name", name);
+		builder->get_widget("standalone", standalone);
+		builder->get_widget("server", server);
+		builder->get_widget("client", client);
+		builder->get_widget_derived("drawingarea1", drawingArea);
+		builder->get_widget_derived("statusbar1", statusbar);
+		builder->get_widget_derived("Start", menu[0]);
+		builder->get_widget_derived("Stop", menu[1]);
+		menu[1]->set_sensitive(false);
+		builder->get_widget_derived("SetMode", menu[2]);
+		builder->get_widget_derived("SendImage", menu[3]);
+		menu[3]->set_sensitive(false);
+		builder->get_widget_derived("Quit", menu[4]);
+		for (int i = 0; i < 5; ++i) {
+			menu[i]->menuId = i;
 		}
-		break;
-	case 2:
-		vmr.subWindow->show();
-		break;
-	case 3:
-		vmr.chooser->show();
-		break;
-	case 4:
-		net.disconnect();
-		net.closeServer();
-		exit(0);
+		return mainWindow;
 	}
-}
-
-MyStatusbar::MyStatusbar(BaseObjectType* o, const Glib::RefPtr<Gtk::Builder>& g) :
-		Gtk::Statusbar(o) {
-	statusId = 0;
-}
-
-void MyStatusbar::pushTemp(std::string s) {
-	push(s, statusId);
-	sigc::slot<bool> slot = sigc::bind(
-			sigc::mem_fun(*this, &MyStatusbar::erase), statusId);
-	Glib::signal_timeout().connect(slot, 5000);
-	statusId++;
-}
-
-bool MyStatusbar::erase(int i) {
-	pop(i);
-	return false;
-}
-
-void ViewManager::subCancel(void) {
-	chooser->hide();
-}
-
-void ViewManager::subSend(void) {
-	MySmartphone &smapho = MySmartphone::getInstance();
-	if (smapho.isConnected()) {
-		smapho.sendImage((const char *) (chooser->get_filename().c_str()));
-	}
-	chooser->hide();
-}
-
-void ViewManager::subHide(void) {
-	Manager &mgr = Manager::getInstance();
-	MyNetwork &net = MyNetwork::getInstance();
-
-	if (server->get_active() && mgr.get_mode() != Manager::Server) {
-		net.disconnect();
-		if (net.startServer(std::atoi(sport->get_text().c_str()),
-				name->get_text().c_str())) {
-			mgr.set_mode(Manager::Server);
-		} else {
-			mgr.set_mode(Manager::Standalone);
-		}
-	} else if (client->get_active() && mgr.get_mode() != Manager::Client) {
-		net.closeServer();
-
-		if (net.connectClient(cip->get_text().c_str(),
-				std::atoi(cport->get_text().c_str()),
-				name->get_text().c_str())) {
-			mgr.set_mode(Manager::Client);
-		} else {
-			mgr.set_mode(Manager::Standalone);
-		}
-	} else {
-		net.closeServer();
-		net.disconnect();
-		mgr.set_mode(Manager::Standalone);
-	}
-	switch (mgr.get_mode()) {
-	case Manager::Standalone:
-		standalone->set_active();
-		break;
-	case Manager::Server:
-		server->set_active();
-		break;
-	case Manager::Client:
-		client->set_active();
-		break;
-	}
-	subWindow->hide();
-}
-
-Gtk::Window *ViewManager::init(Glib::RefPtr<Gtk::Builder> builder) {
-	builder->get_widget("window1", mainWindow);
-	builder->get_widget("window2", subWindow);
-	builder->get_widget("window3", chooser);
-	builder->get_widget("button1", ok);
-	ok->signal_clicked().connect(sigc::mem_fun0(*this, &ViewManager::subHide));
-	builder->get_widget("button2", ok);
-	ok->signal_clicked().connect(
-			sigc::mem_fun0(*this, &ViewManager::subCancel));
-	builder->get_widget("button3", ok);
-	ok->signal_clicked().connect(sigc::mem_fun0(*this, &ViewManager::subSend));
-	builder->get_widget("sip", sip);
-	builder->get_widget("sport", sport);
-	builder->get_widget("cip", cip);
-	builder->get_widget("cport", cport);
-	builder->get_widget("name", name);
-	builder->get_widget("standalone", standalone);
-	builder->get_widget("server", server);
-	builder->get_widget("client", client);
-	builder->get_widget_derived("drawingarea1", drawingArea);
-	builder->get_widget_derived("statusbar1", statusbar);
-	builder->get_widget_derived("Start", menu[0]);
-	builder->get_widget_derived("Stop", menu[1]);
-	menu[1]->set_sensitive(false);
-	builder->get_widget_derived("SetMode", menu[2]);
-	builder->get_widget_derived("SendImage", menu[3]);
-	menu[3]->set_sensitive(false);
-	builder->get_widget_derived("Quit", menu[4]);
-	for (int i = 0; i < 5; ++i) {
-		menu[i]->menuId = i;
-	}
-	return mainWindow;
-}

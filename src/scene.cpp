@@ -60,10 +60,10 @@ void Scene::init(void) {
 	//値の初期化を行う場合この辺で定義
 	p.clear();
 	valid = false;
-	pic.picx = 0;
-	pic.picy = 0;
 	pic.change = 0;
 	pic.service = 0;
+	pic.getpointx = 0;
+	pic.getpointy = 0;
 	mp.x = 0;
 	mp.y = 0;
 	s.sx = 0; //追記1129

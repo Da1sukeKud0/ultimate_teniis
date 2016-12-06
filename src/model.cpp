@@ -49,13 +49,77 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			break;
 	}
 	Player &player = scene.p[id];
-	//imgcircle &ic=scene.pic; 短縮
 
 	//ゲーム開始時の動作
-	if (scene.pic.service == 0){
+	if (scene.pic.service == 0) {
 		scene.mp.y = 364;
+		if (scene.mp.x < 122) {
+			scene.mp.x = 122;
+		}
+		if (scene.mp.x > 392) {
+			scene.mp.x = 392;
+		}
+		//打った後にservice == 1になるように
 	}
 
+	//得点後の動作
+	if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+		scene.pic.service = 0;
+
+	}
+
+	//通常得点
+	void scorecalc() {
+		if (scene.pic.getpointx == 1) {
+
+			if (scene.s.sx < 2) {
+				scene.s.sx++;
+				scene.pic.getpointx = 0;
+			}
+
+			if (scene.s.sy != 4 && scene.s.sy != 5 && scene.s.sx == 3) {
+				gameset(1);
+			} //通常勝利
+
+			if (scene.s.sy == 2 && scene.s.sy == 2) {
+				Avemode();
+			}
+
+		}
+
+		if (scene.pic.getpointy == 1) {
+
+			if (scene.s.sy < 2) {
+				scene.s.sy++; //通常得点
+				scene.pic.getpointy = 0;
+			}
+
+			if (scene.s.sx != 4 && scene.s.sx != 5 && scene.s.sy == 3) {
+				gameset(2);
+			} //通常勝利
+
+			if (scene.s.sx == 2 && scene.s.sx == 2) {
+				Avemode();
+			}
+		}
+	}
+
+	int Avemode() {
+		if (scene.s.sx == 3) {
+			gameset()
+		} //Ave勝利
+	}
+
+	void gameset(int x) {
+		if (x == 1) {
+		} //xのセット＋１
+		if (x == 2) {
+		} //yのセット＋１
+
+		scene.pic.getpointx = 0;
+		scene.pic.getpointy = 0;
+		//gameset時の変更とメッセージ
+	}
 
 	for (int i = 0; i < max_dots; ++i) {
 		player.dots[i].x += (input.right - input.left) * 5;
@@ -85,7 +149,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	if (input.score != (-1)) { //追記1129
 		scene.s.sx = input.score;
-		}
+	}
 
 	if (input.key != 0) {
 		scene.c[0] = input.key;
