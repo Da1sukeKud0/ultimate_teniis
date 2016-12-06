@@ -245,13 +245,16 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	cc->restore();
 
 	cc->save();
+	if (scene.pic.change == 0) {
 	myplayer = Cairo::ImageSurface::create_from_png("player.png");
 	cc->scale(1.0, 1.0);
 	cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 	cc->paint();
+	}
 	if (scene.pic.change == 1) {
-		myplayer2 = Cairo::ImageSurface::create_from_png("sample.png");
-		cc->set_source(myplayer2, scene.mp.x, scene.mp.y);
+		myplayer = Cairo::ImageSurface::create_from_png("sample.png");
+		cc->scale(0.5, 0.5);
+		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		cc->paint();
 	}
 

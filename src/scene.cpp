@@ -63,6 +63,7 @@ void Scene::init(void) {
 	pic.picx = 0;
 	pic.picy = 0;
 	pic.change = 0;
+	pic.service = 0;
 	mp.x = 0;
 	mp.y = 0;
 	s.sx = 0; //追記1129

@@ -23,8 +23,8 @@ struct score {//追記1129
 	int sx, sy;
 };
 
-struct imgcircle {
-	int picx, picy, change;
+struct game {
+	int change,service;
 };
 
 struct ball{
@@ -43,7 +43,7 @@ class Scene {
 public:
 	char c[2];
 	struct tm tm;
-	imgcircle pic;
+	game pic;
 	Players p;
 	Player mp;
 	score s;
