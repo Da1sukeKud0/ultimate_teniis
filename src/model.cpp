@@ -9,10 +9,9 @@
 #include "model.h"
 #include "manager.h"
 #include "input.h"
-#include "scene.h"
 
 void Model::initModel(void) {
-//	std::cout << "Init" << std::endl;
+//std::cout << "Init" << std::endl;
 	Scene &scene = Manager::getInstance().scene;
 	time_t t;
 	t = time(NULL);
@@ -49,14 +48,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (i->first == fd)
 			break;
 	}
+
 	//Player &player = scene.p[id];
-	//imgcircle &ic=scene.pic; 短縮
-
-	//ゲーム開始時の動作
-	/*if (scene.pic.service == 0){
-		scene.mp.y = 364;
-	}*/
-
 
 	for (int i = 0; i < max_dots; ++i) {
 		//player.dots[i].x += (input.right - input.left) * 5;
@@ -92,10 +85,27 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	if (input.score != (-1)) { //追記1129
 		scene.s.sx = input.score;
-		}
+	}
 
 	if (input.key != 0) {
 		scene.c[0] = input.key;
+	}
+	//ゲーム開始時の動作
+	if (scene.pic.service == 0) {
+		scene.mp.y = 364;
+		if (scene.mp.x < 122) {
+			scene.mp.x = 122;
+		}
+		if (scene.mp.x > 392) {
+			scene.mp.x = 392;
+		}
+		//打った後にservice == 1になるように
+	}
+
+	//得点後の動作
+	if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+		scene.pic.service = 0;
+
 	}
 }
 
@@ -115,3 +125,77 @@ void Model::ballmovement(void){
 		scene.b.x+=scene.b.vx
 	}
 }
+
+
+	//通常得点
+void Model::scorecalc(){
+			Scene &scene = Manager::getInstance().scene;
+			//xの得点
+			if (scene.pic.getpointx == 1) {
+
+				if (scene.s.sx < 2) {
+					scene.s.sx++; //通常得点
+					scene.pic.getpointx = 0;
+				}
+
+				if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
+					gameset(1);
+				} //通常勝利
+
+				if (scene.s.sy == 3 && scene.s.sy == 3) { //40vs40
+					scene.s.sx = 4;
+					Avemode();
+				}
+
+			}
+			//yの得点
+			if (scene.pic.getpointy == 1) {
+
+				if (scene.s.sy < 2) {
+					scene.s.sy++; //通常得点
+					scene.pic.getpointy = 0;
+				}
+
+				if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
+					gameset(2);
+				} //通常勝利
+
+				if (scene.s.sx == 3 && scene.s.sx == 3) { //40vs40
+					scene.s.sy = 4;
+					Avemode();
+				}
+			}
+		}
+
+	void Model::Avemode() {
+		Scene &scene = Manager::getInstance().scene;
+		if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
+			if (scene.pic.getpointx == 1) {
+				gameset(1);
+			}
+			if (scene.pic.getpointy == 1) {
+				gameset(2);
+			}
+		}
+
+		if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
+			if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+				scene.s.sx = 4;
+				scene.s.sy = 4;
+			}
+		}
+	}
+
+	void Model::gameset(int i) {
+		Scene &scene = Manager::getInstance().scene;
+			if (i == 1) {
+			} //xのセット＋１
+			if (i == 2) {
+			} //yのセット＋１
+
+			scene.pic.getpointx = 0;
+			scene.pic.getpointy = 0;
+			//gameset時の変更とメッセージ
+		}
+
+

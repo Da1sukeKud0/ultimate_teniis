@@ -63,6 +63,8 @@ void Scene::init(void) {
 	valid = false;
 	pic.change = 0;
 	pic.service = 0;
+	pic.getpointx = 0;
+	pic.getpointy = 0;
 	mp.x = 0;
 	mp.y = 0;
 	mp2.x = 0;
