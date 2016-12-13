@@ -99,9 +99,11 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.pic.service = 0;
 
 	}
+}
 
 	//通常得点
-		void scorecalc() {
+void Model::scorecalc(){
+			Scene &scene = Manager::getInstance().scene;
 			//xの得点
 			if (scene.pic.getpointx == 1) {
 
@@ -139,8 +141,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			}
 		}
 
-	void Avemode() {
-
+	void Model::Avemode() {
+		Scene &scene = Manager::getInstance().scene;
 		if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
 			if (scene.pic.getpointx == 1) {
 				gameset(1);
@@ -158,7 +160,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 	}
 
-	void gameset(int i) {
+	void Model::gameset(int i) {
+		Scene &scene = Manager::getInstance().scene;
 			if (i == 1) {
 			} //xのセット＋１
 			if (i == 2) {
@@ -168,6 +171,5 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.pic.getpointy = 0;
 			//gameset時の変更とメッセージ
 		}
-}
 
 

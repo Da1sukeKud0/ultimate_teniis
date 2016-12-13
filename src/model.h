@@ -14,8 +14,8 @@ public:
 	void stepPlayer(int fd);
 	void postAction();
 	void scorecalc();
-	static void Avemode();
-	static void gameset(int i);
+	void Avemode();
+	void gameset(int i);
 };
 
 #endif /* MODEL_H_ */
