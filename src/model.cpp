@@ -89,14 +89,21 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	if (input.key != 0) {
 		scene.c[0] = input.key;
 	}
+
+
+
+
 	//ゲーム開始時の動作
 	if (scene.pic.service == 0) {
 		scene.mp.y = 364;
 		if (scene.mp.x < 122) {
 			scene.mp.x = 122;
+			//ballの初期位置決定
+
 		}
 		if (scene.mp.x > 392) {
 			scene.mp.x = 392;
+			//ballの初期位置決定
 		}
 		//打った後にservice == 1になるように
 	}
@@ -197,4 +204,3 @@ void Model::gameset(int i) {
 	scene.pic.getpoint = 0;
 	//gameset時の変更とメッセージ
 }
-
