@@ -4,7 +4,6 @@
 #ifndef MODEL_H_
 #define MODEL_H_
 #include <time.h>
-
 #include "input.h"
 
 class Model {
