@@ -66,11 +66,7 @@ void Input::set_key(GdkEventKey* k) {
 		input.right = 1;
 		break;
 	case GDK_KEY_w:
-		//if (input.w == 0) {
-			input.w = 1;
-		//} else if (input.w == 1) {
-			//input.w = 0;
-		//}
+		input.w = 1;
 		break;
 	case GDK_KEY_s://追記1129
 			input.score += 1;
@@ -105,11 +101,7 @@ void Input::reset_key(GdkEventKey* k) {
 		input.right = 0;
 		break;
 	case GDK_KEY_w:
-		//if (input.w == 0) {
-			//input.w = 1;
-		//} else if (input.w == 1) {
-			input.w = 0;
-		//}
+		input.w = 0;
 		break;
 	case GDK_KEY_space:
 			input.space = 0;

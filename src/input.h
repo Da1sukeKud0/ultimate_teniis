@@ -21,7 +21,7 @@ struct InputData { // 要素数を可変にしたい場合は、packInputとrece
 	int space;
 	int score;
 	double ax, ay, az;
-	int w;
+	int w,w0,w1;
 };
 
 class Input {

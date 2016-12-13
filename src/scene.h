@@ -7,16 +7,15 @@
 #include <gtkmm.h>
 const int max_scenelen = 1000;
 
-struct Dot {
-	int x, y, visible;
-};
+
 
 const int max_dots = 5;
 struct Player { // 要素数を可変にしたい場合は、packSceneとreceiveSceneを注意深く書き直す必要がある
-	char name[20];
 	double x, y;
-	Dot dots[max_dots];
-	int curDots;
+};
+
+struct Player2{
+	double x,y;
 };
 
 struct score {//追記1129
@@ -28,13 +27,29 @@ struct game {
 };
 
 struct ball{
-	int x, y;
-	int vx, vy;
+	double x, y;
+	double vx, vy;
 };
 
 struct ballshadow{
 	int x,y;
 	int ax,ay;
+};
+
+struct imageball{
+
+};
+
+struct imageballshadow{
+
+};
+
+struct imageplayer{
+
+};
+
+struct imageplayer2{
+
 };
 
 typedef std::map<int, Player> Players;
@@ -45,6 +60,7 @@ public:
 	struct tm tm;
 	game pic;
 	Players p;
+	Player2 mp2;
 	Player mp;
 	score s;
 	ball b;

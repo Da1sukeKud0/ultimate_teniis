@@ -9,10 +9,13 @@
 
 class Model {
 public:
+	int flag;
 	void initModel(void);
+	void ballmovement(void);
 	void preAction();
 	void stepPlayer(int fd);
 	void postAction();
+	void preBallaction(void);
 };
 
 #endif /* MODEL_H_ */

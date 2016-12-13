@@ -246,10 +246,10 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 	cc->save();
 	if (scene.pic.change == 0) {
-	myplayer = Cairo::ImageSurface::create_from_png("player.png");
-	cc->scale(1.0, 1.0);
-	cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-	cc->paint();
+		myplayer = Cairo::ImageSurface::create_from_png("player.png");
+		cc->scale(1.0, 1.0);
+		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+		cc->paint();
 	}
 	if (scene.pic.change == 1) {
 		myplayer = Cairo::ImageSurface::create_from_png("sample.png");
@@ -260,11 +260,26 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 	cc->restore();
 
+	//ボールの座標計算
+
+
 	cc->save();
-	ball = Cairo::ImageSurface::create_from_png("ball.png");
-	cc->scale(1.0, 1.0);
-	cc->set_source(ball, 200, 364);
-	cc->paint();
+	if (scene.pic.change == 0) {
+		ball = Cairo::ImageSurface::create_from_png("ball.png");
+		cc->scale(1.0, 1.0);
+		cc->set_source(ball, scene.b.x, scene.b.y);
+		cc->paint();
+	} else if (scene.pic.change == 1) {
+		for (int i=0; i<=100; i++){
+		ball = Cairo::ImageSurface::create_from_png("ball.png");
+		scene.b.x+=scene.b.vx;
+		scene.b.y-=scene.b.vy;
+		cc->scale(1.0, 1.0);
+		cc->set_source(ball, scene.b.x, scene.b.y);
+		cc->paint();
+		}
+	}
+
 	cc->restore();
 
 	//得点板
@@ -365,7 +380,15 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 	cc->restore();
 
+	//テニスの物理計算
+	if(scene.pic.change==1){
+
+	}
+
+
 //追記終わり
+
+
 
 	/*針・点
 	 cc->set_font_size(16);
