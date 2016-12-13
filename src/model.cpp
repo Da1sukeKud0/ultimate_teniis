@@ -9,7 +9,6 @@
 #include "model.h"
 #include "manager.h"
 #include "input.h"
-#include "scene.h"
 
 void Model::initModel(void) {
 //	std::cout << "Init" << std::endl;
@@ -50,95 +49,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 	Player &player = scene.p[id];
 
-	//ゲーム開始時の動作
-	if (scene.pic.service == 0) {
-		scene.mp.y = 364;
-		if (scene.mp.x < 122) {
-			scene.mp.x = 122;
-		}
-		if (scene.mp.x > 392) {
-			scene.mp.x = 392;
-		}
-		//打った後にservice == 1になるように
-	}
-
-	//得点後の動作
-	if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
-		scene.pic.service = 0;
-
-	}
-
-	//通常得点
-	void scorecalc() {
-		//xの得点
-		if (scene.pic.getpointx == 1) {
-
-			if (scene.s.sx < 2) {
-				scene.s.sx++; //通常得点
-				scene.pic.getpointx = 0;
-			}
-
-			if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
-				gameset(1);
-			} //通常勝利
-
-			if (scene.s.sy == 3 && scene.s.sy == 3) { //40vs40
-				scene.s.sx = 4;
-				Avemode();
-			}
-
-		}
-		//yの得点
-		if (scene.pic.getpointy == 1) {
-
-			if (scene.s.sy < 2) {
-				scene.s.sy++; //通常得点
-				scene.pic.getpointy = 0;
-			}
-
-			if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
-				gameset(2);
-			} //通常勝利
-
-			if (scene.s.sx == 3 && scene.s.sx == 3) { //40vs40
-				scene.s.sy = 4;
-				Avemode();
-			}
-		}
-	}
-
-	void Avemode() {
-
-		if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
-			if (scene.pic.getpointx == 1) {
-				gameset(1);
-			}
-			if (scene.pic.getpointy == 1) {
-				gameset(2);
-			}
-		}
-
-		if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
-			if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
-				scene.s.sx = 4;
-				scene.s.sy = 4;
-			}
-		}
-	}
-
-
-
-	void gameset(int i) {
-		if (i == 1) {
-		} //xのセット＋１
-		if (i == 2) {
-		} //yのセット＋１
-
-		scene.pic.getpointx = 0;
-		scene.pic.getpointy = 0;
-		//gameset時の変更とメッセージ
-	}
-
 	for (int i = 0; i < max_dots; ++i) {
 		player.dots[i].x += (input.right - input.left) * 5;
 		player.dots[i].y += (input.down - input.up) * 5;
@@ -172,4 +82,90 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	if (input.key != 0) {
 		scene.c[0] = input.key;
 	}
+}
+//ゲーム開始時の動作
+if (scene.pic.service == 0) {
+	scene.mp.y = 364;
+	if (scene.mp.x < 122) {
+		scene.mp.x = 122;
+	}
+	if (scene.mp.x > 392) {
+		scene.mp.x = 392;
+	}
+	//打った後にservice == 1になるように
+}
+
+//得点後の動作
+if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+	scene.pic.service = 0;
+
+}
+
+//通常得点
+void Model::scorecalc() {
+	//xの得点
+	if (scene.pic.getpointx == 1) {
+
+		if (scene.s.sx < 2) {
+			scene.s.sx++; //通常得点
+			scene.pic.getpointx = 0;
+		}
+
+		if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
+			gameset(1);
+		} //通常勝利
+
+		if (scene.s.sy == 3 && scene.s.sy == 3) { //40vs40
+			scene.s.sx = 4;
+			Avemode();
+		}
+
+	}
+	//yの得点
+	if (scene.pic.getpointy == 1) {
+
+		if (scene.s.sy < 2) {
+			scene.s.sy++; //通常得点
+			scene.pic.getpointy = 0;
+		}
+
+		if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
+			gameset(2);
+		} //通常勝利
+
+		if (scene.s.sx == 3 && scene.s.sx == 3) { //40vs40
+			scene.s.sy = 4;
+			Avemode();
+		}
+	}
+}
+
+void Model::Avemode() {
+
+	if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
+		if (scene.pic.getpointx == 1) {
+			gameset(1);
+		}
+		if (scene.pic.getpointy == 1) {
+			gameset(2);
+		}
+	}
+
+	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
+		if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+			scene.s.sx = 4;
+			scene.s.sy = 4;
+		}
+	}
+}
+
+void Model::gameset(int i) {
+	if (i == 1) {
+	} //xのセット＋１
+	if (i == 2) {
+	} //yのセット＋１
+
+	scene.pic.getpointx = 0;
+	scene.pic.getpointy = 0;
+	//gameset時の変更とメッセージ
 }
