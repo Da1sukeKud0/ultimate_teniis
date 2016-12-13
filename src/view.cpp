@@ -380,8 +380,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 //追記終わり
 
-<<<<<<< HEAD
-
 
 	/*針・点
 	 cc->set_font_size(16);
@@ -389,14 +387,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 (double)(ls-ls*cos(2.0*M_PI*scene.tm.tm_sec/60)));
 	 cc->show_text(std::string(scene.c).c_str());
 	 cc->move_to(4, 20);
-=======
-		/*針・点
-		 cc->set_font_size(16);
-		 cc->move_to((double)(ls+ls*sin(2.0*M_PI*scene.tm.tm_sec/60)),
-		 (double)(ls-ls*cos(2.0*M_PI*scene.tm.tm_sec/60)));
-		 cc->show_text(std::string(scene.c).c_str());
-		 cc->move_to(4, 20);
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
+
+	 branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 
 		 if(scene.id==-1){
 		 cc->show_text(std::string("Standalone"));
