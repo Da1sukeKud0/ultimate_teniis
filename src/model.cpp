@@ -101,9 +101,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		//打った後にservice == 1になるように
 	}
 
-	//得点後の動作
-	if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
+	if (scene.pic.getpoint == 1 || scene.pic.getpoint == 2) {
 		scene.pic.service = 0;
+		flag = 0;
 
 	}
 }
@@ -128,12 +129,11 @@ void Model::ballmovement(void) {
 void Model::scorecalc() {
 	Scene &scene = Manager::getInstance().scene;
 	//xの得点
-	if (scene.pic.getpointx == 1) {
+	if (scene.pic.getpoint == 1) {
 
 		if (scene.s.sx < 2) {
 			scene.s.sx++; //通常得点
-			scene.pic.getpointx = 0;
-			flag = 0;
+			scene.pic.getpoint = 0;
 		}
 
 		if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
@@ -147,11 +147,11 @@ void Model::scorecalc() {
 
 	}
 	//yの得点
-	if (scene.pic.getpointy == 1) {
+	if (scene.pic.getpoint == 2) {
 
 		if (scene.s.sy < 2) {
 			scene.s.sy++; //通常得点
-			scene.pic.getpointy = 0;
+			scene.pic.getpoint = 0;
 		}
 
 		if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
@@ -167,21 +167,24 @@ void Model::scorecalc() {
 
 void Model::Avemode() {
 	Scene &scene = Manager::getInstance().scene;
+
+	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
+		if (scene.pic.getpoint == 1 || scene.pic.getpoint == 2) {
+			scene.s.sx = 3;
+			scene.s.sy = 3;
+		}
+	}
+
 	if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
-		if (scene.pic.getpointx == 1) {
+		if (scene.pic.getpoint == 1) {
 			gameset(1);
 		}
-		if (scene.pic.getpointy == 1) {
+		if (scene.pic.getpoint == 2) {
 			gameset(2);
 		}
 	}
 
-	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
-		if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
-			scene.s.sx = 4;
-			scene.s.sy = 4;
-		}
-	}
+
 }
 
 void Model::gameset(int i) {
@@ -191,8 +194,7 @@ void Model::gameset(int i) {
 	if (i == 2) {
 	} //yのセット＋１
 
-	scene.pic.getpointx = 0;
-	scene.pic.getpointy = 0;
+	scene.pic.getpoint = 0;
 	//gameset時の変更とメッセージ
 }
 
