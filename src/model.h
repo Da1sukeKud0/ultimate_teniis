@@ -17,6 +17,7 @@ public:
 	void scorecalc();
 	void Avemode();
 	void gameset(int i);
+	void getset(int i);
 };
 
 #endif /* MODEL_H_ */

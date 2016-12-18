@@ -197,6 +197,7 @@ void Model::Avemode() {
 void Model::gameset(int i) {
 	Scene &scene = Manager::getInstance().scene;
 	if (i == 1) {
+		getset(1);
 	} //xのセット＋１
 	if (i == 2) {
 	} //yのセット＋１
