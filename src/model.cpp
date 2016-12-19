@@ -194,7 +194,7 @@ void Model::Avemode() {
 
 }
 
-void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋完全試合終了時の操作を含む
+void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
 	if (i == 1) {//xのセット＋１
 		++scene.g.getset1;

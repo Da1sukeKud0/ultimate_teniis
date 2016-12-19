@@ -374,13 +374,13 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	//gameset時の画面表示
 	cc->save();
 	Cairo::RefPtr<Cairo::ImageSurface> win;
-	if (scene.g.getset1 == 3) {
+	if (scene.g.getset1 == 2) {
 		win = Cairo::ImageSurface::create_from_png("win1.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(win, 0, 0);
 		cc->paint();
 	}
-	if (scene.g.getset2 == 3) {
+	if (scene.g.getset2 == 2) {
 		win = Cairo::ImageSurface::create_from_png("win2.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(win, 0, 0);
