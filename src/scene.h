@@ -23,7 +23,7 @@ struct score {//追記1129
 };
 
 struct game {
-	int change,service,getpoint,getset1,getset2,gameset;
+	int charactorselect,change,service,getpoint,getset1,getset2,gameset;
 };
 
 struct ball{
