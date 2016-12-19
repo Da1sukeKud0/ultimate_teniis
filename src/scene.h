@@ -23,7 +23,7 @@ struct score {//追記1129
 };
 
 struct game {
-	int change,service,getpoint;
+	int change,service,getpoint,getset1,getset2,gameset;
 };
 
 struct ball{
@@ -58,7 +58,7 @@ class Scene {
 public:
 	char c[2];
 	struct tm tm;
-	game pic;
+	game g;
 	Players p;
 	Player2 mp2;
 	Player mp;

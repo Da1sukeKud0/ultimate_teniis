@@ -79,7 +79,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 
 	if (input.w != (-1)) { //追記
-		scene.pic.change = input.w;
+		scene.g.change = input.w;
 	}
 
 	if (input.score != (-1)) { //追記1129
@@ -94,7 +94,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 
 	//ゲーム開始時の動作
-	if (scene.pic.service == 0) {
+	if (scene.g.service == 0) {
 		scene.mp.y = 364;
 		if (scene.mp.x < 122) {
 			scene.mp.x = 122;
@@ -109,8 +109,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
-	if (scene.pic.getpoint == 1 || scene.pic.getpoint == 2) {
-		scene.pic.service = 0;
+	if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
+		scene.g.service = 0;
 		flag = 0;
 
 	}
@@ -119,7 +119,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 void Model::ballmovement(void) {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
-	if (scene.pic.change == 1) {
+	if (scene.g.change == 1) {
 		if (flag == 0) {
 			scene.b.vx = 1;
 			flag += 1;
@@ -136,11 +136,11 @@ void Model::ballmovement(void) {
 void Model::scorecalc() {
 	Scene &scene = Manager::getInstance().scene;
 	//xの得点
-	if (scene.pic.getpoint == 1) {
+	if (scene.g.getpoint == 1) {
 
 		if (scene.s.sx < 2) {
 			scene.s.sx++; //通常得点
-			scene.pic.getpoint = 0;
+			scene.g.getpoint = 0;
 		}
 
 		if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
@@ -154,11 +154,11 @@ void Model::scorecalc() {
 
 	}
 	//yの得点
-	if (scene.pic.getpoint == 2) {
+	if (scene.g.getpoint == 2) {
 
 		if (scene.s.sy < 2) {
 			scene.s.sy++; //通常得点
-			scene.pic.getpoint = 0;
+			scene.g.getpoint = 0;
 		}
 
 		if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
@@ -176,17 +176,17 @@ void Model::Avemode() {
 	Scene &scene = Manager::getInstance().scene;
 
 	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
-		if (scene.pic.getpoint == 1 || scene.pic.getpoint == 2) {
+		if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
 			scene.s.sx = 3;
 			scene.s.sy = 3;
 		}
 	}
 
 	if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
-		if (scene.pic.getpoint == 1) {
+		if (scene.g.getpoint == 1) {
 			gameset(1);
 		}
-		if (scene.pic.getpoint == 2) {
+		if (scene.g.getpoint == 2) {
 			gameset(2);
 		}
 	}
@@ -194,14 +194,17 @@ void Model::Avemode() {
 
 }
 
-void Model::gameset(int i) {
+void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
-	if (i == 1) {
-		getset(1);
-	} //xのセット＋１
-	if (i == 2) {
-	} //yのセット＋１
+	if (i == 1) {//xのセット＋１
+		++scene.g.getset1;
 
-	scene.pic.getpoint = 0;
+	}
+	if (i == 2) {//yのセット＋１
+		++scene.g.getset2;
+	}
+
+	scene.g.getpoint = 0;
 	//gameset時の変更とメッセージ
+
 }

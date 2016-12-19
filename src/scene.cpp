@@ -61,9 +61,12 @@ void Scene::init(void) {
 	p.clear();
 
 	valid = false;
-	pic.change = 0;
-	pic.service = 0;
-	pic.getpoint = 0;
+	g.change = 0;
+	g.service = 0;
+	g.getpoint = 0;
+	g.getset1 = 0;
+	g.getset2 = 0;
+	g.gameset = 0;
 	mp.x = 0;
 	mp.y = 0;
 	mp2.x = 0;
