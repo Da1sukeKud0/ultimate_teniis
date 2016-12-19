@@ -68,6 +68,10 @@ void Scene::init(void) {
 	g.getset2 = 0;
 	g.gameset = 0;
 	g.charactorselect =0;
+	g.cha1 = 0;
+	g.cha2 = 0;
+	g.cha3 = 0;
+	g.cha4 = 0;
 	mp.x = 0;
 	mp.y = 0;
 	mp2.x = 0;

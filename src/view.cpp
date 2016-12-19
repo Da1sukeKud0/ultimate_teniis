@@ -284,6 +284,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->paint();
 		cc->restore();
 
+		if(scene.)
+
 	}
 
 	//ボールの座標計算
