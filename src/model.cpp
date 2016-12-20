@@ -115,6 +115,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.g.service = 0;
 		flag = 0;
 
+
 	}
 }
 
