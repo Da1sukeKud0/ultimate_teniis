@@ -260,11 +260,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	cc->restore();
 
-<<<<<<< HEAD
-
-/*
-=======
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 	//ゲーム開始時のキャラクター選択
 	/*if (scene.g.charactorselect == 0) {
 		cc->save();
@@ -286,13 +281,10 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->set_source(chara4, 300, 200);
 		cc->paint();
 		cc->restore();
-<<<<<<< HEAD
 	}
-*/
-=======
 	}*/
 
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
+
 	//ボールの座標計算
 
 	cc->save();
@@ -424,10 +416,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	if (scene.g.change == 1) {
 
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 
 //追記終わり
 
@@ -483,6 +471,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 }
 	 }
 	 */
+
 #endif
 	scene.valid = false;
 	return true;
