@@ -237,7 +237,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	//こっから追記
 	cc->save();
-	Cairo::RefPtr<Cairo::ImageSurface> court, myplayer, myplayer2, ball;
+	Cairo::RefPtr<Cairo::Surface> court, myplayer, myplayer2, ball;
 	court = Cairo::ImageSurface::create_from_png("court.png");
 	cc->scale(1.0, 1.0);
 	cc->set_source(court, 0, 0);
@@ -261,11 +261,11 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	cc->restore();
 
 
-
+/*
 	//ゲーム開始時のキャラクター選択
 	if (scene.g.charactorselect == 0) {
 		cc->save();
-		Cairo::RefPtr<Cairo::ImageSurface> chara1, chara2, chara3, chara4; //1枚が200*300の画像として計算
+		Cairo::RefPtr<Cairo::Surface> chara1, chara2, chara3, chara4; //1枚が200*300の画像として計算
 		chara1 = Cairo::ImageSurface::create_from_png("chara1.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(chara1, 0, 0);
@@ -284,7 +284,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->paint();
 		cc->restore();
 	}
-
+*/
 	//ボールの座標計算
 
 	cc->save();
@@ -415,7 +415,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	if (scene.g.change == 1) {
 
 	}
-}
+
 
 //追記終わり
 
