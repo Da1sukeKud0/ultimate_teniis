@@ -283,9 +283,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->set_source(chara4, 300, 200);
 		cc->paint();
 		cc->restore();
-
-		if(scene.)
-
 	}
 
 	//ボールの座標計算
@@ -418,6 +415,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	if (scene.g.change == 1) {
 
 	}
+}
 
 //追記終わり
 
