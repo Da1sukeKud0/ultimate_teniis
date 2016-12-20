@@ -98,6 +98,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	//ゲーム開始時の動作
 	if (scene.g.service == 0) {
 		scene.mp.y = 364;
+		scene.b.y = 364;
 		if (scene.mp.x < 122) {
 			scene.mp.x = 122;
 			//ballの初期位置決定
@@ -107,6 +108,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.mp.x = 392;
 			//ballの初期位置決定
 		}
+		scene.b.x = scene.mp.x - 10;
 		//打った後にservice == 1になるように
 	}
 
