@@ -13,7 +13,7 @@ public:
 	void ballmovement(void);
 	void preAction();
 	void stepPlayer(int fd);
-	void postAction();t
+	void postAction();
 	void scorecalc();
 	void Avemode();
 	void gameset(int i);

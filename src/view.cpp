@@ -252,10 +252,15 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->paint();
 	}
 	if (scene.pic.change == 1) {
+		if(scene.ip.x <= scene.ib.x && scene.ib.x<= scene.ip.x + 5){
 		myplayer = Cairo::ImageSurface::create_from_png("sample.png");
 		cc->scale(0.5, 0.5);
 		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		cc->paint();
+		}
+		else if(scene.ip.x - 5 <= scene.ib.x && scene.ib.x<= scene.ip.x){
+
+		}
 	}
 
 	cc->restore();
@@ -380,7 +385,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 //追記終わり
 
-<<<<<<< HEAD
 
 
 	/*針・点
