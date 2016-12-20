@@ -260,10 +260,13 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	cc->restore();
 
+<<<<<<< HEAD
 
 /*
+=======
+>>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 	//ゲーム開始時のキャラクター選択
-	if (scene.g.charactorselect == 0) {
+	/*if (scene.g.charactorselect == 0) {
 		cc->save();
 		Cairo::RefPtr<Cairo::Surface> chara1, chara2, chara3, chara4; //1枚が200*300の画像として計算
 		chara1 = Cairo::ImageSurface::create_from_png("chara1.png");
@@ -283,8 +286,13 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->set_source(chara4, 300, 200);
 		cc->paint();
 		cc->restore();
+<<<<<<< HEAD
 	}
 */
+=======
+	}*/
+
+>>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 	//ボールの座標計算
 
 	cc->save();
@@ -385,6 +393,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->show_text(string("30"));
 	} else if (scene.s.sy == 3) {
 		cc->set_font_size(22);
+		//return true;nt_size(22);
 		cc->move_to(43, 68);
 		cc->show_text(string("40"));
 	} else if (scene.s.sy == 4) {
@@ -415,7 +424,10 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	if (scene.g.change == 1) {
 
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 
 //追記終わり
 
@@ -473,8 +485,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 */
 #endif
 	scene.valid = false;
-
 	return true;
+
 }
 
 void MyDrawingArea::update() {
