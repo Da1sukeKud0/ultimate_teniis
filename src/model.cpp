@@ -26,6 +26,7 @@ void Model::initModel(void) {
 	 }*/
 	flag = 0;
 
+
 }
 
 void Model::preAction(void) { // 衝突判定など、判定のみを行う。公平のため、ここで動かしてはいけない
