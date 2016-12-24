@@ -31,16 +31,18 @@ struct ball {
 };
 
 struct ballshadow {
-	int x, y;
-	int ax, ay;
+	double x, y;
+	double vx, vy;
 };
 
 struct imageball {
-
+	double x, y;
+	double vx, vy;
 };
 
 struct imageballshadow {
-
+	double x, y;
+	double vx, vy;
 };
 
 struct imageplayer {
@@ -48,7 +50,8 @@ struct imageplayer {
 };
 
 struct imageplayer2 {
-
+	double x, y;
+	double vx, vy;
 };
 
 typedef std::map<int, Player> Players;
@@ -64,6 +67,10 @@ public:
 	score s;
 	ball b;
 	ballshadow bs;
+	imageball ib;
+	imageballshadow ibs;
+	imageplayer ip;
+	imageplayer2 ip2;
 	int id;
 	void receiveScene(char *);
 	char *packScene(int &len);
