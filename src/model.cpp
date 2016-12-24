@@ -210,5 +210,6 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 	}
 
 	scene.g.getpoint = 0;
+
 	//gameset時の変更とメッセージ
 }
