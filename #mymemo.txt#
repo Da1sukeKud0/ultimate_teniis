@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+//1227以前のscorecalc関係
+
 //ゲーム開始時の動作
 if (scene.pic.service == 0) {
 	scene.mp.y = 364;
@@ -16,14 +19,17 @@ if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
 
 }
 
+=======
+>>>>>>> refs/remotes/origin/master
 //通常得点
 void Model::scorecalc() {
+	Scene &scene = Manager::getInstance().scene;
 	//xの得点
-	if (scene.pic.getpointx == 1) {
+	if (scene.g.getpoint == 1) {
 
 		if (scene.s.sx < 2) {
 			scene.s.sx++; //通常得点
-			scene.pic.getpointx = 0;
+			scene.g.getpoint = 0;
 		}
 
 		if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
@@ -37,11 +43,11 @@ void Model::scorecalc() {
 
 	}
 	//yの得点
-	if (scene.pic.getpointy == 1) {
+	if (scene.g.getpoint == 2) {
 
 		if (scene.s.sy < 2) {
 			scene.s.sy++; //通常得点
-			scene.pic.getpointy = 0;
+			scene.g.getpoint = 0;
 		}
 
 		if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
@@ -56,31 +62,37 @@ void Model::scorecalc() {
 }
 
 void Model::Avemode() {
+	Scene &scene = Manager::getInstance().scene;
+
+	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
+		if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
+			scene.s.sx = 3;
+			scene.s.sy = 3;
+		}
+	}
 
 	if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
-		if (scene.pic.getpointx == 1) {
+		if (scene.g.getpoint == 1) {
 			gameset(1);
 		}
-		if (scene.pic.getpointy == 1) {
+		if (scene.g.getpoint == 2) {
 			gameset(2);
 		}
 	}
 
-	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
-		if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
-			scene.s.sx = 4;
-			scene.s.sy = 4;
-		}
-	}
 }
 
-void Model::gameset(int i) {
-	if (i == 1) {
-	} //xのセット＋１
-	if (i == 2) {
-	} //yのセット＋１
+void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
+	Scene &scene = Manager::getInstance().scene;
+	if (i == 1) { //xのセット＋１
+		++scene.g.getset1;
 
-	scene.pic.getpointx = 0;
-	scene.pic.getpointy = 0;
+	}
+	if (i == 2) { //yのセット＋１
+		++scene.g.getset2;
+	}
+
+	scene.g.getpoint = 0;
+
 	//gameset時の変更とメッセージ
 }

@@ -2,6 +2,7 @@
  * input.cpp
  * InputDataをパケットに詰め込むpack関数と、パケットからメンバに取り込むreceive関数
  * 各種入力デバイスからのイベントを、InputDataへ反映させる方法を定める関数
+ *dayo
  */
 
 //キーボード上との対応をcaseで取る
@@ -69,8 +70,9 @@ void Input::set_key(GdkEventKey* k) {
 		input.w = 1;
 		break;
 	case GDK_KEY_s: //追記1129
-		input.score += 1;
+		input.score = 1; //+=1を=1に変更　1227
 		break;
+
 	case GDK_KEY_space:
 		input.space = 1;
 		break;
@@ -119,7 +121,7 @@ void Input::reset_key(GdkEventKey* k) {
 		input.space = 0;
 		break;
 	case GDK_KEY_s: //追記1129
-		input.score += 0;
+		input.score = 0; //+=0を=0に変更 1227
 		break;
 	case GDK_KEY_1:
 		input.key1 = 0;

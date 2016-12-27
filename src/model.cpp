@@ -9,6 +9,7 @@
 #include "model.h"
 #include "manager.h"
 #include "input.h"
+using namespace std;
 
 void Model::initModel(void) {
 //std::cout << "Init" << std::endl;
@@ -24,7 +25,6 @@ void Model::initModel(void) {
 	 i->second.dots[j].visible = 0;
 	 }
 	 }*/
-	flag = 0;
 
 }
 
@@ -83,8 +83,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.g.change = input.w;
 	}
 
-	if (input.score != (-1)) { //追記1129
-		scene.s.sx = input.score;
+	if (input.score != (-1)) { //追記1227
+		scene.g.getpoint = input.score;
+		cout << scene.s.sx << " " << scene.g.getpoint << " " << input.score
+				<< endl;
 	}
 
 	if (input.key != 0) {
@@ -105,42 +107,56 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			//ballの初期位置決定
 		}
 		scene.ibs.x = scene.ip.x - 10;
+		if (input.w == 1) {
+			scene.g.service = 1;
+		}
 		//打った後にservice == 1になるように
+<<<<<<< HEAD
 		if(input.w == 1){
 			scene.g.service == 1;
+=======
+		if (input.w == 1) {
+			scene.g.service = 1;
+>>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 		}
 	}
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
 	if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
 		scene.g.service = 0;
-		flag = 0;
+		scene.g.flag = 0;
 
 	}
+	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
 }
 
+void Model::serve(void) {
 
-void Model::ballmovement(void) {
+}
+
+void Model::ballmovement() {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 
 	if (scene.g.change == 1) {
-		if (flag == 0) {
-			if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
+
+		if (scene.g.flag == 0) {
+
+			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = 1;
-				scene.ibs.vx = scene.ip.y - scene.ib.y;
-				flag += 1;
+				scene.ibs.vx = (scene.ip.y - scene.ib.y) / 100;
+				scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 5
+					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = 1;
-				scene.ibs.vx = -(scene.ip.y - scene.ib.y);
-				flag += 1;
+				scene.ibs.vx = (-(scene.ip.y - scene.ib.y)) / 100;
+				scene.g.flag += 1;
 			}
-		} else if (flag == 1) {
+		} else if (scene.g.flag == 1) {
 			if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
@@ -154,12 +170,13 @@ void Model::ballmovement(void) {
 				scene.ibs.vx = -(scene.ip.y - scene.ib.y);
 			}
 
-			scene.ib.x += scene.ib.vx;
-
-			scene.ibs.y += scene.ibs.vy;
-			scene.ibs.x += scene.ibs.vx;
 		}
 	}
+
+	scene.ib.x += scene.ib.vx;
+
+	scene.ibs.y += scene.ibs.vy;
+	scene.ibs.x += scene.ibs.vx;
 }
 
 //通常得点
@@ -168,8 +185,16 @@ void Model::scorecalc() {
 	//xの得点
 	if (scene.g.getpoint == 1) {
 
-		if (scene.s.sx < 2) {
-			scene.s.sx++; //通常得点
+		if (scene.s.sx == 2) {
+			scene.s.sx = 3; //通常得点
+			scene.g.getpoint = 0;
+		}
+		if (scene.s.sx == 1) {
+			scene.s.sx = 2; //通常得点
+			scene.g.getpoint = 0;
+		}
+		if (scene.s.sx == 0) {
+			scene.s.sx = 1; //通常得点
 			scene.g.getpoint = 0;
 		}
 
@@ -181,13 +206,21 @@ void Model::scorecalc() {
 			scene.s.sx = 4;
 			Avemode();
 		}
-
 	}
+
 	//yの得点
 	if (scene.g.getpoint == 2) {
 
-		if (scene.s.sy < 2) {
-			scene.s.sy++; //通常得点
+		if (scene.s.sy == 2) {
+			scene.s.sy = 3; //通常得点
+			scene.g.getpoint = 0;
+		}
+		if (scene.s.sy == 1) {
+			scene.s.sy = 2; //通常得点
+			scene.g.getpoint = 0;
+		}
+		if (scene.s.sy == 0) {
+			scene.s.sy = 1; //通常得点
 			scene.g.getpoint = 0;
 		}
 
@@ -226,11 +259,11 @@ void Model::Avemode() {
 void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
 	if (i == 1) { //xのセット＋１
-		++scene.g.getset1;
+		++scene.s.setx;
 
 	}
 	if (i == 2) { //yのセット＋１
-		++scene.g.getset2;
+		++scene.s.sety;
 	}
 
 	scene.g.getpoint = 0;

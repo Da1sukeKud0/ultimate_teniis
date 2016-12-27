@@ -1,7 +1,6 @@
 /*
  * main.cpp
  * 使用するライブラリを初期化し、ユーザインタフェース定義を読み込み、制御をgtkmmへと移す
- * よ
  */
 #include <iostream>
 #include <gtkmm.h>

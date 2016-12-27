@@ -44,12 +44,12 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 #else
-	bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
-		Cairo::RefPtr<Cairo::Context> cc =
-		this->get_window()->create_cairo_context();
-		Gtk::DrawingArea::on_expose_event(e);
-		Manager &mgr = Manager::getInstance();
-		Scene &scene = mgr.scene;
+bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
+	Cairo::RefPtr<Cairo::Context> cc =
+			this->get_window()->create_cairo_context();
+	Gtk::DrawingArea::on_expose_event(e);
+	Manager &mgr = Manager::getInstance();
+	Scene &scene = mgr.scene;
 
 #endif
 	if (!scene.valid) {
@@ -255,14 +255,13 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		scene.bs.y = -scene.ibs.y;
 	}
 
-
 	/*scene.mp.x = 300 + (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
-	scene.mp.y = scene.ip.y;
-	scene.b.x = 300 + (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
-	scene.b.y = scene.ib.y;
-	scene.bs.x = 300 + (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
-	scene.bs.y = scene.ibs.y;
-*/
+	 scene.mp.y = scene.ip.y;
+	 scene.b.x = 300 + (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
+	 scene.b.y = scene.ib.y;
+	 scene.bs.x = 300 + (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
+	 scene.bs.y = scene.ibs.y;
+	 */
 
 	cc->save();
 	Cairo::RefPtr<Cairo::Surface> court, myplayer, myplayer2, ball;
@@ -281,13 +280,13 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	}
 
 	if (scene.g.change == 1) {
-		if (scene.ip.x <= scene.ib.x && scene.ib.x <= scene.ip.x + 5) {
+		if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
 			myplayer = Cairo::ImageSurface::create_from_png("sample.png");
 			cc->scale(0.5, 0.5);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
-		} else if (scene.ip.x - 5 <= scene.ib.x && scene.ib.x <= scene.ip.x) {
-			myplayer = Cairo::ImageSurface::create_from_png("sample.png");
+		} else if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x) {
+			myplayer = Cairo::ImageSurface::create_from_png("sample2.png");
 			cc->scale(0.5, 0.5);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
@@ -386,7 +385,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	cc->move_to(10, 68);
 	cc->show_text(string("P2"));
 
-	//ゲーム数・得点表示
+	//得点表示
 	if (scene.s.sx == 0) {
 		cc->set_font_size(22);
 		cc->move_to(43, 35);
@@ -423,13 +422,41 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		cc->show_text(string("30"));
 	} else if (scene.s.sy == 3) {
 		cc->set_font_size(22);
-		//return true;nt_size(22);
 		cc->move_to(43, 68);
 		cc->show_text(string("40"));
 	} else if (scene.s.sy == 4) {
 		cc->set_font_size(22);
 		cc->move_to(43, 68);
 		cc->show_text(string("Ave"));
+	}
+
+	//セット数表示
+	if (scene.s.setx == 0) {
+		cc->set_font_size(22);
+		cc->move_to(76, 35);
+		cc->show_text(string("0"));
+	} else if (scene.s.setx == 1) {
+		cc->set_font_size(22);
+		cc->move_to(76, 35);
+		cc->show_text(string("1"));
+	} else if (scene.s.setx == 2) {
+		cc->set_font_size(22);
+		cc->move_to(76, 35);
+		cc->show_text(string("win"));
+	}
+
+	if (scene.s.sety == 0) {
+		cc->set_font_size(22);
+		cc->move_to(76, 68);
+		cc->show_text(string("0"));
+	} else if (scene.s.sety == 1) {
+		cc->set_font_size(22);
+		cc->move_to(76, 68);
+		cc->show_text(string("1"));
+	} else if (scene.s.setx == 2) {
+		cc->set_font_size(22);
+		cc->move_to(76, 35);
+		cc->show_text(string("win"));
 	}
 	cc->restore();
 
@@ -449,11 +476,6 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		cc->paint();
 	}
 	cc->restore();
-
-	//テニスの物理計算
-	if (scene.g.change == 1) {
-
-	}
 
 //追記終わり
 

@@ -17,12 +17,12 @@ struct Player2 {
 };
 
 struct score { //追記1129
-	int sx, sy;
+	int sx, sy ,setx ,sety;
 };
 
 struct game {
 	int charactorselect, change, service, getpoint, getset1, getset2, gameset,
-			cha1, cha2, cha3, cha4;
+			cha1, cha2, cha3, cha4,serve,flag;
 };
 
 struct ball {
