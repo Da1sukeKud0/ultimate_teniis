@@ -69,7 +69,7 @@ void Input::set_key(GdkEventKey* k) {
 		input.w = 1;
 		break;
 	case GDK_KEY_s: //追記1129
-		input.score = 1; //+=1を=1に変更　1227
+		input.score += 1;
 		break;
 
 	case GDK_KEY_space:
@@ -120,7 +120,7 @@ void Input::reset_key(GdkEventKey* k) {
 		input.space = 0;
 		break;
 	case GDK_KEY_s: //追記1129
-		input.score = 0; //+=0を=0に変更 1227
+		input.score += 0;
 		break;
 	case GDK_KEY_1:
 		input.key1 = 0;

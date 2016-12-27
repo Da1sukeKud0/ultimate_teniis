@@ -1,5 +1,3 @@
-//1227以前のscorecalc関係
-
 //ゲーム開始時の動作
 if (scene.pic.service == 0) {
 	scene.mp.y = 364;
