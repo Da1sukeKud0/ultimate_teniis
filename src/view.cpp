@@ -477,11 +477,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	}
 	cc->restore();
 
-	//テニスの物理計算
-	if (scene.g.change == 1) {
-
-	}
-
 //追記終わり
 
 	/*針・点
