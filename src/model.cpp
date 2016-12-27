@@ -107,19 +107,13 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			//ballの初期位置決定
 		}
 		scene.ibs.x = scene.ip.x - 10;
-		if (input.w == 1) {
-			scene.g.service = 1;
-		}
-		//打った後にservice == 1になるように
-<<<<<<< HEAD
-		if(input.w == 1){
-			scene.g.service == 1;
-=======
-		if (input.w == 1) {
-			scene.g.service = 1;
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
-		}
+
 	}
+
+	if (input.w == 1) {
+		scene.g.service = 1;
+	}
+	//打った後にservice == 1になるように
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
 	if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
@@ -128,10 +122,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	}
 	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
-}
-
-void Model::serve(void) {
-
 }
 
 void Model::ballmovement() {
