@@ -61,14 +61,14 @@ void Scene::init(void) {
 	p.clear();
 
 	valid = false;
-	g.flag=0;
+	g.flag = 0;
 	g.change = 0;
 	g.service = 0;
 	g.getpoint = 0;
 	g.getset1 = 0;
 	g.getset2 = 0;
 	g.gameset = 0;
-	g.charactorselect =0;
+	g.charactorselect = 0;
 	g.cha1 = 0;
 	g.cha2 = 0;
 	g.cha3 = 0;
@@ -79,6 +79,8 @@ void Scene::init(void) {
 	mp2.y = 0;
 	s.sx = 0; //追記1129
 	s.sy = 0; //追記1129
+	s.setx = 0;
+	s.sety = 0;
 	b.x = 0;
 	b.y = 0;
 	b.vx = 0;
