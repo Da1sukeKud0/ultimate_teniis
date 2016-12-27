@@ -8,7 +8,7 @@
 
 const int period = 33; // in millisecond
 
-Manager::Manager(void){
+Manager::Manager(void) {
 	init_status();
 }
 
@@ -25,7 +25,7 @@ void Manager::init_status() {
 
 void Manager::init_objects() {
 	model.initModel();
-	Input &input=Input::getInstance();
+	Input &input = Input::getInstance();
 	input.clearInput();
 }
 
@@ -43,27 +43,31 @@ void Manager::set_mode(Manager::Mode s) {
 	mode = s;
 }
 
-void Manager::tickClient(void){
-	ViewManager &view =ViewManager::getInstance();
+void Manager::tickClient(void) {
+	ViewManager &view = ViewManager::getInstance();
 	view.update();
 }
 
 bool Manager::tickServer(void) {
 	Manager &mgr = Manager::getInstance();
 	ViewManager &view = ViewManager::getInstance();
-	MyNetwork &net=MyNetwork::getInstance();
-	Input &input=Input::getInstance();
+	MyNetwork &net = MyNetwork::getInstance();
+	Input &input = Input::getInstance();
 
-	mgr.members[0].input=input.input; // 自分は必ず0番に入っている
+	mgr.members[0].input = input.input; // 自分は必ず0番に入っている
 	input.clearInput();
 	mgr.model.preAction();
-	for(Members::iterator i=mgr.members.begin(); i!=mgr.members.end(); ++i){
+	mgr.model.ballmovement();
+	mgr.model.scorecalc();
+	mgr.model.Avemode();
+	for (Members::iterator i = mgr.members.begin(); i != mgr.members.end();
+			++i) {
 		mgr.model.stepPlayer(i->first);
 	}
 	mgr.model.postAction();
 	net.sendScene(mgr.scene);
-	mgr.scene.id=mgr.members[0].id; // 自分は必ず0番に入っている
-	mgr.scene.valid=true;
+	mgr.scene.id = mgr.members[0].id; // 自分は必ず0番に入っている
+	mgr.scene.valid = true;
 	view.update();
 	if (mgr.get_state() == Run) { // trueを返すとタイマーを再設定し、falseならタイマーを停止する
 		return true;
@@ -72,17 +76,17 @@ bool Manager::tickServer(void) {
 	}
 }
 
-void Manager::startStandaloneTick(std::string n){
-	Input &input=Input::getInstance();
+void Manager::startStandaloneTick(std::string n) {
+	Input &input = Input::getInstance();
 	Manager &mgr = Manager::getInstance();
 	input.clearInput();
 	mgr.scene.init();
 
 	mgr.members.clear();
 	Member tmp;
-	tmp.name=n;
-	tmp.ready=1;
-	tmp.id=-1; // standaloneの時はidを-1にすることで、servermodeと区別できるようにしている
+	tmp.name = n;
+	tmp.ready = 1;
+	tmp.id = -1; // standaloneの時はidを-1にすることで、servermodeと区別できるようにしている
 	mgr.members.insert(Members::value_type(0, tmp));
 
 	model.initModel();
@@ -90,18 +94,18 @@ void Manager::startStandaloneTick(std::string n){
 	Glib::signal_timeout().connect(slot, period);
 }
 
-void Manager::startServerTick(void){
-	Input &input=Input::getInstance();
+void Manager::startServerTick(void) {
+	Input &input = Input::getInstance();
 	Player p;
-	int j=0;
+	int j = 0;
 	input.clearInput();
 	scene.init();
-	for(Members::iterator i=members.begin(); i!=members.end(); ++i, ++j){
+	for (Members::iterator i = members.begin(); i != members.end(); ++i, ++j) {
 		// 参加者のnameとidを確定する
 		//strcpy(p.name, i->second.name.c_str());
 		// 初期化したinputをコピーすることで、各々のinputを初期化する
-		members[i->first].input=input.input;
-		members[i->first].id=j;
+		members[i->first].input = input.input;
+		members[i->first].id = j;
 		scene.p.insert(Players::value_type(j, p));
 	}
 	model.initModel();

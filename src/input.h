@@ -19,7 +19,7 @@ struct InputData { // 要素数を可変にしたい場合は、packInputとrece
 	int x, y;
 	int key;
 	int space,key1,key2,key3,key4;
-	int score;
+	int score, serve;
 	double ax, ay, az;
 	int w,w0,w1;
 };

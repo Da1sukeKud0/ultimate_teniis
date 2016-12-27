@@ -8,11 +8,11 @@
 
 class Model {
 public:
-	int flag;
+	void serve(void);
 	void initModel(void);
-	void ballmovement(void);
-	void preAction();
 	void stepPlayer(int fd);
+	void ballmovement();
+	void preAction();
 	void postAction();
 	void scorecalc();
 	void Avemode();

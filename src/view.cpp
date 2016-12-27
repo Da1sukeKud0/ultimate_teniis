@@ -281,13 +281,13 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	}
 
 	if (scene.g.change == 1) {
-		if (scene.ip.x <= scene.ib.x && scene.ib.x <= scene.ip.x + 5) {
+		if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
 			myplayer = Cairo::ImageSurface::create_from_png("sample.png");
 			cc->scale(0.5, 0.5);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
-		} else if (scene.ip.x - 5 <= scene.ib.x && scene.ib.x <= scene.ip.x) {
-			myplayer = Cairo::ImageSurface::create_from_png("sample.png");
+		} else if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x) {
+			myplayer = Cairo::ImageSurface::create_from_png("sample2.png");
 			cc->scale(0.5, 0.5);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();

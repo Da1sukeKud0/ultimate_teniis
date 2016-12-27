@@ -24,7 +24,6 @@ void Model::initModel(void) {
 	 i->second.dots[j].visible = 0;
 	 }
 	 }*/
-	flag = 0;
 
 }
 
@@ -109,37 +108,47 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.g.service = 1;
 		}
 		//打った後にservice == 1になるように
+		if (input.w == 1) {
+			scene.g.service = 1;
+		}
 	}
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
 	if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
 		scene.g.service = 0;
-		flag = 0;
+		scene.g.flag = 0;
 
 	}
+	std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
 }
 
-void Model::ballmovement(void) {
+void Model::serve(void){
+
+}
+
+void Model::ballmovement() {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 
 	if (scene.g.change == 1) {
-		if (flag == 0) {
-			if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
+
+		if (scene.g.flag == 0) {
+
+			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = 1;
-				scene.ibs.vx = scene.ip.y - scene.ib.y;
-				flag += 1;
+				scene.ibs.vx = (scene.ip.y - scene.ib.y)/100;
+				scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 5
+					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = 1;
-				scene.ibs.vx = -(scene.ip.y - scene.ib.y);
-				flag += 1;
+				scene.ibs.vx = (-(scene.ip.y - scene.ib.y))/100;
+				scene.g.flag += 1;
 			}
-		} else if (flag == 1) {
+		} else if (scene.g.flag == 1) {
 			if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
@@ -153,12 +162,13 @@ void Model::ballmovement(void) {
 				scene.ibs.vx = -(scene.ip.y - scene.ib.y);
 			}
 
-			scene.ib.x += scene.ib.vx;
-
-			scene.ibs.y += scene.ibs.vy;
-			scene.ibs.x += scene.ibs.vx;
 		}
 	}
+
+	scene.ib.x += scene.ib.vx;
+
+	scene.ibs.y += scene.ibs.vy;
+	scene.ibs.x += scene.ibs.vx;
 }
 
 //通常得点
