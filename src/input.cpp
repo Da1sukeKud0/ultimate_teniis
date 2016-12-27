@@ -2,6 +2,7 @@
  * input.cpp
  * InputDataをパケットに詰め込むpack関数と、パケットからメンバに取り込むreceive関数
  * 各種入力デバイスからのイベントを、InputDataへ反映させる方法を定める関数
+ *dayo
  */
 
 //キーボード上との対応をcaseで取る
