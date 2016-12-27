@@ -255,6 +255,15 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		scene.bs.y = -scene.ibs.y;
 	}
 
+
+	/*scene.mp.x = 300 + (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
+	scene.mp.y = scene.ip.y;
+	scene.b.x = 300 + (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
+	scene.b.y = scene.ib.y;
+	scene.bs.x = 300 + (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
+	scene.bs.y = scene.ibs.y;
+*/
+
 	cc->save();
 	Cairo::RefPtr<Cairo::Surface> court, myplayer, myplayer2, ball;
 	court = Cairo::ImageSurface::create_from_png("court.png");
