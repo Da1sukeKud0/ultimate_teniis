@@ -106,6 +106,9 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 		scene.ibs.x = scene.ip.x - 10;
 		//打った後にservice == 1になるように
+		if(input.w == 1){
+			scene.g.service == 1;
+		}
 	}
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
