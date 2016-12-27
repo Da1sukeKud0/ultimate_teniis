@@ -46,7 +46,8 @@ struct imageballshadow {
 };
 
 struct imageplayer {
-
+	double x, y;
+	double vx, vy;
 };
 
 struct imageplayer2 {
