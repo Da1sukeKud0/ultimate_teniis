@@ -26,7 +26,6 @@ void Model::initModel(void) {
 	 }*/
 	flag = 0;
 
-
 }
 
 void Model::preAction(void) { // 衝突判定など、判定のみを行う。公平のため、ここで動かしてはいけない
@@ -60,13 +59,13 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//追記
 	for (int i = 0; i < max_dots; ++i) {
-		scene.mp.x += (input.right - input.left) * 2;
-		scene.mp.y += (input.down - input.up) * 2;
+		scene.ip.x += (input.right - input.left) * 2;
+		scene.ip.y += (input.down - input.up) * 2;
 	}
 
 	for (int i = 0; i < max_dots; ++i) {
-		scene.mp2.x += (input.right - input.left) * 2;
-		scene.mp2.y += (input.down - input.up) * 2;
+		scene.ip2.x += (input.right - input.left) * 2;
+		scene.ip2.y += (input.down - input.up) * 2;
 	}
 
 	if (input.x != (-1)) {
@@ -92,23 +91,20 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.c[0] = input.key;
 	}
 
-
-
-
 	//ゲーム開始時の動作
 	if (scene.g.service == 0) {
-		scene.mp.y = 364;
-		scene.b.y = 364;
-		if (scene.mp.x < 122) {
-			scene.mp.x = 122;
+		scene.ip.y = 364;
+		scene.ibs.y = 364;
+		if (scene.ip.x < 122) {
+			scene.ip.x = 122;
 			//ballの初期位置決定
 
 		}
-		if (scene.mp.x > 392) {
-			scene.mp.x = 392;
+		if (scene.ip.x > 392) {
+			scene.ip.x = 392;
 			//ballの初期位置決定
 		}
-		scene.b.x = scene.mp.x - 10;
+		scene.ibs.x = scene.ip.x - 10;
 		//打った後にservice == 1になるように
 	}
 
@@ -117,23 +113,49 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.g.service = 0;
 		flag = 0;
 
-
 	}
 }
+
 
 void Model::ballmovement(void) {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
+
 	if (scene.g.change == 1) {
 		if (flag == 0) {
-			scene.b.vx = 1;
-			flag += 1;
+			if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
+					&& scene.ip.y - 10 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 10) {
+				scene.ibs.vy = 1;
+				scene.ibs.vx = scene.ip.y - scene.ib.y;
+				flag += 1;
+			} else if (scene.ip.x <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 5
+					&& scene.ip.y - 10 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 10) {
+				scene.ibs.vy = 1;
+				scene.ibs.vx = -(scene.ip.y - scene.ib.y);
+				flag += 1;
+			}
 		} else if (flag == 1) {
-			scene.b.vx *= -1;
+			if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
+					&& scene.ip.y - 10 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 10) {
+				scene.ibs.vy *= -1;
+				scene.ibs.vx = scene.ip.y - scene.ib.y;
+			} else if (scene.ip.x <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 5
+					&& scene.ip.y - 10 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 10) {
+				scene.ibs.vy *= -1;
+				scene.ibs.vx = -(scene.ip.y - scene.ib.y);
+			}
+
+			scene.ib.x += scene.ib.vx;
+
+			scene.ibs.y += scene.ibs.vy;
+			scene.ibs.x += scene.ibs.vx;
 		}
-	}
-	for (int i = 0; i <= 100; i++) {
-		scene.b.x += scene.b.vx;
 	}
 }
 
@@ -196,19 +218,19 @@ void Model::Avemode() {
 		}
 	}
 
-
 }
 
 void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
-	if (i == 1) {//xのセット＋１
+	if (i == 1) { //xのセット＋１
 		++scene.g.getset1;
 
 	}
-	if (i == 2) {//yのセット＋１
+	if (i == 2) { //yのセット＋１
 		++scene.g.getset2;
 	}
 
 	scene.g.getpoint = 0;
 	//gameset時の変更とメッセージ
 }
+

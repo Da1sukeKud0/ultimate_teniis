@@ -81,6 +81,26 @@ void Scene::init(void) {
 	b.x = 0;
 	b.y = 0;
 	b.vx = 0;
-	b.vy = 1;
+	b.vy = 0;
+	bs.x = 0;
+	bs.y = 0;
+	bs.vx = 0;
+	bs.vy = 0;
+	ib.x = 0;
+	ib.y = 0;
+	ib.vx = 0;
+	ib.vy = 0;
+	ibs.x = 0;
+	ibs.y = 0;
+	ibs.vx = 0;
+	ibs.vy = 0;
+	ip.x = 0;
+	ip.y = 0;
+	ip.vx = 0;
+	ip.vy = 0;
+	ip2.x = 0;
+	ip2.y = 0;
+	ip2.vx = 0;
+	ip2.vy = 0;
 
 }

@@ -44,12 +44,12 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 #else
-bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
-	Cairo::RefPtr<Cairo::Context> cc =
-			this->get_window()->create_cairo_context();
-	Gtk::DrawingArea::on_expose_event(e);
-	Manager &mgr = Manager::getInstance();
-	Scene &scene = mgr.scene;
+	bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
+		Cairo::RefPtr<Cairo::Context> cc =
+		this->get_window()->create_cairo_context();
+		Gtk::DrawingArea::on_expose_event(e);
+		Manager &mgr = Manager::getInstance();
+		Scene &scene = mgr.scene;
 
 #endif
 	if (!scene.valid) {
@@ -236,6 +236,13 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 }*/
 
 	//こっから追記
+	scene.mp.x = 300 + (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
+	scene.mp.y = scene.ip.y;
+	scene.b.x = 300 + (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
+	scene.b.y = scene.ib.y;
+	scene.bs.x = 300 + (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
+	scene.bs.y = scene.ibs.y;
+
 	cc->save();
 	Cairo::RefPtr<Cairo::Surface> court, myplayer, myplayer2, ball;
 	court = Cairo::ImageSurface::create_from_png("court.png");
@@ -251,58 +258,68 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		cc->paint();
 	}
+
 	if (scene.g.change == 1) {
-		myplayer = Cairo::ImageSurface::create_from_png("sample.png");
-		cc->scale(0.5, 0.5);
-		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-		cc->paint();
+		if (scene.ip.x <= scene.ib.x && scene.ib.x <= scene.ip.x + 5) {
+			myplayer = Cairo::ImageSurface::create_from_png("sample.png");
+			cc->scale(0.5, 0.5);
+			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+			cc->paint();
+		} else if (scene.ip.x - 5 <= scene.ib.x && scene.ib.x <= scene.ip.x) {
+			myplayer = Cairo::ImageSurface::create_from_png("sample.png");
+			cc->scale(0.5, 0.5);
+			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+			cc->paint();
+		}
 	}
 
 	cc->restore();
 
 	//ゲーム開始時のキャラクター選択
 	/*if (scene.g.charactorselect == 0) {
-		cc->save();
-		Cairo::RefPtr<Cairo::Surface> chara1, chara2, chara3, chara4; //1枚が200*300の画像として計算
-		chara1 = Cairo::ImageSurface::create_from_png("chara1.png");
-		cc->scale(1.0, 1.0);
-		cc->set_source(chara1, 0, 0);
-		cc->paint();
-		chara2 = Cairo::ImageSurface::create_from_png("chara2.png");
-		cc->scale(1.0, 1.0);
-		cc->set_source(chara2, 300, 0);
-		cc->paint();
-		chara3 = Cairo::ImageSurface::create_from_png("chara3.png");
-		cc->scale(1.0, 1.0);
-		cc->set_source(chara3, 0, 200);
-		cc->paint();
-		chara4 = Cairo::ImageSurface::create_from_png("chara4.png");
-		cc->scale(1.0, 1.0);
-		cc->set_source(chara4, 300, 200);
-		cc->paint();
-		cc->restore();
-	}
-	}*/
-
+	 cc->save();
+	 Cairo::RefPtr<Cairo::Surface> chara1, chara2, chara3, chara4; //1枚が200*300の画像として計算
+	 chara1 = Cairo::ImageSurface::create_from_png("chara1.png");
+	 cc->scale(1.0, 1.0);
+	 cc->set_source(chara1, 0, 0);
+	 cc->paint();
+	 chara2 = Cairo::ImageSurface::create_from_png("chara2.png");
+	 cc->scale(1.0, 1.0);
+	 cc->set_source(chara2, 300, 0);
+	 cc->paint();
+	 chara3 = Cairo::ImageSurface::create_from_png("chara3.png");
+	 cc->scale(1.0, 1.0);
+	 cc->set_source(chara3, 0, 200);
+	 cc->paint();
+	 chara4 = Cairo::ImageSurface::create_from_png("chara4.png");
+	 cc->scale(1.0, 1.0);
+	 cc->set_source(chara4, 300, 200);
+	 cc->paint();
+	 cc->restore();
+	 }
+	 }*/
 
 	//ボールの座標計算
-
 	cc->save();
-	if (scene.g.change == 0) {
-		ball = Cairo::ImageSurface::create_from_png("ball.png");
-		cc->scale(1.0, 1.0);
-		cc->set_source(ball, scene.b.x, scene.b.y);
-		cc->paint();
-	} else if (scene.g.change == 1) {
-		for (int i = 0; i <= 100; i++) {
-			ball = Cairo::ImageSurface::create_from_png("ball.png");
-			scene.b.x += scene.b.vx;
-			scene.b.y -= scene.b.vy;
-			cc->scale(1.0, 1.0);
-			cc->set_source(ball, scene.b.x, scene.b.y);
-			cc->paint();
-		}
-	}
+	ball = Cairo::ImageSurface::create_from_png("ball.png");
+	cc->scale(1.0, 1.0);
+	cc->set_source(ball, scene.bs.x, scene.bs.y);
+	cc->paint();
+	/*if (scene.g.change == 0) {
+	 ball = Cairo::ImageSurface::create_from_png("ball.png");
+	 cc->scale(1.0, 1.0);
+	 cc->set_source(ball, scene.b.x, scene.b.y);
+	 cc->paint();
+	 } else if (scene.g.change == 1) {
+	 for (int i = 0; i <= 100; i++) {
+	 ball = Cairo::ImageSurface::create_from_png("ball.png");
+	 scene.b.x += scene.b.vx;
+	 scene.b.y -= scene.b.vy;
+	 cc->scale(1.0, 1.0);
+	 cc->set_source(ball, scene.b.x, scene.b.y);
+	 cc->paint();
+	 }
+	 }*/
 
 	cc->restore();
 
