@@ -236,12 +236,24 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	 }*/
 
 	//こっから追記
-	scene.mp.x = 300 + (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
-	scene.mp.y = scene.ip.y;
-	scene.b.x = 300 + (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
-	scene.b.y = scene.ib.y;
-	scene.bs.x = 300 + (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
-	scene.bs.y = scene.ibs.y;
+	if (scene.id == -1) {
+		scene.mp.x = 300
+				+ (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
+		scene.mp.y = scene.ip.y;
+		scene.b.x = 300 + (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
+		scene.b.y = scene.ib.y;
+		scene.bs.x = 300
+				+ (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
+		scene.bs.y = scene.ibs.y;
+	} else if (scene.id == 0) {
+		scene.mp.x = 300 + (1 - (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
+		scene.mp.y = -scene.ip.y;
+		scene.b.x = 300 + (1 - (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
+		scene.b.y = -scene.ib.y;
+		scene.bs.x = 300
+				+ (1 - (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
+		scene.bs.y = -scene.ibs.y;
+	}
 
 	cc->save();
 	Cairo::RefPtr<Cairo::Surface> court, myplayer, myplayer2, ball;

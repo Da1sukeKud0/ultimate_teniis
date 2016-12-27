@@ -75,8 +75,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		//player.curDots = (player.curDots + 1) % max_dots;
 
 		//追記
-		scene.mp.x = input.x;
-		scene.mp.y = input.y;
+		scene.ip.x = input.x;
+		scene.ip.y = input.y;
 	}
 
 	if (input.w != (-1)) { //追記
