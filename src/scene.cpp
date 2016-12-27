@@ -61,6 +61,7 @@ void Scene::init(void) {
 	p.clear();
 
 	valid = false;
+	g.flag=0;
 	g.change = 0;
 	g.service = 0;
 	g.getpoint = 0;

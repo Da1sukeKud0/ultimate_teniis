@@ -71,6 +71,7 @@ void Input::set_key(GdkEventKey* k) {
 	case GDK_KEY_s: //追記1129
 		input.score += 1;
 		break;
+
 	case GDK_KEY_space:
 		input.space = 1;
 		break;
