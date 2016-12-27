@@ -17,7 +17,7 @@ struct Player2 {
 };
 
 struct score { //追記1129
-	int sx, sy;
+	int sx, sy ,setx ,sety;
 };
 
 struct game {

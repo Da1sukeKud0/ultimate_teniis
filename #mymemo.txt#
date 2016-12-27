@@ -1,3 +1,26 @@
+<<<<<<< HEAD
+//1227以前のscorecalc関係
+
+//ゲーム開始時の動作
+if (scene.pic.service == 0) {
+	scene.mp.y = 364;
+	if (scene.mp.x < 122) {
+		scene.mp.x = 122;
+	}
+	if (scene.mp.x > 392) {
+		scene.mp.x = 392;
+	}
+	//打った後にservice == 1になるように
+}
+
+//得点後の動作
+if (scene.pic.getpointx == 1 || scene.pic.getpointy == 1) {
+	scene.pic.service = 0;
+
+}
+
+=======
+>>>>>>> refs/remotes/origin/master
 //通常得点
 void Model::scorecalc() {
 	Scene &scene = Manager::getInstance().scene;
