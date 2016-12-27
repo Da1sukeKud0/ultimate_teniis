@@ -450,11 +450,6 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	}
 	cc->restore();
 
-	//テニスの物理計算
-	if (scene.g.change == 1) {
-
-	}
-
 //追記終わり
 
 	/*針・点

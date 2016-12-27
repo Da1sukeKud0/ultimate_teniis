@@ -105,6 +105,9 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			//ballの初期位置決定
 		}
 		scene.ibs.x = scene.ip.x - 10;
+		if (input.w == 1) {
+			scene.g.service = 1;
+		}
 		//打った後にservice == 1になるように
 	}
 
@@ -115,7 +118,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	}
 }
-
 
 void Model::ballmovement(void) {
 	Manager &mgr = Manager::getInstance();
