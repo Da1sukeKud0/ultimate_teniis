@@ -16,7 +16,7 @@ struct Player2 {
 	double x, y;
 };
 
-struct score { //追記1129
+struct score {
 	int sx, sy ,setx ,sety;
 };
 

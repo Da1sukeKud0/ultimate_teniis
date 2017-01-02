@@ -58,8 +58,9 @@ bool Manager::tickServer(void) {
 	input.clearInput();
 	mgr.model.preAction();
 	mgr.model.ballmovement();
-	mgr.model.scorecalc();
-	mgr.model.Avemode();
+	//常時読み込みたい関数は以下同様に
+	//mgr.model.scorecalc(mgr.model.i);
+	//mgr.model.gameset(mgr.model.i);
 	for (Members::iterator i = mgr.members.begin(); i != mgr.members.end();
 			++i) {
 		mgr.model.stepPlayer(i->first);

@@ -33,6 +33,16 @@ void Model::preAction(void) { // 衝突判定など、判定のみを行う。�
 	Scene &scene = Manager::getInstance().scene;
 	t = time(NULL);
 	localtime_r(&t, &scene.tm);
+
+	/*
+	 //得点判定
+	 if(//x側の線出る){
+	 //ボール戻す
+	 getpoint++;
+	 scorecalc(getpoint)
+	 }
+
+	 */
 }
 
 void Model::postAction(void) { // 全プレイヤーの動作を終えた後に、全体の状況を変えたい場合はここで処理する
@@ -170,94 +180,72 @@ void Model::ballmovement() {
 }
 
 //通常得点
-void Model::scorecalc() {
+void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
 	//xの得点
-	if (scene.g.getpoint == 1) {
+	switch (i) {
+	case 1:
+		if (scene.s.sx == 3) {
+			if (scene.s.sy == 3) {
+				scene.s.sx = 4;
+				break;
+			} else if (scene.s.sy == 4) {
+				scene.s.sx = 3;
+				scene.s.sy = 3;
+				break;
+			} else {
+				gameset(1);
+				break;
+			}
+			if (scene.s.sx <= 3) {
+				break;
+			}
+			scene.s.sx++;
+		}
+		break;
 
-		if (scene.s.sx == 2) {
-			scene.s.sx = 3; //通常得点
-			scene.g.getpoint = 0;
+	case 2:
+		if (scene.s.sy == 3) {
+			if (scene.s.sx == 3) {
+				scene.s.sy = 4;
+				break;
+			} else if (scene.s.sx == 4) {
+				scene.s.sy = 3;
+				scene.s.sx = 3;
+				break;
+			} else {
+				gameset(2);
+				break;
+			}
+			if (scene.s.sy <= 3) {
+				break;
+			}
+			scene.s.sy++;
 		}
-		if (scene.s.sx == 1) {
-			scene.s.sx = 2; //通常得点
-			scene.g.getpoint = 0;
-		}
-		if (scene.s.sx == 0) {
-			scene.s.sx = 1; //通常得点
-			scene.g.getpoint = 0;
-		}
-
-		if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
-			gameset(1);
-		} //通常勝利
-
-		if (scene.s.sy == 3 && scene.s.sy == 3) { //40vs40
-			scene.s.sx = 4;
-			Avemode();
-		}
-	}
-
-	//yの得点
-	if (scene.g.getpoint == 2) {
-
-		if (scene.s.sy == 2) {
-			scene.s.sy = 3; //通常得点
-			scene.g.getpoint = 0;
-		}
-		if (scene.s.sy == 1) {
-			scene.s.sy = 2; //通常得点
-			scene.g.getpoint = 0;
-		}
-		if (scene.s.sy == 0) {
-			scene.s.sy = 1; //通常得点
-			scene.g.getpoint = 0;
-		}
-
-		if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
-			gameset(2);
-		} //通常勝利
-
-		if (scene.s.sx == 3 && scene.s.sx == 3) { //40vs40
-			scene.s.sy = 4;
-			Avemode();
-		}
-	}
-}
-
-void Model::Avemode() {
-	Scene &scene = Manager::getInstance().scene;
-
-	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
-		if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
-			scene.s.sx = 3;
-			scene.s.sy = 3;
-		}
-	}
-
-	if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
-		if (scene.g.getpoint == 1) {
-			gameset(1);
-		}
-		if (scene.g.getpoint == 2) {
-			gameset(2);
-		}
+		break;
 	}
 
 }
 
 void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
-	if (i == 1) { //xのセット＋１
-		++scene.s.setx;
 
+	switch (i) {
+	case 1:
+		if (scene.s.setx < 2) {
+			++scene.s.setx;
+			if (scene.s.setx == 2) { //x勝利画面
+			}
+		}
+		break;
+
+	case 2:
+		if (scene.s.setx < 2) {
+			++scene.s.setx;
+			if (scene.s.setx == 2) { //x勝利画面
+			}
+		}
+		break;
 	}
-	if (i == 2) { //yのセット＋１
-		++scene.s.sety;
-	}
-
-	scene.g.getpoint = 0;
-
-	//gameset時の変更とメッセージ
 }
 

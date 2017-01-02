@@ -432,6 +432,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	//セット数表示
 	if (scene.s.setx == 0) {
+		cout << "関数実行テスト" << endl;
 		cc->set_font_size(22);
 		cc->move_to(76, 35);
 		cc->show_text(string("0"));
