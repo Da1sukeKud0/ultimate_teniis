@@ -35,14 +35,15 @@ void Model::preAction(void) { // 衝突判定など、判定のみを行う。�
 	localtime_r(&t, &scene.tm);
 
 	/*
-	 //得点判定
-	 if(//x側の線出る){
+	 * 得点判定
+	 if(//x側のライン出る){
 	 //ボール戻す
-	 getpoint++;
-	 scorecalc(getpoint)
+	 scorecalc(1);
+
 	 }
 
 	 */
+
 }
 
 void Model::postAction(void) { // 全プレイヤーの動作を終えた後に、全体の状況を変えたい場合はここで処理する
@@ -94,7 +95,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 
 	if (input.score != (-1)) { //追記1227
-		scene.g.getpoint = input.score;
+		//xの点数追加時のシミュレーション用の動作　本編では削除
 		cout << scene.s.sx << " " << scene.g.getpoint << " " << input.score
 				<< endl;
 	}
@@ -102,6 +103,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	if (input.key != 0) {
 		scene.c[0] = input.key;
 	}
+
+
 
 	//ゲーム開始時の動作
 	if (scene.g.service == 0) {
@@ -126,11 +129,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	//打った後にservice == 1になるように
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
-	if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
+	/*if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
 		scene.g.service = 0;
 		scene.g.flag = 0;
-
+		//仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
 	}
+	*/
 	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
 }
 
