@@ -261,7 +261,8 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 
 	switch (i) {
 	case 1:
-		if (scene.s.setx == 1) {
+		if (scene.s.setx >= 1) {
+			scene.g.win = 1;
 			//x勝利画面
 		}
 		++scene.s.setx;
@@ -269,7 +270,8 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 		break;
 
 	case 2:
-		if (scene.s.setx == 1) {
+		if (scene.s.setx >= 1) {
+			scene.g.win = 1;
 			//y勝利画面
 		}
 		++scene.s.sety;
