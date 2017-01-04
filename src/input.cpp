@@ -128,8 +128,13 @@ void Input::reset_key(GdkEventKey* k) {
 		input.score1 = 0; //+=0を=0に変更 1227
 		break;
 	case GDK_KEY_d: //追記1129
+<<<<<<< HEAD
 		input.score2 = 0; //+=0を=0に変更 1227
 		break;
+=======
+			input.score2 = 0; //+=0を=0に変更 1227
+			break;
+>>>>>>> refs/remotes/origin/master
 
 	case GDK_KEY_1:
 		input.key1 = 0;
