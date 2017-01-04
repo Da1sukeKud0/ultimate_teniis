@@ -270,7 +270,7 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 		break;
 
 	case 2:
-		if (scene.s.setx >= 1) {
+		if (scene.s.sety >= 1) {
 			scene.g.win = 1;
 			//y勝利画面
 		}
