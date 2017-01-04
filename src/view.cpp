@@ -403,7 +403,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->move_to(43, 35);
 		cc->show_text(string("40"));
 	} else if (scene.s.sx == 4) {
-		cc->set_font_size(22);
+		cc->set_font_size(19);
 		cc->move_to(43, 35);
 		cc->show_text(string("Ave"));
 	}
@@ -425,7 +425,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->move_to(43, 68);
 		cc->show_text(string("40"));
 	} else if (scene.s.sy == 4) {
-		cc->set_font_size(22);
+		cc->set_font_size(19);
 		cc->move_to(43, 68);
 		cc->show_text(string("Ave"));
 	}
@@ -441,7 +441,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->move_to(76, 35);
 		cc->show_text(string("1"));
 	} else if (scene.s.setx == 2) {
-		cc->set_font_size(22);
+		cc->set_font_size(19);
 		cc->move_to(76, 35);
 		cc->show_text(string("win"));
 	}
@@ -454,9 +454,9 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->set_font_size(22);
 		cc->move_to(76, 68);
 		cc->show_text(string("1"));
-	} else if (scene.s.setx == 2) {
-		cc->set_font_size(22);
-		cc->move_to(76, 35);
+	} else if (scene.s.sety == 2) {
+		cc->set_font_size(19);
+		cc->move_to(76, 68);
 		cc->show_text(string("win"));
 	}
 	cc->restore();
