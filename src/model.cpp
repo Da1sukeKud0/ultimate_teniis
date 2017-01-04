@@ -11,6 +11,16 @@
 #include "input.h"
 using namespace std;
 
+//コートの角の座標設定
+int rux = 0;
+int ruy = 0;
+int lux = 606;
+int luy = 0;
+int rdx = 0;
+int rdy = 424;
+int ldx = 606
+int ldy = 424;
+
 void Model::initModel(void) {
 //std::cout << "Init" << std::endl;
 	Scene &scene = Manager::getInstance().scene;
@@ -35,15 +45,13 @@ void Model::preAction(void) { // 衝突判定など、判定のみを行う。�
 	localtime_r(&t, &scene.tm);
 
 	/*
-	 * 得点判定
-	 if(//x側のライン出る){
+	 //得点判定
+	 if (scene.ib.y >= ) {
 	 //ボール戻す
 	 scorecalc(1);
 
 	 }
-
 	 */
-
 }
 
 void Model::postAction(void) { // 全プレイヤーの動作を終えた後に、全体の状況を変えたい場合はここで処理する
@@ -104,8 +112,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.c[0] = input.key;
 	}
 
-
-
 	//ゲーム開始時の動作
 	if (scene.g.service == 0) {
 		scene.ip.y = 364;
@@ -130,12 +136,13 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
 	/*if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
-		scene.g.service = 0;
-		scene.g.flag = 0;
-		//仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
-	}
-	*/
+	 scene.g.service = 0;
+	 scene.g.flag = 0;
+	 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
+	 }
+	 */
 	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
+	std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
 }
 
 void Model::ballmovement() {
@@ -189,22 +196,21 @@ void Model::scorecalc(int i) {
 	//xの得点
 	switch (i) {
 	case 1:
-		if (scene.s.sx == 3) {
+		if (scene.s.sx == 3) { //40点以降
 			if (scene.s.sy == 3) {
-				scene.s.sx = 4;
+				scene.s.sx = 4; //xがAve
 				break;
 			} else if (scene.s.sy == 4) {
-				scene.s.sx = 3;
+				scene.s.sx = 3; //yのAveに追いついたので40:40に
 				scene.s.sy = 3;
 				break;
-			} else {
+			} else { //yが30点未満なので勝利
 				gameset(1);
 				break;
 			}
-			if (scene.s.sx <= 3) {
-				break;
+			if (scene.s.sx <= 2) {
+				scene.s.sx++;
 			}
-			scene.s.sx++;
 		}
 		break;
 
@@ -221,10 +227,9 @@ void Model::scorecalc(int i) {
 				gameset(2);
 				break;
 			}
-			if (scene.s.sy <= 3) {
-				break;
+			if (scene.s.sy <= 2) {
+				scene.s.sy++;
 			}
-			scene.s.sy++;
 		}
 		break;
 	}
@@ -236,18 +241,16 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 
 	switch (i) {
 	case 1:
-		if (scene.s.setx < 2) {
-			++scene.s.setx;
-			if (scene.s.setx == 2) { //x勝利画面
-			}
+		++scene.s.setx;
+		if (scene.s.setx == 2) {
+			//x勝利画面
 		}
 		break;
 
 	case 2:
-		if (scene.s.setx < 2) {
-			++scene.s.setx;
-			if (scene.s.setx == 2) { //x勝利画面
-			}
+		++scene.s.setx;
+		if (scene.s.setx == 2) {
+			//y勝利画面
 		}
 		break;
 	}
