@@ -102,10 +102,18 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.g.change = input.w;
 	}
 
-	if (input.score != (-1)) { //追記1227
+	//以下!= (-1)から変更してscorecalcテスト中
+	if (input.score1 == 1) { //追記1227
 		//xの点数追加時のシミュレーション用の動作　本編では削除
-		cout << scene.s.sx << " " << scene.g.getpoint << " " << input.score
-				<< endl;
+		scorecalc(1);
+		cout << "テスト1" << endl;
+		cout << scene.s.sx << " " << input.score1 << endl;
+	}
+	if (input.score2 == 1) { //追記1227
+		//yの点数追加時のシミュレーション用の動作　本編では削除
+		scorecalc(2);
+		cout << "テスト2" << endl;
+		cout << scene.s.sy << " " << input.score2 << endl;
 	}
 
 	if (input.key != 0) {
@@ -193,6 +201,7 @@ void Model::ballmovement() {
 //通常得点
 void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
+
 	//xの得点
 	switch (i) {
 	case 1:
@@ -208,32 +217,43 @@ void Model::scorecalc(int i) {
 				gameset(1);
 				break;
 			}
-			if (scene.s.sx <= 2) {
-				scene.s.sx++;
-			}
 		}
+		if (scene.s.sx == 4) { //xがAveの状態から勝利
+			gameset(1);
+			break;
+		}
+		if (scene.s.sx <= 2) { //通常得点
+			scene.s.sx++;
+			break;
+		}
+		cout << "scorecalc呼び出しテスト" << scene.s.sx << endl;
 		break;
 
 	case 2:
-		if (scene.s.sy == 3) {
+		if (scene.s.sy == 3) { //40点以降
 			if (scene.s.sx == 3) {
-				scene.s.sy = 4;
+				scene.s.sy = 4; //yがAve
 				break;
 			} else if (scene.s.sx == 4) {
-				scene.s.sy = 3;
+				scene.s.sy = 3; //xのAveに追いついたので40:40に
 				scene.s.sx = 3;
 				break;
-			} else {
+			} else { //xが30点未満なので勝利
 				gameset(2);
 				break;
 			}
-			if (scene.s.sy <= 2) {
-				scene.s.sy++;
-			}
 		}
+		if (scene.s.sy == 4) { //yがAveの状態から勝利
+			gameset(2);
+			break;
+		}
+		if (scene.s.sy <= 2) { //通常得点
+			scene.s.sy++;
+			break;
+		}
+		cout << "scorecalc呼び出しテスト" << scene.s.sy << endl;
 		break;
 	}
-
 }
 
 void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
@@ -241,17 +261,19 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 
 	switch (i) {
 	case 1:
-		++scene.s.setx;
-		if (scene.s.setx == 2) {
+		if (scene.s.setx == 1) {
 			//x勝利画面
 		}
+		++scene.s.setx;
+		scene.s.sx = scene.s.sy = 0;
 		break;
 
 	case 2:
-		++scene.s.setx;
-		if (scene.s.setx == 2) {
+		if (scene.s.setx == 1) {
 			//y勝利画面
 		}
+		++scene.s.sety;
+		scene.s.sx = scene.s.sy = 0;
 		break;
 	}
 }
