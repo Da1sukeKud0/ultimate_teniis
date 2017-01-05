@@ -104,16 +104,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//以下!= (-1)から変更してscorecalcテスト中
 	if (input.score1 == 1) { //追記1227
-		//xの点数追加時のシミュレーション用の動作　本編では削除
+		//P1の点数追加時のシミュレーション用の動作　本編では削除
 		scorecalc(1);
-		cout << "テスト1" << endl;
-		cout << scene.s.sx << " " << input.score1 << endl;
 	}
 	if (input.score2 == 1) { //追記1227
-		//yの点数追加時のシミュレーション用の動作　本編では削除
+		//P2の点数追加時のシミュレーション用の動作　本編では削除
 		scorecalc(2);
-		cout << "テスト2" << endl;
-		cout << scene.s.sy << " " << input.score2 << endl;
 	}
 
 	if (input.key != 0) {
@@ -205,20 +201,21 @@ void Model::scorecalc(int i) {
 	//xの得点
 	switch (i) {
 	case 1:
+		cout << "scorecalc呼出テスト" << scene.s.sx << endl;
 		if (scene.s.sx == 3) { //40点以降
 			if (scene.s.sy == 3) {
-				scene.s.sx = 4; //xがAve
+				scene.s.sx = 4; //P1がAve
 				break;
 			} else if (scene.s.sy == 4) {
-				scene.s.sx = 3; //yのAveに追いついたので40:40に
+				scene.s.sx = 3; //P2のAveに追いついたので40:40に
 				scene.s.sy = 3;
 				break;
-			} else { //yが30点未満なので勝利
+			} else { //P2が30点未満なので勝利
 				gameset(1);
 				break;
 			}
 		}
-		if (scene.s.sx == 4) { //xがAveの状態から勝利
+		if (scene.s.sx == 4) { //P1がAveの状態から勝利
 			gameset(1);
 			break;
 		}
@@ -226,24 +223,25 @@ void Model::scorecalc(int i) {
 			scene.s.sx++;
 			break;
 		}
-		cout << "scorecalc呼び出しテスト" << scene.s.sx << endl;
+
 		break;
 
 	case 2:
+		cout << "scorecalc呼出テスト" << scene.s.sy << endl;
 		if (scene.s.sy == 3) { //40点以降
 			if (scene.s.sx == 3) {
-				scene.s.sy = 4; //yがAve
+				scene.s.sy = 4; //P2がAve
 				break;
 			} else if (scene.s.sx == 4) {
-				scene.s.sy = 3; //xのAveに追いついたので40:40に
+				scene.s.sy = 3; //P1のAveに追いついたので40:40に
 				scene.s.sx = 3;
 				break;
-			} else { //xが30点未満なので勝利
+			} else { //P1が30点未満なので勝利
 				gameset(2);
 				break;
 			}
 		}
-		if (scene.s.sy == 4) { //yがAveの状態から勝利
+		if (scene.s.sy == 4) { //P2がAveの状態から勝利
 			gameset(2);
 			break;
 		}
@@ -251,7 +249,7 @@ void Model::scorecalc(int i) {
 			scene.s.sy++;
 			break;
 		}
-		cout << "scorecalc呼び出しテスト" << scene.s.sy << endl;
+
 		break;
 	}
 }
@@ -261,20 +259,20 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 
 	switch (i) {
 	case 1:
-		if (scene.s.setx >= 1) {
-			scene.g.win = 1;
-			//x勝利画面
-		}
 		++scene.s.setx;
+		if (scene.s.setx == 2) {
+			scene.g.win = 1;
+			//P1勝利画面
+		}
 		scene.s.sx = scene.s.sy = 0;
 		break;
 
 	case 2:
-		if (scene.s.sety >= 1) {
-			scene.g.win = 1;
-			//y勝利画面
-		}
 		++scene.s.sety;
+		if (scene.s.sety == 2) {
+			scene.g.win = 2;
+			//P2勝利画面
+		}
 		scene.s.sx = scene.s.sy = 0;
 		break;
 	}

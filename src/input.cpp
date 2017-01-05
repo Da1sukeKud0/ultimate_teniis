@@ -27,7 +27,7 @@ char *Input::packInput(int &len) {
 }
 
 void Input::clearInput(void) {
-	input.x = input.y = -1;
+	input.x = input.y =input.score1 = input.score2 = -1;
 //	input.ax=input.ay=input.az=0;
 }
 

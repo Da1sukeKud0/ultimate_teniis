@@ -319,17 +319,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 }
 	 }*/
 
-	//勝利時の画面表示
-		cc->save();
-		Cairo::RefPtr<Cairo::ImageSurface> win;
-		if (scene.g.win == 1) {
-			win = Cairo::ImageSurface::create_from_png("win1.png");
-			cc->scale(1.0, 1.0);
-			cc->set_source(win,100,100);
-			cc->paint();
-		}
-		cc->restore();
-
 	//ボールの座標計算
 	cc->save();
 	ball = Cairo::ImageSurface::create_from_png("ball.png");
@@ -471,6 +460,25 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->show_text(string("win"));
 	}
 	cc->restore();
+
+	//勝利時の画面表示
+	cc->save();
+	Cairo::RefPtr<Cairo::ImageSurface> win;
+	if (scene.g.win == 1) {
+		win = Cairo::ImageSurface::create_from_png("win1.png");
+		cc->scale(1.0, 1.0);
+		cc->set_source(win, 0, 100);
+		cc->paint();
+	}
+	if (scene.g.win == 2) {
+		win = Cairo::ImageSurface::create_from_png("win2.png");
+		cc->scale(1.0, 1.0);
+		cc->set_source(win, 0, 100);
+		cc->paint();
+	}
+	cc->restore();
+
+
 
 //追記終わり
 
