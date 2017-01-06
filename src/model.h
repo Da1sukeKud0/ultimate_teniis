@@ -18,6 +18,7 @@ public:
 	void postAction();
 	void scorecalc(int);
 	void gameset(int);
+	void gameend();
 };
 
 #endif /* MODEL_H_ */

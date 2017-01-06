@@ -259,22 +259,25 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 
 	switch (i) {
 	case 1:
+		scene.s.sx = scene.s.sy = 0;
 		++scene.s.setx;
 		if (scene.s.setx == 2) {
-			scene.g.win = 1;
-			//P1勝利画面
+			scene.g.win = 1; //P1勝利画面
+			/*
+			int i=0;
+			if(i == 0){
+				scene.s.sx = scene.s.sy = scene.s.setx = scene.s.sety =  0;
+			}
+			*/
 		}
-		scene.s.sx = scene.s.sy = 0;
 		break;
 
 	case 2:
+		scene.s.sx = scene.s.sy = 0;
 		++scene.s.sety;
 		if (scene.s.sety == 2) {
-			scene.g.win = 2;
-			//P2勝利画面
+			scene.g.win = 2; //P2勝利画面
 		}
-		scene.s.sx = scene.s.sy = 0;
 		break;
 	}
 }
-
