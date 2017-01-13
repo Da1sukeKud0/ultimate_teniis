@@ -82,6 +82,7 @@ void Scene::init(void) {
 	s.sy = 0; //追記1129
 	s.setx = 0;
 	s.sety = 0;
+	s.chanp = 0;
 	b.x = 0;
 	b.y = 0;
 	b.vx = 0;
