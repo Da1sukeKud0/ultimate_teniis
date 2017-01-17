@@ -25,6 +25,7 @@ void Scene::receiveScene(char *tmp) {
 		tmp += sizeof(char);
 		p[j] = *(Player *) tmp;
 		tmp += sizeof(Player);
+
 	}
 	valid = true;
 }
