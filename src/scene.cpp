@@ -17,6 +17,26 @@ void Scene::receiveScene(char *tmp) {
 	tmp += sizeof(char);
 	tm = *(struct tm *) tmp;
 	tmp += sizeof(struct tm);
+	//追記
+	mp = *(struct Player *) tmp;
+	tmp += sizeof(struct Player);
+	mp2 = *(struct Player2 *) tmp;
+	tmp += sizeof(struct Player2);
+	s = *(struct score *) tmp;
+	tmp += sizeof(struct score);
+	b = *(struct ball *) tmp;
+	tmp += sizeof(struct ball);
+	bs = *(struct ballshadow *) tmp;
+	tmp += sizeof(struct ballshadow);
+	ib = *(struct imageball *) tmp;
+	tmp += sizeof(struct imageball);
+	ibs = *(struct imageballshadow *) tmp;
+	tmp += sizeof(struct imageballshadow);
+	ip = *(struct imageplayer *) tmp;
+	tmp += sizeof(struct imageplayer);
+	ip2 = *(struct imageplayer2 *) tmp;
+	tmp += sizeof(struct imageplayer2);
+
 	p.clear(); // まずコンテナを空にして、
 	size = *(char *) tmp;
 	tmp += sizeof(char); // 可変長のデータの個数を受け取り
@@ -39,6 +59,26 @@ char *Scene::packScene(int &len) {
 	tmp += sizeof(char);
 	*(struct tm *) tmp = tm;
 	tmp += sizeof(struct tm);
+	//追記
+	*(struct Player *) tmp = mp;
+	tmp += sizeof(struct Player);
+	*(struct Player2 *) tmp = mp2 ;
+	tmp += sizeof(struct Player2);
+	*(struct score *) tmp = s;
+	tmp += sizeof(struct score);
+	*(struct ball *) tmp = b;
+	tmp += sizeof(struct ball);
+	*(struct ballshadow *) tmp = bs;
+	tmp += sizeof(struct ballshadow);
+	*(struct imageball *) tmp = ib;
+	tmp += sizeof(struct imageball);
+	*(struct imageballshadow *) tmp = ibs;
+	tmp += sizeof(struct imageballshadow);
+	*(struct imageplayer *) tmp = ip;
+	tmp += sizeof(struct imageplayer);
+	*(struct imageplayer2 *) tmp = ip2;
+	tmp += sizeof(struct imageplayer2);
+
 	*(char *) tmp = p.size();
 	tmp += sizeof(char); // 可変長のデータは、まず個数を送る
 	for (Players::iterator i = p.begin(); i != p.end(); ++i) {
@@ -74,7 +114,7 @@ void Scene::init(void) {
 	g.cha3 = 0;
 	g.cha4 = 0;
 	g.win = 0;
-	g.chanp=0;
+	g.chanp = 0;
 	mp.x = 0;
 	mp.y = 0;
 	mp2.x = 0;
