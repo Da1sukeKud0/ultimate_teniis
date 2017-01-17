@@ -49,7 +49,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			break;
 	}
 
-	//Player &player = scene.p[id];
+	Player &player = scene.p[id];
 
 	for (int i = 0; i < max_dots; ++i) {
 		//player.dots[i].x += (input.right - input.left) * 5;
@@ -116,48 +116,46 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.g.flag = 0;
 
 	}
-	std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
+	std::cout << scene.g.service << "," << scene.g.flag << "," << scene.ibs.y
+			<< "," << scene.ibs.vy << std::endl;
 }
 
-void Model::serve(void){
+void Model::serve(void) {
 
 }
-
 
 void Model::ballmovement() {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 
 	if (scene.g.change == 1) {
-
 		if (scene.g.flag == 0) {
-
 			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = 1;
-				scene.ibs.vx = (scene.ip.y - scene.ib.y)/100;
+				scene.ibs.vy = -1;
+				scene.ibs.vx = (scene.ip.y - scene.ib.y) / 100;
 				scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = 1;
-				scene.ibs.vx = (-(scene.ip.y - scene.ib.y))/100;
+				scene.ibs.vy = -1;
+				scene.ibs.vx = (-(scene.ip.y - scene.ib.y)) / 100;
 				scene.g.flag += 1;
 			}
 		} else if (scene.g.flag == 1) {
-			if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
+			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy *= -1;
-				scene.ibs.vx = scene.ip.y - scene.ib.y;
+				scene.ibs.vx = (scene.ip.y - scene.ib.y) / 100;
 			} else if (scene.ip.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 5
+					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy *= -1;
-				scene.ibs.vx = -(scene.ip.y - scene.ib.y);
+				scene.ibs.vx = (-(scene.ip.y - scene.ib.y)) / 100;
 			}
 
 		}
