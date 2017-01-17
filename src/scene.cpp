@@ -103,7 +103,8 @@ void Scene::init(void) {
 
 	valid = false;
 	g.flag = 0;
-	g.change = 0;
+	g.change1 = 0;
+	g.change2 = 0;
 	g.service = 0;
 	g.getpoint = 0;
 	g.getset1 = 0;
