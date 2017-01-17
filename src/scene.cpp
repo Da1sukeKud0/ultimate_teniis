@@ -74,7 +74,6 @@ void Scene::init(void) {
 	g.cha3 = 0;
 	g.cha4 = 0;
 	g.win = 0;
-	g.chanp=0;
 	mp.x = 0;
 	mp.y = 0;
 	mp2.x = 0;
