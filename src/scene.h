@@ -22,7 +22,7 @@ struct score {
 
 struct game {
 	int charactorselect, change, service, getpoint, getset1, getset2, gameset,
-			cha1, cha2, cha3, cha4,serve,flag,win;
+			cha1, cha2, cha3, cha4,serve,flag,win,chanp;
 };
 
 struct ball {

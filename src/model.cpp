@@ -98,8 +98,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-	if (input.w != == 1) { //追記
+	if (input.w == 1 && scene.g.chanp == 0) { //追記
 		scene.g.change = 1;
+		scene.g.chanp = 1;
+	} else if (input.w == 1 && scene.g.chanp == 1) {
+		scene.g.change = 0;
+		scene.g.chanp = 0;
 	}
 
 	//以下!= (-1)から変更してscorecalcテスト中
@@ -164,7 +168,6 @@ void Model::ballmovement() {
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = -5;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-				;
 				scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20
