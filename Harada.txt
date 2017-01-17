@@ -4,4 +4,4 @@
 
 テニスの王子様は読んだことありません。
 
-alias team4='echo -e "### team4 compile and run ###\n" && cd /home/daisuke/workspace/team4 && make && ./sample'
+alias team4='echo -e "### team4 compile and run ###\n" && cd /home/keiya/workspace/team4 && make && ./sample'

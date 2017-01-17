@@ -98,10 +98,11 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-	/*if (input.w != (-1) && scene.s.chanp == 0) { //追記
-		scene.g.change = input.w;
-		scene.s.chanp = input.w;
-	}*/
+	if (input.w == 1) { //追記
+		scene.g.change = 1;
+	}else{
+		scene.g.change =0;
+	}
 
 	//以下!= (-1)から変更してscorecalcテスト中
 	if (input.score1 == 1) { //追記1227
@@ -163,16 +164,16 @@ void Model::ballmovement() {
 			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -1;
-				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 100;
+				scene.ibs.vy = -5;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				;
 				scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -1;
-				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 100;
+				scene.ibs.vy = -5;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 			}
 		} else if (scene.g.flag == 1) {
@@ -180,13 +181,13 @@ void Model::ballmovement() {
 					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy *= -1;
-				scene.ibs.vx = scene.ip.y - scene.ibs.y / 100;
+				scene.ibs.vx = (scene.ip.y - scene.ibs.y) / 10;
 			} else if (scene.ip.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy *= -1;
-				scene.ibs.vx = -(scene.ip.y - scene.ibs.y) / 100;
+				scene.ibs.vx = -(scene.ip.y - scene.ibs.y) / 10;
 			}
 
 		}

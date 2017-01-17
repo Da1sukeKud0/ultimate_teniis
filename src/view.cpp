@@ -273,7 +273,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	cc->save();
 	if (scene.g.change == 0) {
-		myplayer = Cairo::ImageSurface::create_from_png("player.png");
+		myplayer = Cairo::ImageSurface::create_from_png("待機1.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		cc->paint();
@@ -281,13 +281,13 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 	if (scene.g.change == 1) {
 		if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
-			myplayer = Cairo::ImageSurface::create_from_png("sample.png");
-			cc->scale(0.5, 0.5);
+			myplayer = Cairo::ImageSurface::create_from_png("バックハンド1.png");
+			cc->scale(1.0,1.0);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
 		} else if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x) {
-			myplayer = Cairo::ImageSurface::create_from_png("sample2.png");
-			cc->scale(0.5, 0.5);
+			myplayer = Cairo::ImageSurface::create_from_png("フォアハンド1.png");
+			cc->scale(1.0, 1.0);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
 		}
