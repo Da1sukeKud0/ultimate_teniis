@@ -69,7 +69,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			break;
 	}
 
-	Player &player = scene.p[id];
+	//Player &player = scene.p[id];
 
 	for (int i = 0; i < max_dots; ++i) {
 		//player.dots[i].x += (input.right - input.left) * 5;
@@ -98,8 +98,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-	if (input.w != (-1)) { //追記
-		scene.g.change = input.w;
+	if (input.w == 1 && scene.g.chanp == 0) { //追記
+		scene.g.change = 1;
+		scene.g.chanp = 1;
+	} else if (input.w == 1 && scene.g.chanp == 1) {
+		scene.g.change = 0;
+		scene.g.chanp = 0;
 	}
 
 	//以下!= (-1)から変更してscorecalcテスト中
@@ -139,14 +143,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	//打った後にservice == 1になるように
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
-	if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
-		scene.g.service = 0;
-		scene.g.flag = 0;
-
-	}
-	std::cout << scene.g.service << "," << scene.g.flag << "," << scene.ibs.y
-			<< "," << scene.ibs.vy << std::endl;
-
 	/*if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
 	 scene.g.service = 0;
 	 scene.g.flag = 0;
@@ -155,47 +151,44 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	 */
 	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
 	//std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
-
-
-void Model::serve(void) {
-
+	std::cout << scene.g.flag << "," << scene.ibs.vy << "," << scene.ibs.vx
+			<< std::endl;
 }
-
 
 void Model::ballmovement() {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 
 	if (scene.g.change == 1) {
+
 		if (scene.g.flag == 0) {
+
 			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -1;
-				scene.ibs.vy = 1;
-				scene.ibs.vx = (scene.ip.y - scene.ib.y) / 100;
+				scene.ibs.vy = -5;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 10 <= scene.ibs.y
+					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -1;
-				scene.ibs.vy = 1;
-				scene.ibs.vx = (-(scene.ip.y - scene.ib.y)) / 100;
+				scene.ibs.vy = -5;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 			}
 		} else if (scene.g.flag == 1) {
 			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
-					&& scene.ip.y - 10 <= scene.ibs.y
+					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy *= -1;
-				scene.ibs.vx = (scene.ip.y - scene.ib.y) / 100;
+				scene.ibs.vx = (scene.ip.y - scene.ibs.y) / 10;
 			} else if (scene.ip.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 10 <= scene.ibs.y
+					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy *= -1;
-				scene.ibs.vx = (-(scene.ip.y - scene.ib.y)) / 100;
+				scene.ibs.vx = -(scene.ip.y - scene.ibs.y) / 10;
 			}
 
 		}
@@ -277,11 +270,11 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 		if (scene.s.setx == 2) {
 			scene.g.win = 1; //P1勝利画面
 			/*
-			int i=0;
-			if(i == 0){
-				scene.s.sx = scene.s.sy = scene.s.setx = scene.s.sety =  0;
-			}
-			*/
+			 int i=0;
+			 if(i == 0){
+			 scene.s.sx = scene.s.sy = scene.s.setx = scene.s.sety =  0;
+			 }
+			 */
 		}
 		break;
 
