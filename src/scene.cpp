@@ -45,6 +45,7 @@ void Scene::receiveScene(char *tmp) {
 		tmp += sizeof(char);
 		p[j] = *(Player *) tmp;
 		tmp += sizeof(Player);
+
 	}
 	valid = true;
 }
@@ -114,7 +115,10 @@ void Scene::init(void) {
 	g.cha3 = 0;
 	g.cha4 = 0;
 	g.win = 0;
+<<<<<<< HEAD
 	g.chanp = 0;
+=======
+>>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 	mp.x = 0;
 	mp.y = 0;
 	mp2.x = 0;
