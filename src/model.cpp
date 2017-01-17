@@ -98,10 +98,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-	if (input.w == 1) { //追記
+	if (input.w != == 1) { //追記
 		scene.g.change = 1;
-	}else{
-		scene.g.change =0;
 	}
 
 	//以下!= (-1)から変更してscorecalcテスト中
