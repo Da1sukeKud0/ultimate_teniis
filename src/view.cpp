@@ -250,15 +250,15 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		scene.bs.y = scene.ibs.y;
 	} else if (scene.id == 1) {
 		scene.mp.x = 300 + (1 - (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
-		scene.mp.y = 424-scene.ip.y;
+		scene.mp.y = 360-scene.ip.y;
 		scene.mp2.x = 300
 				+ (1 - (scene.ip2.y / 424) * 0.5) * (scene.ip2.x - 300);
-		scene.mp2.y = 424-scene.ip2.y;
+		scene.mp2.y = 360-scene.ip2.y;
 		scene.b.x = 300 + (1 - (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
-		scene.b.y = 424-scene.ib.y;
+		scene.b.y = 360-scene.ib.y;
 		scene.bs.x = 300
 				+ (1 - (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
-		scene.bs.y = 424-scene.ibs.y;
+		scene.bs.y = 360-scene.ibs.y;
 	} else if (scene.id == 0) {
 		scene.mp.x = 300
 				+ (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
@@ -290,14 +290,14 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	cc->restore();
 	if (scene.id == -1) {
 		cc->save();
-		if (scene.g.change == 0) {
+		if (scene.g.change1 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("待機1.png");
 			cc->scale(1.0, 1.0);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
 		}
 
-		if (scene.g.change == 1) {
+		if (scene.g.change1 == 1) {
 			if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
 				myplayer = Cairo::ImageSurface::create_from_png("バックハンド1.png");
 				cc->scale(1.0, 1.0);
@@ -315,14 +315,14 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		cc->restore();
 	} else if (scene.id == 0) {
 		cc->save();
-		if (scene.g.change == 0) {
+		if (scene.g.change1 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("待機1.png");
 			cc->scale(1.0, 1.0);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
 		}
 
-		if (scene.g.change == 1) {
+		if (scene.g.change1 == 1) {
 			if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
 				myplayer = Cairo::ImageSurface::create_from_png("バックハンド1.png");
 				cc->scale(1.0, 1.0);
@@ -339,7 +339,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 		cc->restore();
 		cc->save();
-		if (scene.g.change == 0) {
+		if (scene.g.change2 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("待機2.png");
 			cc->scale(1.0, 1.0);
 			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
@@ -348,7 +348,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 		}
 
-		if (scene.g.change == 1) {
+		if (scene.g.change2 == 1) {
 			if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
 				myplayer = Cairo::ImageSurface::create_from_png("バックハンド2.png");
 				cc->scale(0.5, 0.5);
@@ -367,14 +367,14 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	}
 	else if(scene.id==1){
 		cc->save();
-				if (scene.g.change == 0) {
+				if (scene.g.change2 == 0) {
 					myplayer = Cairo::ImageSurface::create_from_png("待機2.png");
 					cc->scale(1.0, 1.0);
 					cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 					cc->paint();
 				}
 
-				if (scene.g.change == 1) {
+				if (scene.g.change2 == 1) {
 					if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
 						myplayer = Cairo::ImageSurface::create_from_png("バックハンド2.png");
 						cc->scale(1.0, 1.0);
@@ -391,7 +391,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 				cc->restore();
 				cc->save();
-				if (scene.g.change == 0) {
+				if (scene.g.change1 == 0) {
 					myplayer = Cairo::ImageSurface::create_from_png("待機1.png");
 					cc->scale(1.0, 1.0);
 					cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
@@ -400,7 +400,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 				}
 
-				if (scene.g.change == 1) {
+				if (scene.g.change1 == 1) {
 					if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
 						myplayer = Cairo::ImageSurface::create_from_png("バックハンド1.png");
 						cc->scale(0.5, 0.5);
