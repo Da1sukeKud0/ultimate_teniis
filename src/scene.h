@@ -12,17 +12,17 @@ struct Player { // 要素数を可変にしたい場合は、packSceneとreceive
 	double x, y;
 };
 
-/*struct Player2 {
+struct Player2 {
 	double x, y;
-};*/
+};
 
-struct score { //追記1129
-	int sx, sy;
+struct score {
+	int sx, sy ,setx ,sety;
 };
 
 struct game {
 	int charactorselect, change, service, getpoint, getset1, getset2, gameset,
-			cha1, cha2, cha3, cha4,serve,flag;
+			cha1, cha2, cha3, cha4,serve,flag,win;
 };
 
 struct ball {
@@ -63,7 +63,7 @@ public:
 	struct tm tm;
 	game g;
 	Players p;
-	//Player2 mp2;
+	Player2 mp2;
 	Player mp;
 	score s;
 	ball b;

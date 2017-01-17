@@ -9,6 +9,17 @@
 #include "model.h"
 #include "manager.h"
 #include "input.h"
+using namespace std;
+
+//コートの角の座標設定
+int rux = 0;
+int ruy = 0;
+int lux = 606;
+int luy = 0;
+int rdx = 0;
+int rdy = 424;
+int ldx = 606;
+int ldy = 424;
 
 void Model::initModel(void) {
 //std::cout << "Init" << std::endl;
@@ -32,6 +43,15 @@ void Model::preAction(void) { // 衝突判定など、判定のみを行う。�
 	Scene &scene = Manager::getInstance().scene;
 	t = time(NULL);
 	localtime_r(&t, &scene.tm);
+
+	/*
+	 //得点判定
+	 if (scene.ib.y >= ) {
+	 //ボール戻す
+	 scorecalc(1);
+
+	 }
+	 */
 }
 
 void Model::postAction(void) { // 全プレイヤーの動作を終えた後に、全体の状況を変えたい場合はここで処理する
@@ -82,8 +102,14 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.g.change = input.w;
 	}
 
-	if (input.score != (-1)) { //追記1129
-		scene.s.sx = input.score;
+	//以下!= (-1)から変更してscorecalcテスト中
+	if (input.score1 == 1) { //追記1227
+		//P1の点数追加時のシミュレーション用の動作　本編では削除
+		scorecalc(1);
+	}
+	if (input.score2 == 1) { //追記1227
+		//P2の点数追加時のシミュレーション用の動作　本編では削除
+		scorecalc(2);
 	}
 
 	if (input.key != 0) {
@@ -104,11 +130,13 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			//ballの初期位置決定
 		}
 		scene.ibs.x = scene.ip.x - 10;
-		//打った後にservice == 1になるように
-		if (input.w == 1) {
-			scene.g.service = 1;
-		}
+
 	}
+
+	if (input.w == 1) {
+		scene.g.service = 1;
+	}
+	//打った後にservice == 1になるように
 
 	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
 	if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
@@ -118,11 +146,21 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 	std::cout << scene.g.service << "," << scene.g.flag << "," << scene.ibs.y
 			<< "," << scene.ibs.vy << std::endl;
-}
+
+	/*if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
+	 scene.g.service = 0;
+	 scene.g.flag = 0;
+	 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
+	 }
+	 */
+	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
+	//std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
+
 
 void Model::serve(void) {
 
 }
+
 
 void Model::ballmovement() {
 	Manager &mgr = Manager::getInstance();
@@ -134,6 +172,7 @@ void Model::ballmovement() {
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = -1;
+				scene.ibs.vy = 1;
 				scene.ibs.vx = (scene.ip.y - scene.ib.y) / 100;
 				scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
@@ -141,6 +180,7 @@ void Model::ballmovement() {
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = -1;
+				scene.ibs.vy = 1;
 				scene.ibs.vx = (-(scene.ip.y - scene.ib.y)) / 100;
 				scene.g.flag += 1;
 			}
@@ -168,78 +208,89 @@ void Model::ballmovement() {
 }
 
 //通常得点
-void Model::scorecalc() {
+void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
+
 	//xの得点
-	if (scene.g.getpoint == 1) {
-
-		if (scene.s.sx < 2) {
-			scene.s.sx++; //通常得点
-			scene.g.getpoint = 0;
+	switch (i) {
+	case 1:
+		cout << "scorecalc呼出テスト" << scene.s.sx << endl;
+		if (scene.s.sx == 3) { //40点以降
+			if (scene.s.sy == 3) {
+				scene.s.sx = 4; //P1がAve
+				break;
+			} else if (scene.s.sy == 4) {
+				scene.s.sx = 3; //P2のAveに追いついたので40:40に
+				scene.s.sy = 3;
+				break;
+			} else { //P2が30点未満なので勝利
+				gameset(1);
+				break;
+			}
 		}
-
-		if (scene.s.sy != 4 && scene.s.sx == 3) { //Ave外
+		if (scene.s.sx == 4) { //P1がAveの状態から勝利
 			gameset(1);
-		} //通常勝利
-
-		if (scene.s.sy == 3 && scene.s.sy == 3) { //40vs40
-			scene.s.sx = 4;
-			Avemode();
+			break;
+		}
+		if (scene.s.sx <= 2) { //通常得点
+			scene.s.sx++;
+			break;
 		}
 
-	}
-	//yの得点
-	if (scene.g.getpoint == 2) {
+		break;
 
-		if (scene.s.sy < 2) {
-			scene.s.sy++; //通常得点
-			scene.g.getpoint = 0;
+	case 2:
+		cout << "scorecalc呼出テスト" << scene.s.sy << endl;
+		if (scene.s.sy == 3) { //40点以降
+			if (scene.s.sx == 3) {
+				scene.s.sy = 4; //P2がAve
+				break;
+			} else if (scene.s.sx == 4) {
+				scene.s.sy = 3; //P1のAveに追いついたので40:40に
+				scene.s.sx = 3;
+				break;
+			} else { //P1が30点未満なので勝利
+				gameset(2);
+				break;
+			}
 		}
-
-		if (scene.s.sx != 4 && scene.s.sy == 3) { //Ave外
+		if (scene.s.sy == 4) { //P2がAveの状態から勝利
 			gameset(2);
-		} //通常勝利
-
-		if (scene.s.sx == 3 && scene.s.sx == 3) { //40vs40
-			scene.s.sy = 4;
-			Avemode();
+			break;
 		}
+		if (scene.s.sy <= 2) { //通常得点
+			scene.s.sy++;
+			break;
+		}
+
+		break;
 	}
-}
-
-void Model::Avemode() {
-	Scene &scene = Manager::getInstance().scene;
-
-	if (scene.s.sx == 4 && scene.s.sy == 4) { //双方Ave
-		if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
-			scene.s.sx = 3;
-			scene.s.sy = 3;
-		}
-	}
-
-	if (scene.s.sx == 4 || scene.s.sy == 4) { //片方Ave
-		if (scene.g.getpoint == 1) {
-			gameset(1);
-		}
-		if (scene.g.getpoint == 2) {
-			gameset(2);
-		}
-	}
-
 }
 
 void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
-	if (i == 1) { //xのセット＋１
-		++scene.g.getset1;
 
+	switch (i) {
+	case 1:
+		scene.s.sx = scene.s.sy = 0;
+		++scene.s.setx;
+		if (scene.s.setx == 2) {
+			scene.g.win = 1; //P1勝利画面
+			/*
+			int i=0;
+			if(i == 0){
+				scene.s.sx = scene.s.sy = scene.s.setx = scene.s.sety =  0;
+			}
+			*/
+		}
+		break;
+
+	case 2:
+		scene.s.sx = scene.s.sy = 0;
+		++scene.s.sety;
+		if (scene.s.sety == 2) {
+			scene.g.win = 2; //P2勝利画面
+		}
+		break;
 	}
-	if (i == 2) { //yのセット＋１
-		++scene.g.getset2;
-	}
-
-	scene.g.getpoint = 0;
-
-	//gameset時の変更とメッセージ
 }
-

@@ -7,16 +7,18 @@
 #include "input.h"
 
 class Model {
+
 public:
+	int i;
 	void serve(void);
 	void initModel(void);
 	void stepPlayer(int fd);
 	void ballmovement();
 	void preAction();
 	void postAction();
-	void scorecalc();
-	void Avemode();
-	void gameset(int i);
+	void scorecalc(int);
+	void gameset(int);
+	void gameend();
 };
 
 #endif /* MODEL_H_ */
