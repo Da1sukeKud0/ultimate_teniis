@@ -77,24 +77,25 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 
 	//追記
-	if(scene.id==-1){
-	for (int i = 0; i < max_dots; ++i) {
-		scene.ip.x += (input.right - input.left) * 2;
-		scene.ip.y += (input.down - input.up) * 2;
-	}
-	}
-	else if(scene.id==0){
-		for (int i = 0; i < max_dots; ++i) {
-			scene.ip.x += (input.right - input.left) * 2;
-			scene.ip.y += (input.down - input.up) * 2;
-		}
+	if (scene.id == -1) {
+		//for (int i = 0; i < max_dots; ++i) {
+			scene.ip.x += (input.right - input.left) * 10;
+			scene.ip.y += (input.down - input.up) * 10;
+		//}
+	} else if (scene.id == 0) {
+		//for (int i = 0; i < max_dots; ++i) {
+			scene.ip.x += (input.right - input.left) * 10;
+			scene.ip.y += (input.down - input.up) * 10;
+			//}
+			std::cout<<"id=0"<<endl;
 	}
 
-	else if(scene.id==1){
-	for (int i = 0; i < max_dots; ++i) {
-		scene.ip2.x += (input.right - input.left) * 2;
-		scene.ip2.y += (input.down - input.up) * 2;
-	}
+	else if (scene.id == 1) {
+		//for (int i = 0; i < max_dots; ++i) {
+			scene.ip2.x += (input.right - input.left) * 10;
+			scene.ip2.y += (input.down - input.up) * 10;
+		//}
+			std::cout<<"id=1"<<endl;
 	}
 	if (input.x != (-1)) {
 		//player.dots[player.curDots].x = input.x;
