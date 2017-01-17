@@ -82,7 +82,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.ip.x += (input.right - input.left) * 10;
 			scene.ip.y += (input.down - input.up) * 10;
 		//}
-	} else if (scene.id == 0) {
+	}
+	if (scene.id == 0) {
 		//for (int i = 0; i < max_dots; ++i) {
 			scene.ip.x += (input.right - input.left) * 10;
 			scene.ip.y += (input.down - input.up) * 10;
@@ -90,7 +91,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			std::cout<<"id=0"<<endl;
 	}
 
-	else if (scene.id == 1) {
+	if (scene.id == 1) {
 		//for (int i = 0; i < max_dots; ++i) {
 			scene.ip2.x += (input.right - input.left) * 10;
 			scene.ip2.y += (input.down - input.up) * 10;
@@ -108,12 +109,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-	if (input.w == 1 && scene.g.chanp == 0) { //追記
-		scene.g.change = 1;
-		scene.g.chanp = 1;
-	} else if (input.w == 1 && scene.g.chanp == 1) {
-		scene.g.change = 0;
-		scene.g.chanp = 0;
+	if (input.w !=(-1)) { //追記
+		scene.g.change = input.w;
 	}
 
 	//以下!= (-1)から変更してscorecalcテスト中

@@ -250,15 +250,15 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		scene.bs.y = scene.ibs.y;
 	} else if (scene.id == 1) {
 		scene.mp.x = 300 + (1 - (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
-		scene.mp.y = -scene.ip.y;
+		scene.mp.y = 424-scene.ip.y;
 		scene.mp2.x = 300
 				+ (1 - (scene.ip2.y / 424) * 0.5) * (scene.ip2.x - 300);
-		scene.mp2.y = -scene.ip2.y;
+		scene.mp2.y = 424-scene.ip2.y;
 		scene.b.x = 300 + (1 - (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
-		scene.b.y = -scene.ib.y;
+		scene.b.y = 424-scene.ib.y;
 		scene.bs.x = 300
 				+ (1 - (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
-		scene.bs.y = -scene.ibs.y;
+		scene.bs.y = 424-scene.ibs.y;
 	} else if (scene.id == 0) {
 		scene.mp.x = 300
 				+ (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
