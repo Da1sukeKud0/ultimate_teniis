@@ -417,7 +417,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 				cc->restore();
 	}
-	//ゲーム開始時のキャラクター選択
+	//ゲーム開始時のキャラクター選択ぅ
 	/*if (scene.g.charactorselect == 0) {
 	 cc->save();
 	 Cairo::RefPtr<Cairo::Surface> chara1, chara2, chara3, chara4; //1枚が200*300の画像として計算
