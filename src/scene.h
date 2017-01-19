@@ -52,7 +52,7 @@ struct imageplayer {
 
 struct imageplayer2 {
 	double x, y;
-	double vx, vy;
+	double vx, vy;eam
 };
 
 typedef std::map<int, Player> Players;
