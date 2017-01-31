@@ -78,6 +78,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//追記
 	if (id == -1) {
+		if(scene.ip.x)
 		//for (int i = 0; i < max_dots; ++i) {
 		scene.ip.x += (input.right - input.left) * 10;
 		scene.ip.y += (input.down - input.up) * 10;

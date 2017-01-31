@@ -196,7 +196,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	glPushMatrix();
 	double roll=atan2(scene.p[0].ax, scene.p[0].az)*180/M_PI;
 	double pitch=atan2(scene.p[0].ay, scene.p[0].az)*180/M_PI;
-	glRotated(pitch, 1.0, 0.0, 0.0);
+	glRotated(pitch, 関連画像1.0, 0.0, 0.0);
 	glRotated(roll, 0.0, 0.0, 1.0);
 	gdk_gl_draw_teapot(true, lh/4);
 	glPopMatrix();
@@ -250,15 +250,15 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		scene.bs.y = scene.ibs.y;
 	} else if (scene.id == 1) {
 		scene.mp.x = 300 + (1 - (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
-		scene.mp.y = 360 - scene.ip.y;
+		scene.mp.y = scene.ip.y;
 		scene.mp2.x = 300
 				+ (1 - (scene.ip2.y / 424) * 0.5) * (scene.ip2.x - 300);
-		scene.mp2.y = 360 - scene.ip2.y;
+		scene.mp2.y = scene.ip2.y;
 		scene.b.x = 300 + (1 - (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
 		scene.b.y = 360 - scene.ib.y;
 		scene.bs.x = 300
 				+ (1 - (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
-		scene.bs.y = 360 - scene.ibs.y;
+		scene.bs.y = scene.ibs.y;
 	} else if (scene.id == 0) {
 		scene.mp.x = 300
 				+ (0.5 + (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
