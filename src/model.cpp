@@ -87,16 +87,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 	} else if (id == 0) {
 		//for (int i = 0; i < max_dots; ++i) {
-<<<<<<< HEAD
-			scene.ip.x += (input.right - input.left) * 10;
-			scene.ip.y += (input.down - input.up) * 10;
-			//}
-			if (input.w !=(-1) && scene.g.chanp ==0) { //追記
-					scene.g.change1 = input.w;
-					scene.g.chanp = 1;
-				}
-			std::cout<<"id=0"<<endl;
-=======
 		scene.ip.x += (input.right - input.left) * 10;
 		scene.ip.y += (input.down - input.up) * 10;
 		//}
@@ -105,7 +95,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.g.chanp = 1;
 		}
 		std::cout << "id=0" << endl;
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 	}
 
 	else if (id == 1) {
@@ -113,20 +102,13 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip2.x += (input.right - input.left) * 10;
 		scene.ip2.y += (input.up - input.down) * 10;
 		//}
-<<<<<<< HEAD
-			if (input.w !=(-1) && scene.g.chanp==1) { //追記
-					scene.g.change2 = input.w;
-					scene.g.chanp = 0;
-				}
-			std::cout<<"id=1"<<endl;
-=======
 		if (input.w != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.change2 = input.w;
 			scene.g.chanp = 0;
 		}
 		std::cout << "id=1" << endl;
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 	}
+
 	if (input.x != (-1)) {
 		//player.dots[player.curDots].x = input.x;
 		//player.dots[player.curDots].y = input.y;
@@ -196,8 +178,8 @@ void Model::ballmovement() {
 		if (scene.g.flag == 0) {
 
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 20 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 20) {
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
 				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
