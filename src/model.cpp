@@ -79,35 +79,34 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	//追記
 	if (id == -1) {
 		//for (int i = 0; i < max_dots; ++i) {
-			scene.ip.x += (input.right - input.left) * 10;
-			scene.ip.y += (input.down - input.up) * 10;
+		scene.ip.x += (input.right - input.left) * 10;
+		scene.ip.y += (input.down - input.up) * 10;
 		//}
-			if (input.w !=(-1)) { //追記
+		if (input.w != (-1)) { //追記
 			scene.g.change1 = input.w;
 		}
-	}
-	else if (id == 0) {
+	} else if (id == 0) {
 		//for (int i = 0; i < max_dots; ++i) {
-			scene.ip.x += (input.right - input.left) * 10;
-			scene.ip.y += (input.down - input.up) * 10;
-			//}
-			if (input.w !=(-1) && scene.g.chanp ==0) { //追記
-					scene.g.change1 = input.w;
-					scene.g.chanp = 1;
-				}
-			std::cout<<"id=0"<<endl;
+		scene.ip.x += (input.right - input.left) * 10;
+		scene.ip.y += (input.down - input.up) * 10;
+		//}
+		if (input.w != (-1) && scene.g.chanp == 0) { //追記
+			scene.g.change1 = input.w;
+			scene.g.chanp = 1;
+		}
+		std::cout << "id=0" << endl;
 	}
 
 	else if (id == 1) {
 		//for (int i = 0; i < max_dots; ++i) {
-			scene.ip2.x += (input.right - input.left) * 10;
-			scene.ip2.y += (input.up - input.down) * 10;
+		scene.ip2.x += (input.right - input.left) * 10;
+		scene.ip2.y += (input.up - input.down) * 10;
 		//}
-			if (input.w !=(-1) && scene.g.chanp==1) { //追記
-					scene.g.change2 = input.w;
-					scene.g.chanp = 0;
-				}
-			std::cout<<"id=1"<<endl;
+		if (input.w != (-1) && scene.g.chanp == 1) { //追記
+			scene.g.change2 = input.w;
+			scene.g.chanp = 0;
+		}
+		std::cout << "id=1" << endl;
 	}
 	if (input.x != (-1)) {
 		//player.dots[player.curDots].x = input.x;
@@ -119,8 +118,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.x = input.x;
 		scene.ip.y = input.y;
 	}
-
-
 
 	//以下!= (-1)から変更してscorecalcテスト中
 	if (input.score1 == 1) { //追記1227
@@ -179,32 +176,33 @@ void Model::ballmovement() {
 
 		if (scene.g.flag == 0) {
 
-			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
-					&& scene.ip.y - 10 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -5;
+			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+					&& scene.ip.y - 20 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 20) {
+				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
-			} else if (scene.ip.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -5;
+			} else if (scene.ip.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 70
+					&& scene.ip.y - 20 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 20) {
+				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 			}
+
 		} else if (scene.g.flag == 1) {
-			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
-					&& scene.ip.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = (scene.ip.y - scene.ibs.y) / 10;
-			} else if (scene.ip.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = -(scene.ip.y - scene.ibs.y) / 10;
+			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+					&& scene.ip.y - 20 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 20) {
+				scene.ibs.vy = -3;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
+			} else if (scene.ip.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 70
+					&& scene.ip.y - 20 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 20) {
+				scene.ibs.vy = -3;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 			}
 
 		}
@@ -214,32 +212,38 @@ void Model::ballmovement() {
 
 		if (scene.g.flag == 0) {
 
-			if (scene.ip2.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x
-					&& scene.ip2.y - 10 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy = -5;
+			if (scene.ip2.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 20
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
 				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
-			} else if (scene.ip2.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip2.x + 20
-					&& scene.ip2.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy = -5;
+			} else if (scene.ip2.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 90
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
 				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 			}
+
 		} else if (scene.g.flag == 1) {
-			if (scene.ip2.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x
-					&& scene.ip2.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = (scene.ip2.y - scene.ibs.y) / 10;
-			} else if (scene.ip2.x <= scene.ibs.x
+
+			if (scene.ip2.x - 50 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 20
-					&& scene.ip2.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = -(scene.ip2.y - scene.ibs.y) / 10;
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+			} else if (scene.ip2.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 90
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
 			}
 
 		}
