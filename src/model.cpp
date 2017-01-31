@@ -184,26 +184,29 @@ void Model::ballmovement() {
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 			} else if (scene.ip.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 70
-					&& scene.ip.y - 20 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 20) {
+					&& scene.ibs.x <= scene.ip.x + 90
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
 				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 			}
 
 		} else if (scene.g.flag == 1) {
+
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 20 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 20) {
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
 				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
 			} else if (scene.ip.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 70
-					&& scene.ip.y - 20 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 20) {
+					&& scene.ibs.x <= scene.ip.x + 90
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
 				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
 			}
 
 		}
