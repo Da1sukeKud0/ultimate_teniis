@@ -85,7 +85,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (input.w != (-1)) { //追記
 			scene.g.change1 = input.w;
 		}
-	} else if (id == 0) {
+	} else if (id == 0) { //server
 		//for (int i = 0; i < max_dots; ++i) {
 		scene.ip.x += (input.right - input.left) * 10;
 		scene.ip.y += (input.down - input.up) * 10;
@@ -93,11 +93,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (input.w != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.change1 = input.w;
 			//scene.g.chanp = 1;
+			cout << "打った1" << "ipx= "<< scene.ip.x << " ipy= "<< scene.ip.y << " ibx= "<< scene.ib.x << " iby= "<< scene.ib.y << endl;
 		}
 		std::cout << "id=0" << endl;
 	}
 
-	else if (id == 1) {
+	else if (id == 1) { //client
 		//for (int i = 0; i < max_dots; ++i) {
 		scene.ip2.x += (input.right - input.left) * 10;
 		scene.ip2.y += (input.up - input.down) * 10;
@@ -105,6 +106,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (input.w != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.change2 = input.w;
 			//scene.g.chanp = 0;
+			cout << "打った2" << "ip2x= "<< scene.ip2.x << " ip2y= "<< scene.ip2.y << " ibx= "<< scene.ib.x << " iby= "<< scene.ib.y << endl;
+
 		}
 		std::cout << "id=1" << endl;
 	}
