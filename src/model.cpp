@@ -78,6 +78,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//追記
 	if (id == -1) {
+		if(scene.ip.x)
 		//for (int i = 0; i < max_dots; ++i) {
 		scene.ip.x += (input.right - input.left) * 10;
 		scene.ip.y += (input.down - input.up) * 10;
@@ -197,7 +198,7 @@ void Model::ballmovement() {
 				scene.g.chanp = 1;
 			}
 
-		} else if (scene.g.flag == 1) {
+		} else if (scene.g.flag != 0) {
 
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
@@ -217,6 +218,7 @@ void Model::ballmovement() {
 			}
 
 		}
+		scene.g.change1=0;
 	}
 
 	if (scene.g.change2 == 1) {
@@ -241,7 +243,7 @@ void Model::ballmovement() {
 				scene.g.chanp = 0;
 			}
 
-		} else if (scene.g.flag == 1) {
+		} else if (scene.g.flag != 0) {
 
 			if (scene.ip2.x - 50 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 20
@@ -262,6 +264,7 @@ void Model::ballmovement() {
 			}
 
 		}
+		scene.g.change2=0;
 	}
 
 	scene.ib.x += scene.ib.vx;
