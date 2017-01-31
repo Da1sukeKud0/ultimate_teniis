@@ -266,6 +266,7 @@ void Model::scorecalc(int i) {
 	//xの得点
 	switch (i) {
 	case 1:
+		scene.g.flag = 0;
 		cout << "scorecalc呼出テスト" << scene.s.sx << endl;
 		if (scene.s.sx == 3) { //40点以降
 			if (scene.s.sy == 3) {
@@ -293,6 +294,7 @@ void Model::scorecalc(int i) {
 
 	case 2:
 		cout << "scorecalc呼出テスト" << scene.s.sy << endl;
+		scene.g.flag = 0;
 		if (scene.s.sy == 3) { //40点以降
 			if (scene.s.sx == 3) {
 				scene.s.sy = 4; //P2がAve
