@@ -91,8 +91,9 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.ip.x += (input.right - input.left) * 10;
 			scene.ip.y += (input.down - input.up) * 10;
 			//}
-			if (input.w !=(-1)) { //追記
+			if (input.w !=(-1) && scene.g.chanp ==0) { //追記
 					scene.g.change1 = input.w;
+					scene.g.chanp = 1;
 				}
 			std::cout<<"id=0"<<endl;
 	}
@@ -102,8 +103,9 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.ip2.x += (input.right - input.left) * 10;
 			scene.ip2.y += (input.up - input.down) * 10;
 		//}
-			if (input.w !=(-1)) { //追記
+			if (input.w !=(-1) && scene.g.chanp==1) { //追記
 					scene.g.change2 = input.w;
+					scene.g.chanp = 0;
 				}
 			std::cout<<"id=1"<<endl;
 	}
