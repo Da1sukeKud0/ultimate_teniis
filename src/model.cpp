@@ -11,7 +11,7 @@
 #include "input.h"
 using namespace std;
 
-//コートの角の座標設定
+//仮想コートの座標設定
 int rux = 0;
 int ruy = 0;
 int lux = 606;
@@ -137,6 +137,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.c[0] = input.key;
 	}
 
+
+	//得点判定
+	//if( scene.ibs.y < 0)
+
+
+
 	//ゲーム開始時の動作
 	if (scene.g.service == 0) {
 		scene.ip.y = 364;
@@ -197,7 +203,7 @@ void Model::ballmovement() {
 				scene.g.chanp = 1;
 			}
 
-		} else if (scene.g.flag == 1) {
+		} else if (scene.g.flag != 0) {
 
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
@@ -217,6 +223,7 @@ void Model::ballmovement() {
 			}
 
 		}
+		scene.g.change1=0;
 	}
 
 	if (scene.g.change2 == 1) {
@@ -241,7 +248,7 @@ void Model::ballmovement() {
 				scene.g.chanp = 0;
 			}
 
-		} else if (scene.g.flag == 1) {
+		} else if (scene.g.flag != 0) {
 
 			if (scene.ip2.x - 50 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 20
@@ -262,6 +269,7 @@ void Model::ballmovement() {
 			}
 
 		}
+		scene.g.change2=0;
 	}
 
 	scene.ib.x += scene.ib.vx;
@@ -274,7 +282,6 @@ void Model::ballmovement() {
 void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
 
-	//xの得点
 	switch (i) {
 	case 1:
 		scene.g.flag = 0;
