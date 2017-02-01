@@ -123,31 +123,31 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 		if (input.f != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.hissatu1 = input.f;
-			cout << "g.hissatu1="<<scene.g.hissatu1 << endl;
+			cout << "g.hissatu1=" << scene.g.hissatu1 << endl;
 		}
 		//std::cout << "id=0" << endl;
 	}
 
 	else if (id == 1) { //client
-		if (scene.ip.y <= 212) {
-			scene.ip.y += (input.down - input.up) * 10;
+		if (scene.ip2.y <= 212) {
+			scene.ip2.y += (input.down - input.up) * 10;
 		} else {
-			scene.ip.y = 212;
+			scene.ip2.y = 212;
 		}
-		if (scene.ip.x >= 0) {
-			scene.ip.x += (input.right - input.left) * 10;
+		if (scene.ip2.x >= 0) {
+			scene.ip2.x += (input.right - input.left) * 10;
 		} else {
-			scene.ip.x = 0;
+			scene.ip2.x = 0;
 		}
-		if (scene.ip.x <= 606) {
-			scene.ip.x += (input.right - input.left) * 10;
+		if (scene.ip2.x <= 606) {
+			scene.ip2.x += (input.right - input.left) * 10;
 		} else {
-			scene.ip.x = 606;
+			scene.ip2.x = 606;
 		}
 		if (input.w != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.change2 = input.w;
 
-			//cout << "打った2" << scene.ip2.x << "," << scene.ip2.y << "," << scene.ibs.x << "," << scene.ibs.y<< endl;
+			//cout << "打った2" << scene.ip2.x << "," <<Merge branch 'master' of
 
 		}
 		if (input.a != (-1) && scene.g.chanp == 0) { //追記
@@ -187,11 +187,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.c[0] = input.key;
 	}
 
-
 	//得点判定
 	//if( scene.ibs.y < 0)
-
-
 
 //ゲーム開始時の動作
 	if (scene.g.service == 0) {
@@ -220,7 +217,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	 scene.g.service = 0;
 	 scene.g.flag = 0;
 	 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
-	 }
+	 }Merge branch 'master' of
+	 ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
+
+	 Conflicts:
+	 src/model.cpp
+
 	 */
 //std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
 //std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
@@ -457,7 +459,6 @@ void Model::ballmovement() {
 //通常得点
 void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
-
 
 //xの得点
 	switch (i) {
