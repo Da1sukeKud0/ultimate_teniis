@@ -135,12 +135,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.ip2.y = 212;
 		}
 		if (scene.ip2.x >= 0) {
-			scene.ip2.x += (input.right - input.left) * 10;
+			scene.ip2.x += (input.left - input.right) * 10;
 		} else {
 			scene.ip2.x = 0;
 		}
 		if (scene.ip2.x <= 606) {
-			scene.ip2.x += (input.right - input.left) * 10;
+			scene.ip2.x += (input.left - input.right) * 10;
 		} else {
 			scene.ip2.x = 606;
 		}
