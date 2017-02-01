@@ -11,7 +11,7 @@
 #include "input.h"
 using namespace std;
 
-//コートの角の座標設定
+//仮想コートの座標設定
 int rux = 0;
 int ruy = 0;
 int lux = 606;
@@ -186,6 +186,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	if (input.key != 0) {
 		scene.c[0] = input.key;
 	}
+
+
+	//得点判定
+	//if( scene.ibs.y < 0)
+
+
 
 //ゲーム開始時の動作
 	if (scene.g.service == 0) {
@@ -451,6 +457,7 @@ void Model::ballmovement() {
 //通常得点
 void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
+
 
 //xの得点
 	switch (i) {
