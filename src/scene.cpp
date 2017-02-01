@@ -63,7 +63,7 @@ char *Scene::packScene(int &len) {
 	//追記
 	*(struct Player *) tmp = mp;
 	tmp += sizeof(struct Player);
-	*(struct Player2 *) tmp = mp2 ;
+	*(struct Player2 *) tmp = mp2;
 	tmp += sizeof(struct Player2);
 	*(struct score *) tmp = s;
 	tmp += sizeof(struct score);
@@ -117,6 +117,12 @@ void Scene::init(void) {
 	g.cha4 = 0;
 	g.chanp = 0;
 	g.win = 0;
+	g.slice = 0;
+	g.slice1 = 0;
+	g.slice2 = 0;
+	g.hissatu = 0;
+	g.hissatu1 = 0;
+	g.hissatu2 = 0;
 	mp.x = 0;
 	mp.y = 0;
 	mp2.x = 0;
@@ -141,6 +147,9 @@ void Scene::init(void) {
 	ibs.y = 0;
 	ibs.vx = 0;
 	ibs.vy = 0;
+	ibs.svx = 0;
+	ibs.hvx = 0;
+	ibs.hvy = 0;
 	ip.x = 0;
 	ip.y = 0;
 	ip.vx = 0;
