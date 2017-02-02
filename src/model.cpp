@@ -165,7 +165,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	 */
 	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
 	//std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
-	std::cout << scene.g.flag << "," << scene.ibs.vy << "," << scene.ibs.vx
+	std::cout << scene.ibs.vy << "," << scene.ibs.vx
 			<< std::endl;
 }
 
@@ -175,23 +175,23 @@ void Model::ballmovement() {
 
 	if (scene.g.change1 == 1) {
 
-		if (scene.g.flag == 0) {
+		//if (scene.g.flag == 0) {
 
 			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = -5;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-				scene.g.flag += 1;
+				//scene.g.flag += 1;
 			} else if (scene.ip.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
 				scene.ibs.vy = -5;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-				scene.g.flag += 1;
+				//scene.g.flag += 1;
 			}
-		} else if (scene.g.flag == 1) {
+		/*} else if (scene.g.flag == 1) {
 			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
 					&& scene.ip.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 10) {
@@ -205,28 +205,28 @@ void Model::ballmovement() {
 				scene.ibs.vx = -(scene.ip.y - scene.ibs.y) / 10;
 			}
 
-		}
+		}*/
 	}
 
 	if (scene.g.change2 == 1) {
 
-		if (scene.g.flag == 0) {
+		//if (scene.g.flag == 0) {
 
 			if (scene.ip2.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x
 					&& scene.ip2.y - 10 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy = -5;
+				scene.ibs.vy = 5;
 				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-				scene.g.flag += 1;
+				//scene.g.flag += 1;
 			} else if (scene.ip2.x <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 20
 					&& scene.ip2.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy = -5;
+				scene.ibs.vy = 5;
 				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-				scene.g.flag += 1;
+				//scene.g.flag += 1;
 			}
-		} else if (scene.g.flag == 1) {
+	/*	} else if (scene.g.flag == 1) {
 			if (scene.ip2.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x
 					&& scene.ip2.y - 50 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 10) {
@@ -240,7 +240,7 @@ void Model::ballmovement() {
 				scene.ibs.vx = -(scene.ip2.y - scene.ibs.y) / 10;
 			}
 
-		}
+		}*/
 	}
 
 	scene.ib.x += scene.ib.vx;

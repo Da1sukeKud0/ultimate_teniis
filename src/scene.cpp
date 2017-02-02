@@ -102,7 +102,7 @@ void Scene::init(void) {
 	p.clear();
 
 	valid = false;
-	g.flag = 0;
+	//g.flag = 0;
 	g.change1 = 0;
 	g.change2 = 0;
 	g.service = 0;

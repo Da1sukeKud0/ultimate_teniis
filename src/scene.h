@@ -22,7 +22,7 @@ struct score {
 
 struct game {
 	int charactorselect, change1,change2, service, getpoint, getset1, getset2, gameset,
-			cha1, cha2, cha3, cha4,serve,flag,win,chanp;
+			cha1, cha2, cha3, cha4,serve,/*flag,*/win,chanp;
 };
 
 struct ball {
@@ -52,7 +52,7 @@ struct imageplayer {
 
 struct imageplayer2 {
 	double x, y;
-	double vx, vy;eam
+	double vx, vy;
 };
 
 typedef std::map<int, Player> Players;
