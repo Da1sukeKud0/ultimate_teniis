@@ -15,6 +15,18 @@ CPP_SRCS += \
 ../src/scene.cpp \
 ../src/view.cpp 
 
+O_SRCS += \
+../src/Network.o \
+../src/Smartphone.o \
+../src/input.o \
+../src/main.o \
+../src/manager.o \
+../src/model.o \
+../src/mynetwork.o \
+../src/mysmartphone.o \
+../src/scene.o \
+../src/view.o 
+
 OBJS += \
 ./src/Network.o \
 ./src/Smartphone.o \

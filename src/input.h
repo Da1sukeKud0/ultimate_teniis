@@ -16,7 +16,7 @@ const int max_inputlen = 100;
 
 struct InputData { // 要素数を可変にしたい場合は、packInputとreceiveInputを注意深く書き直す必要がある
 	int up, down, left, right;
-	int x, y;
+	int x, y, a, f;
 	int key;
 	int space,key1,key2,key3,key4;
 	int score1,score2, serve;

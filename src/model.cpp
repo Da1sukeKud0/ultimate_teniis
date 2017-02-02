@@ -11,7 +11,7 @@
 #include "input.h"
 using namespace std;
 
-//コートの角の座標設定
+//仮想コートの座標設定
 int rux = 0;
 int ruy = 0;
 int lux = 606;
@@ -20,6 +20,10 @@ int rdx = 0;
 int rdy = 424;
 int ldx = 606;
 int ldy = 424;
+
+int GetRandom(int min, int max) {
+	return min + (int) (rand() * (max - min + 1.0) / (1.0 + RAND_MAX));
+}
 
 void Model::initModel(void) {
 //std::cout << "Init" << std::endl;
@@ -78,35 +82,86 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//追記
 	if (id == -1) {
-		//for (int i = 0; i < max_dots; ++i) {
+		if (scene.ip.y >= 212 && scene.ip.x >= 0 && scene.ip.x <= 606) {
 			scene.ip.x += (input.right - input.left) * 10;
 			scene.ip.y += (input.down - input.up) * 10;
-		//}
-			if (input.w !=(-1)) { //追記
+		}
+		if (input.w != (-1)) { //追記
 			scene.g.change1 = input.w;
 		}
-	}
-	else if (id == 0) {
-		//for (int i = 0; i < max_dots; ++i) {
-			scene.ip.x += (input.right - input.left) * 10;
+		if (input.a != (-1)) { //追記
+			scene.g.slice1 = input.a;
+			cout << scene.g.slice1 << endl;
+		}
+		if (input.f != (-1)) { //追記
+			scene.g.hissatu1 = input.f;
+		}
+	} else if (id == 0) { //server
+		if (scene.ip.y >= 212) {
 			scene.ip.y += (input.down - input.up) * 10;
-			//}
-			if (input.w !=(-1)) { //追記
-					scene.g.change1 = input.w;
-				}
-			std::cout<<"id=0"<<endl;
+		} else {
+			scene.ip.y = 212;
+		}
+		if (scene.ip.x >= 0) {
+			scene.ip.x += (input.right - input.left) * 10;
+		} else {
+			scene.ip.x = 0;
+		}
+		if (scene.ip.x <= 606) {
+			scene.ip.x += (input.right - input.left) * 10;
+		} else {
+			scene.ip.x = 606;
+		}
+		if (input.w != (-1) && scene.g.chanp == 0) { //追記
+			scene.g.change1 = input.w;
+
+			//cout << "打った1" << scene.ip.x << "," << scene.ip.y << "," << scene.ibs.x << "," << scene.ibs.y<< endl;
+		}
+		if (input.a != (-1) && scene.g.chanp == 0) { //追記
+			scene.g.slice1 = input.a;
+			//cout << scene.g.slice1 << endl;
+		}
+		if (input.f != (-1) && scene.g.chanp == 0) { //追記
+			scene.g.hissatu1 = input.f;
+			cout << "g.hissatu1=" << scene.g.hissatu1 << endl;
+		}
+		//std::cout << "id=0" << endl;
 	}
 
-	else if (id == 1) {
-		//for (int i = 0; i < max_dots; ++i) {
-			scene.ip2.x += (input.right - input.left) * 10;
-			scene.ip2.y += (input.up - input.down) * 10;
-		//}
-			if (input.w !=(-1)) { //追記
-					scene.g.change2 = input.w;
-				}
-			std::cout<<"id=1"<<endl;
+	else if (id == 1) { //client
+		if (scene.ip2.y <= 212) {
+			scene.ip2.y += (input.down - input.up) * 10;
+		} else {
+			scene.ip2.y = 212;
+		}
+		if (scene.ip2.x >= 0) {
+			scene.ip2.x += (input.left - input.right) * 10;
+		} else {
+			scene.ip2.x = 0;
+		}
+		if (scene.ip2.x <= 606) {
+			scene.ip2.x += (input.left - input.right) * 10;
+		} else {
+			scene.ip2.x = 606;
+		}
+		if (input.w != (-1) && scene.g.chanp == 1) { //追記
+			scene.g.change2 = input.w;
+
+			//cout << "打った2" << scene.ip2.x << "," <<Merge branch 'master' of
+
+		}
+		if (input.a != (-1) && scene.g.chanp == 0) { //追記
+			scene.g.slice2 = input.a;
+			//cout << scene.g.slice1 << endl;
+		}
+		if (input.f != (-1) && scene.g.chanp == 0) { //追記
+			scene.g.hissatu2 = input.f;
+			//cout << "g.hissatu2="<<scene.g.hissatu2 << endl;
+		}
+		//std::cout << "id=0" << endl;
 	}
+	//std::cout << "id=1" << endl;
+
 	if (input.x != (-1)) {
 		//player.dots[player.curDots].x = input.x;
 		//player.dots[player.curDots].y = input.y;
@@ -118,9 +173,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-
-
-	//以下!= (-1)から変更してscorecalcテスト中
+//以下!= (-1)から変更してscorecalcテスト中
 	if (input.score1 == 1) { //追記1227
 		//P1の点数追加時のシミュレーション用の動作　本編では削除
 		scorecalc(1);
@@ -134,7 +187,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.c[0] = input.key;
 	}
 
-	//ゲーム開始時の動作
+	//得点判定
+	//if( scene.ibs.y < 0)
+
+//ゲーム開始時の動作
 	if (scene.g.service == 0) {
 		scene.ip.y = 364;
 		scene.ibs.y = 364;
@@ -151,22 +207,28 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	}
 
-	if (input.w == 1) {
+	if (input.w == 1 || input.a == 1 || input.f == 1) {
 		scene.g.service = 1;
 	}
-	//打った後にservice == 1になるように
+//打った後にservice == 1になるように
 
-	//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
+//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
 	/*if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
 	 scene.g.service = 0;
 	 scene.g.flag = 0;
 	 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
-	 }
+	 }Merge branch 'master' of
+	 ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
+
+	 Conflicts:
+	 src/model.cpp
+
 	 */
-	//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
-	//std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
-	std::cout << scene.ibs.vy << "," << scene.ibs.vx
-			<< std::endl;
+//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
+//std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
+//std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
+//std::cout << scene.g.flag << "," << scene.ibs.vy << "," << scene.ibs.vx
+//		<< std::endl;
 }
 
 void Model::ballmovement() {
@@ -175,87 +237,233 @@ void Model::ballmovement() {
 
 	if (scene.g.change1 == 1) {
 
-		//if (scene.g.flag == 0) {
+		if (scene.g.flag == 0) {
 
-			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
-					&& scene.ip.y - 10 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -5;
+			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
+				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-				//scene.g.flag += 1;
-			} else if (scene.ip.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy = -5;
+				scene.g.flag += 1;
+				scene.g.chanp = 1;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			} else if (scene.ip.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 90
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
+				scene.ibs.vy = -3;
 				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-				//scene.g.flag += 1;
-			}
-		/*} else if (scene.g.flag == 1) {
-			if (scene.ip.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x
-					&& scene.ip.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = (scene.ip.y - scene.ibs.y) / 10;
-			} else if (scene.ip.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = -(scene.ip.y - scene.ibs.y) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 1;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
 			}
 
-		}*/
+		} else if (scene.g.flag != 0) {
+
+			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
+				scene.ibs.vy = -3;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 1;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			} else if (scene.ip.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 90
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
+				scene.ibs.vy = -3;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 1;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			}
+
+		}
+		scene.g.change1 = 0;
 	}
 
 	if (scene.g.change2 == 1) {
 
-		//if (scene.g.flag == 0) {
+		if (scene.g.flag == 0) {
 
-			if (scene.ip2.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x
-					&& scene.ip2.y - 10 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy = 5;
-				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-				//scene.g.flag += 1;
-			} else if (scene.ip2.x <= scene.ibs.x
+			if (scene.ip2.x - 50 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 20
-					&& scene.ip2.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy = 5;
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
 				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-				//scene.g.flag += 1;
-			}
-	/*	} else if (scene.g.flag == 1) {
-			if (scene.ip2.x - 20 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x
-					&& scene.ip2.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = (scene.ip2.y - scene.ibs.y) / 10;
-			} else if (scene.ip2.x <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip2.x + 20
-					&& scene.ip2.y - 50 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 10) {
-				scene.ibs.vy *= -1;
-				scene.ibs.vx = -(scene.ip2.y - scene.ibs.y) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 0;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			} else if (scene.ip2.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 90
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 0;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
 			}
 
-		}*/
+		} else if (scene.g.flag != 0) {
+
+			if (scene.ip2.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 20
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 0;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			} else if (scene.ip2.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 90
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 0;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			}
+
+		}
+		scene.g.change2 = 0;
+	}
+	if (scene.g.slice1 == 1) {
+		if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -3;
+			scene.ibs.svx = 0.05;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
+			scene.g.slice = 1;
+			scene.g.hissatu = 0;
+		} else if (scene.ip.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip.x + 90
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -3;
+			scene.ibs.svx = -0.05;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
+			scene.g.slice = 1;
+			scene.g.hissatu = 0;
+		}
+		scene.g.slice1 = 0;
 	}
 
-	scene.ib.x += scene.ib.vx;
+	if (scene.g.slice2 == 1) {
+		if (scene.ip2.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x + 20
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.svx = 0.05;
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.slice = 1;
+			scene.g.hissatu = 0;
+		} else if (scene.ip2.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip2.x + 90
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.svx = -0.05;
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.slice = 1;
+			scene.g.hissatu = 0;
+		}
+		scene.g.slice2 = 0;
+		scene.g.slice = 1;
+	}
+	if (scene.g.hissatu1 == 1) {
+		if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -10;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
+			scene.g.slice = 0;
+			scene.g.hissatu = 0;
+		} else if (scene.ip.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip.x + 90
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -10;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
+			scene.g.slice = 0;
+			scene.g.hissatu = 0;
+		}
+		scene.g.hissatu1 = 0;
 
-	scene.ibs.y += scene.ibs.vy;
-	scene.ibs.x += scene.ibs.vx;
+	}
+	if (scene.g.hissatu2 == 1) {
+		if (scene.ip2.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x + 20
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.hissatu = 1;
+			scene.g.slice = 0;
+		} else if (scene.ip2.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip2.x + 90
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.hissatu = 1;
+			scene.g.slice = 0;
+		}
+		scene.g.hissatu1 = 0;
+	}
+//scene.ib.x += scene.ib.vx;
+	std::cout << "ibs.vx=" << scene.ibs.vx << ",ibs.vy=" << scene.ibs.vy
+			<< std::endl;
+	std::cout << ",ibs.x=" << scene.ibs.x << ",ibs.y=" << scene.ibs.y
+			<< std::endl;
+	if (scene.g.slice == 1) {
+		scene.ibs.vx += scene.ibs.svx;
+		scene.ibs.y += scene.ibs.vy;
+		scene.ibs.x += scene.ibs.vx;
+	} else if (scene.g.hissatu == 1) {
+		scene.ibs.hvx = GetRandom(1, 10) / 10;
+		scene.ibs.hvy = GetRandom(1, 10) / 10;
+		scene.ibs.vx = scene.ibs.hvx;
+		scene.ibs.vy = scene.ibs.hvy;
+		scene.ibs.y += scene.ibs.vy;
+		scene.ibs.x += scene.ibs.vx;
+	} else {
+		scene.ibs.y += scene.ibs.vy;
+		scene.ibs.x += scene.ibs.vx;
+	}
 }
-
 //通常得点
 void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
 
-	//xの得点
+//xの得点
 	switch (i) {
 	case 1:
+		scene.g.flag = 0;
 		cout << "scorecalc呼出テスト" << scene.s.sx << endl;
 		if (scene.s.sx == 3) { //40点以降
 			if (scene.s.sy == 3) {
@@ -283,6 +491,7 @@ void Model::scorecalc(int i) {
 
 	case 2:
 		cout << "scorecalc呼出テスト" << scene.s.sy << endl;
+		scene.g.flag = 0;
 		if (scene.s.sy == 3) { //40点以降
 			if (scene.s.sx == 3) {
 				scene.s.sy = 4; //P2がAve

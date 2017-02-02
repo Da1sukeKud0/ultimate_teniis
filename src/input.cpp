@@ -27,7 +27,7 @@ char *Input::packInput(int &len) {
 }
 
 void Input::clearInput(void) {
-	input.x = input.y =input.score1 = input.score2 = -1;
+	input.x = input.y = input.score1 = input.score2 = -1;
 //	input.ax=input.ay=input.az=0;
 }
 
@@ -75,7 +75,12 @@ void Input::set_key(GdkEventKey* k) {
 	case GDK_KEY_d: //追記1129
 		input.score2 = 1; //+=1を=1に変更　1227
 		break;
-
+	case GDK_KEY_a: //追記1129
+		input.a = 1; //+=1を=1に変更　1227
+		break;
+	case GDK_KEY_f: //追記1129
+		input.f = 1; //+=1を=1に変更　1227
+		break;
 	case GDK_KEY_space:
 		input.space = 1;
 		break;
@@ -131,7 +136,12 @@ void Input::reset_key(GdkEventKey* k) {
 		input.score2 = 0; //+=0を=0に変更 1227
 		break;
 
-
+	case GDK_KEY_a: //追記1129
+		input.a = 0; //+=1を=1に変更　1227
+		break;
+	case GDK_KEY_f: //追記1129
+		input.f = 0; //+=1を=1に変更　1227
+		break;
 	case GDK_KEY_1:
 		input.key1 = 0;
 		break;

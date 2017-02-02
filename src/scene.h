@@ -17,12 +17,13 @@ struct Player2 {
 };
 
 struct score {
-	int sx, sy ,setx ,sety;
+	int sx, sy, setx, sety;
 };
 
 struct game {
-	int charactorselect, change1,change2, service, getpoint, getset1, getset2, gameset,
-			cha1, cha2, cha3, cha4,serve,/*flag,*/win,chanp;
+	int charactorselect, change1, change2, service, getpoint, getset1, getset2,
+			gameset, cha1, cha2, cha3, cha4, serve, flag, win, chanp;
+	int slice1, slice2, hissatu1, hissatu2, slice, hissatu;
 };
 
 struct ball {
@@ -35,14 +36,14 @@ struct ballshadow {
 	double vx, vy;
 };
 
-struct imageball {
+struct imageball
 	double x, y;
 	double vx, vy;
 };
 
 struct imageballshadow {
 	double x, y;
-	double vx, vy;
+	double vx, vy, svx, hvx, hvy;
 };
 
 struct imageplayer {
