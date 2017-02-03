@@ -88,10 +88,15 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.g.hissatu1 = input.f;
 		}
 	} else if (id == 0) { //server
-		if (scene.ip.y >= 212) {
+		if (scene.ip.y >= 282) {
 			scene.ip.y += (input.down - input.up) * 10;
 		} else {
-			scene.ip.y = 212;
+			scene.ip.y = 282;
+		}
+		if (scene.ip.y <= 424) {
+			scene.ip.y += (input.down - input.up) * 10;
+		} else {
+			scene.ip.y = 424;
 		}
 		if (scene.ip.x >= 0) {
 			scene.ip.x += (input.right - input.left) * 10;
@@ -105,25 +110,25 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 		if (input.w != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.change1 = input.w;
-
-			//cout << "打った1" << scene.ip.x << "," << scene.ip.y << "," << scene.ibs.x << "," << scene.ibs.y<< endl;
 		}
 		if (input.a != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.slice1 = input.a;
-			//cout << scene.g.slice1 << endl;
 		}
 		if (input.f != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.hissatu1 = input.f;
-			//cout << "g.hissatu1=" << scene.g.hissatu1 << endl;
 		}
-		//std::cout << "id=0" << endl;
 	}
 
 	else if (id == 1) { //client
-		if (scene.ip2.y <= 212) {
-			scene.ip2.y += (input.down - input.up) * 10;
+		if (scene.ip2.y <= 142) {
+			scene.ip2.y += (input.up - input.down) * 10;
 		} else {
-			scene.ip2.y = 212;
+			scene.ip2.y = 142;
+		}
+		if (scene.ip2.y >= 0) {
+			scene.ip2.y += (input.up - input.down) * 10;
+		} else {
+			scene.ip2.y = 0;
 		}
 		if (scene.ip2.x >= 0) {
 			scene.ip2.x += (input.left - input.right) * 10;
@@ -137,23 +142,16 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 		if (input.w != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.change2 = input.w;
-
-			//cout << "打った2" << scene.ip2.x << "," << endl;
-
 		}
 		if (input.a != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.slice2 = input.a;
-			//cout << scene.g.slice1 << endl;
 		}
 		if (input.f != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.hissatu2 = input.f;
-			//cout << "g.hissatu2="<<scene.g.hissatu2 << endl;
 		}
-		//std::cout << "id=0" << endl;
 	}
-//std::cout << "id=1" << endl;
 
-	if (input.x != (-1)) {
+/*	if (input.x != (-1)) {
 		//player.dots[player.curDots].x = input.x;
 		//player.dots[player.curDots].y = input.y;
 		//player.dots[player.curDots].visible = 1;
@@ -162,20 +160,20 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		//追記
 		scene.ip.x = input.x;
 		scene.ip.y = input.y;
-	}
+	}*/
 
-	if (input.score1 == 1) { //追記1227
+	/*if (input.score1 == 1) { //追記1227
 		//P1の点数追加時のシミュレーション用の動作　本編では削除
 		scorecalc(1);
 	}
 	if (input.score2 == 1) { //追記1227
 		//P2の点数追加時のシミュレーション用の動作　本編では削除
 		scorecalc(2);
-	}
+	}*/
 
-	if (input.key != 0) {
+	/*if (input.key != 0) {
 		scene.c[0] = input.key;
-	}
+	}*/
 
 //サーブ時プレイヤーの初期位置固定
 	if (scene.g.service == 0) {
