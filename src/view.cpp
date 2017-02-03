@@ -291,7 +291,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	if (scene.id == -1) {
 		cc->save();
 		if (scene.g.change1 == 0) {
-			myplayer = Cairo::ImageSurface::create_from_png("待機1.png");
+			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
@@ -299,13 +299,15 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 		if (scene.g.change1 == 1) {
 			if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
-				myplayer = Cairo::ImageSurface::create_from_png("バックハンド1.png");
+				myplayer = Cairo::ImageSurface::create_from_png(
+						"backhand1.png");
 				cc->scale(1.0, 1.0);
 				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 				cc->paint();
 			} else if (scene.ip.x - 5 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x) {
-				myplayer = Cairo::ImageSurface::create_from_png("フォアハンド1.png");
+				myplayer = Cairo::ImageSurface::create_from_png(
+						"forehand1.png");
 				cc->scale(1.0, 1.0);
 				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 				cc->paint();
@@ -313,33 +315,34 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		}
 
 		cc->restore();
-	} else if (scene.id == 0) {
+	} else if (scene.id == 0) { //Player1について
 		cc->save();
 		//if (scene.g.change1 == 0) {
-		myplayer = Cairo::ImageSurface::create_from_png("待機1.png");
+		myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		cc->paint();
 		//}
 
-		if (scene.g.change1 == 1) {
-			if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
-				myplayer = Cairo::ImageSurface::create_from_png("バックハンド1.png");
-				cc->scale(1.0, 1.0);
-				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-				cc->paint();
-			} else if (scene.ip.x - 5 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x) {
-				myplayer = Cairo::ImageSurface::create_from_png("フォアハンド1.png");
-				cc->scale(1.0, 1.0);
-				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-				cc->paint();
-			}
-		}
+		/*if (scene.g.change1 == 1) {
+		 if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
+		 myplayer = Cairo::ImageSurface::create_from_png("backhand1.png");
+		 cc->scale(1.0, 1.0);
+		 cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+		 cc->paint();
+		 } else if (scene.ip.x - 5 <= scene.ibs.x
+		 && scene.ibs.x <= scene.ip.x) {
+		 myplayer = Cairo::ImageSurface::create_from_png("forehand1.png");
+		 cc->scale(1.0, 1.0);
+		 cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+		 cc->paint();
+		 }
+		 }*/
+
 		cc->restore();
 		cc->save();
 		//if (scene.g.change2 == 0) {
-		myplayer = Cairo::ImageSurface::create_from_png("待機2.png");
+		myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 		cc->paint();
@@ -347,13 +350,13 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 		/*if (scene.g.change2 == 1) {
 		 if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
-		 myplayer = Cairo::ImageSurface::create_from_png("バックハンド2.png");
+		 myplayer = Cairo::ImageSurface::create_from_png("backhand2.png");
 		 cc->scale(0.5, 0.5);
 		 cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 		 cc->paint();
 		 } else if (scene.ip.x - 5 <= scene.ibs.x
 		 && scene.ibs.x <= scene.ip.x) {
-		 myplayer = Cairo::ImageSurface::create_from_png("フォアハンド2.png");
+		 myplayer = Cairo::ImageSurface::create_from_png("forehand2.png");
 		 cc->scale(0.5, 0.5);
 		 cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 		 cc->paint();
@@ -361,24 +364,24 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		 }*/
 
 		cc->restore();
-	} else if (scene.id == 1) {
+	} else if (scene.id == 1) { //Player2について
 		cc->save();
-		//	if (scene.g.change2 == 0) {
-		myplayer = Cairo::ImageSurface::create_from_png("待機2.png");
+		//if (scene.g.change2 == 0) {
+		myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		cc->paint();
-		//}
+		// }
 
 		/*if (scene.g.change2 == 1) {
 
 		 if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
-		 myplayer = Cairo::ImageSurface::create_from_png("バックハンド2.png");
+		 myplayer = Cairo::ImageSurface::create_from_png("backhand2.png");
 		 cc->scale(1.0, 1.0);
 		 cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		 cc->paint();
 		 } else if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x) {
-		 myplayer = Cairo::ImageSurface::create_from_png("フォアハンド2.png");
+		 myplayer = Cairo::ImageSurface::create_from_png("forehand2.png");
 		 cc->scale(1.0, 1.0);
 		 cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 		 cc->paint();
@@ -389,7 +392,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->restore();
 		cc->save();
 		//if (scene.g.change1 == 0) {
-		myplayer = Cairo::ImageSurface::create_from_png("待機1.png");
+		myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 		cc->scale(1.0, 1.0);
 		cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 		cc->paint();
@@ -397,12 +400,12 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 		/*if (scene.g.change1 == 1) {
 		 if (scene.ip.x <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 5) {
-		 myplayer = Cairo::ImageSurface::create_from_png("バックハンド1.png");
+		 myplayer = Cairo::ImageSurface::create_from_png("backhand1.png");
 		 cc->scale(0.5, 0.5);
 		 cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 		 cc->paint();
 		 } else if (scene.ip.x - 5 <= scene.ibs.x && scene.ibs.x <= scene.ip.x) {
-		 myplayer = Cairo::ImageSurface::create_from_png("フォアハンド1.png");
+		 myplayer = Cairo::ImageSurface::create_from_png("forehand1.png");
 		 cc->scale(0.5, 0.5);
 		 cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 		 cc->paint();
@@ -411,7 +414,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 		cc->restore();
 	}
-//ゲーム開始時のキャラクター選択ぅぅ
+
+//ゲーム開始時のキャラクター選択
 	/*if (scene.g.charactorselect == 0) {
 	 cc->save();
 	 Cairo::RefPtr<Cairo::Surface> chara1, chara2, chara3, chara4; //1枚が200*300の画像として計算

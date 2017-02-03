@@ -247,11 +247,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	 scene.g.service = 0;
 	 scene.g.flag = 0;
 	 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
-	 }Merge branch 'master' of
-	 ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
-
-	 Conflicts:
-	 src/model.cpp
+	 }
 
 	 */
 //std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
@@ -554,12 +550,6 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 		++scene.s.setx;
 		if (scene.s.setx == 2) {
 			scene.g.win = 1; //P1勝利画面
-			/*
-			 int i=0;
-			 if(i == 0){
-			 scene.s.sx = scene.s.sy = scene.s.setx = scene.s.sety =  0;
-			 }
-			 */
 		}
 		break;
 
