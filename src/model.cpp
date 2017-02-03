@@ -48,14 +48,6 @@ void Model::preAction(void) { // 衝突判定など、判定のみを行う。�
 	t = time(NULL);
 	localtime_r(&t, &scene.tm);
 
-	/*
-	 //得点判定
-	 if (scene.ib.y >= ) {
-	 //ボール戻す
-	 scorecalc(1);
-
-	 }
-	 */
 }
 
 void Model::postAction(void) { // 全プレイヤーの動作を終えた後に、全体の状況を変えたい場合はここで処理する
@@ -73,14 +65,14 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			break;
 	}
 
-	//Player &player = scene.p[id];
+//Player &player = scene.p[id];
 
 	for (int i = 0; i < max_dots; ++i) {
 		//player.dots[i].x += (input.right - input.left) * 5;
 		//player.dots[i].y += (input.down - input.up) * 5;
 	}
 
-	//追記
+//追記
 	if (id == -1) {
 		if (scene.ip.y >= 212 && scene.ip.x >= 0 && scene.ip.x <= 606) {
 			scene.ip.x += (input.right - input.left) * 10;
@@ -91,7 +83,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 		if (input.a != (-1)) { //追記
 			scene.g.slice1 = input.a;
-			cout << scene.g.slice1 << endl;
 		}
 		if (input.f != (-1)) { //追記
 			scene.g.hissatu1 = input.f;
@@ -123,7 +114,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 		if (input.f != (-1) && scene.g.chanp == 0) { //追記
 			scene.g.hissatu1 = input.f;
-			cout << "g.hissatu1=" << scene.g.hissatu1 << endl;
+			//cout << "g.hissatu1=" << scene.g.hissatu1 << endl;
 		}
 		//std::cout << "id=0" << endl;
 	}
@@ -147,7 +138,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (input.w != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.change2 = input.w;
 
-			//cout << "打った2" << scene.ip2.x << "," <<Merge branch 'master' of
+			//cout << "打った2" << scene.ip2.x << "," << endl;
 
 		}
 		if (input.a != (-1) && scene.g.chanp == 0) { //追記
@@ -160,7 +151,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 		//std::cout << "id=0" << endl;
 	}
-	//std::cout << "id=1" << endl;
+//std::cout << "id=1" << endl;
 
 	if (input.x != (-1)) {
 		//player.dots[player.curDots].x = input.x;
@@ -173,7 +164,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-//以下!= (-1)から変更してscorecalcテスト中
 	if (input.score1 == 1) { //追記1227
 		//P1の点数追加時のシミュレーション用の動作　本編では削除
 		scorecalc(1);
@@ -187,29 +177,81 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.c[0] = input.key;
 	}
 
-	//得点判定
-	//if( scene.ibs.y < 0)
-
-//ゲーム開始時の動作
+//サーブ時プレイヤーの初期位置固定
 	if (scene.g.service == 0) {
-		scene.ip.y = 364;
-		scene.ibs.y = 364;
-		if (scene.ip.x < 122) {
-			scene.ip.x = 122;
-			//ballの初期位置決定
+		if ((scene.s.setx + scene.s.sety) % 2 == 0) {
+			scene.ip.y = 364;
+			scene.ibs.y = 364;
+			if (scene.ip.x < 122) {
+				scene.ip.x = 122;
+				//ballの初期位置決定
 
+			}
+			if (scene.ip.x > 392) {
+				scene.ip.x = 392;
+				//ballの初期位置決定
+			}
+			scene.ibs.x = scene.ip.x - 10;
 		}
-		if (scene.ip.x > 392) {
-			scene.ip.x = 392;
-			//ballの初期位置決定
-		}
-		scene.ibs.x = scene.ip.x - 10;
 
+		else {
+			scene.ip2.y = 60;
+			scene.ibs.y = 60;
+			if (scene.ip2.x < 122) {
+				scene.ip2.x = 122;
+				//ballの初期位置決定
+
+			}
+			if (scene.ip2.x > 392) {
+				scene.ip2.x = 392;
+				//ballの初期位置決定
+			}
+			scene.ibs.x = scene.ip2.x - 10;
+		}
 	}
 
 	if (input.w == 1 || input.a == 1 || input.f == 1) {
 		scene.g.service = 1;
 	}
+
+	//得点判定
+	if (scene.g.chanp == 0) {
+		if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
+			//out的な
+			scorecalc(2);
+		} else if (scene.ibs.y >= 195 && scene.ibs.x >= 606) {
+			//out的な
+			scorecalc(2);
+		} else if (scene.ibs.y <= 195 && scene.ibs.x <= 0) {
+			//out的な
+			scorecalc(1);
+		} else if (scene.ibs.y <= 195 && scene.ibs.x >= 606) {
+			//out的な
+			scorecalc(1);
+		} else if (scene.ibs.x >= 0 && scene.ibs.x <= 606
+				&& scene.ibs.y >= 424) {
+			scorecalc(2);
+		}
+	}
+
+	if (scene.g.chanp == 1) {
+		if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
+			//out的な
+			scorecalc(1);
+		} else if (scene.ibs.y >= 195 && scene.ibs.x >= 606) {
+			//out的な
+			scorecalc(1);
+		} else if (scene.ibs.y <= 195 && scene.ibs.x <= 0) {
+			//out的な
+			scorecalc(2);
+		} else if (scene.ibs.y <= 195 && scene.ibs.x >= 606) {
+			//out的な
+			scorecalc(2);
+		} else if (scene.ibs.x >= 0 && scene.ibs.x <= 606 && scene.ibs.y <= 0) {
+			scorecalc(1);
+		}
+	}
+
 //打った後にservice == 1になるように
 
 //得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
@@ -217,15 +259,11 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	 scene.g.service = 0;
 	 scene.g.flag = 0;
 	 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
-	 }Merge branch 'master' of
-	 ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
-
-	 Conflicts:
-	 src/model.cpp
+	 }
 
 	 */
 //std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
-//std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
+	std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
 //std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
 //std::cout << scene.g.flag << "," << scene.ibs.vy << "," << scene.ibs.vx
 //		<< std::endl;
@@ -433,13 +471,11 @@ void Model::ballmovement() {
 			scene.g.hissatu = 1;
 			scene.g.slice = 0;
 		}
-		scene.g.hissatu1 = 0;
+		scene.g.hissatu2 = 0;
 	}
 //scene.ib.x += scene.ib.vx;
-	std::cout << "ibs.vx=" << scene.ibs.vx << ",ibs.vy=" << scene.ibs.vy
-			<< std::endl;
-	std::cout << ",ibs.x=" << scene.ibs.x << ",ibs.y=" << scene.ibs.y
-			<< std::endl;
+//std::cout << "ibs.vx=" << scene.ibs.vx << ",ibs.vy=" << scene.ibs.vy<< std::endl;
+//std::cout << ",ibs.x=" << scene.ibs.x << ",ibs.y=" << scene.ibs.y<< std::endl;
 	if (scene.g.slice == 1) {
 		scene.ibs.vx += scene.ibs.svx;
 		scene.ibs.y += scene.ibs.vy;
@@ -459,7 +495,7 @@ void Model::ballmovement() {
 //通常得点
 void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
-
+	scene.g.service = 0;
 //xの得点
 	switch (i) {
 	case 1:
@@ -486,7 +522,6 @@ void Model::scorecalc(int i) {
 			scene.s.sx++;
 			break;
 		}
-
 		break;
 
 	case 2:
@@ -513,13 +548,13 @@ void Model::scorecalc(int i) {
 			scene.s.sy++;
 			break;
 		}
-
 		break;
 	}
 }
 
 void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
+	scene.g.service = 0;
 
 	switch (i) {
 	case 1:
@@ -527,12 +562,6 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 		++scene.s.setx;
 		if (scene.s.setx == 2) {
 			scene.g.win = 1; //P1勝利画面
-			/*
-			 int i=0;
-			 if(i == 0){
-			 scene.s.sx = scene.s.sy = scene.s.setx = scene.s.sety =  0;
-			 }
-			 */
 		}
 		break;
 
@@ -544,4 +573,5 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 		}
 		break;
 	}
+
 }
