@@ -138,7 +138,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (input.w != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.change2 = input.w;
 
-			//cout << "打った2" << scene.ip2.x << "," <<Merge branch 'master' of
+			//cout << "打った2" << scene.ip2.x << "," << endl;
 
 		}
 		if (input.a != (-1) && scene.g.chanp == 0) { //追記
@@ -164,7 +164,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.ip.y = input.y;
 	}
 
-//以下!= (-1)から変更してscorecalcテスト中
 	if (input.score1 == 1) { //追記1227
 		//P1の点数追加時のシミュレーション用の動作　本編では削除
 		scorecalc(1);
@@ -178,23 +177,37 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		scene.c[0] = input.key;
 	}
 
-//得点判定
-//if( scene.ibs.y < 0)
-
-//ゲーム開始時の動作
+//サーブ時プレイヤーの初期位置固定
 	if (scene.g.service == 0) {
-		scene.ip.y = 364;
-		scene.ibs.y = 364;
-		if (scene.ip.x < 122) {
-			scene.ip.x = 122;
-			//ballの初期位置決定
+		if ((scene.s.setx + scene.s.sety) % 2 == 0) {
+			scene.ip.y = 364;
+			scene.ibs.y = 364;
+			if (scene.ip.x < 122) {
+				scene.ip.x = 122;
+				//ballの初期位置決定
 
+			}
+			if (scene.ip.x > 392) {
+				scene.ip.x = 392;
+				//ballの初期位置決定
+			}
+			scene.ibs.x = scene.ip.x - 10;
 		}
-		if (scene.ip.x > 392) {
-			scene.ip.x = 392;
-			//ballの初期位置決定
+
+		else {
+			scene.ip2.y = 60;
+			scene.ibs.y = 60;
+			if (scene.ip2.x < 122) {
+				scene.ip2.x = 122;
+				//ballの初期位置決定
+
+			}
+			if (scene.ip2.x > 392) {
+				scene.ip2.x = 392;
+				//ballの初期位置決定
+			}
+			scene.ibs.x = scene.ip2.x - 10;
 		}
-		scene.ibs.x = scene.ip.x - 10;
 	}
 
 	if (input.w == 1 || input.a == 1 || input.f == 1) {
@@ -202,7 +215,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 
 	//得点判定
-
 	if (scene.g.chanp == 0) {
 		if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
 			//out的な

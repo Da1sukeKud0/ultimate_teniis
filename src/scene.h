@@ -62,7 +62,8 @@ class Scene {
 public:
 	char c[2];
 	struct tm tm;
-	game g;
+	game g;//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
+
 	Players p;
 	Player2 mp2;
 	Player mp;
