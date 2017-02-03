@@ -151,63 +151,59 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 	}
 
-/*	if (input.x != (-1)) {
-		//player.dots[player.curDots].x = input.x;
-		//player.dots[player.curDots].y = input.y;
-		//player.dots[player.curDots].visible = 1;
-		//player.curDots = (player.curDots + 1) % max_dots;
 
-		//追記
-		scene.ip.x = input.x;
-		scene.ip.y = input.y;
-	}*/
+
+	/*	if (input.x != (-1)) {
+	 //player.dots[player.curDots].x = input.x;
+	 //player.dots[player.curDots].y = input.y;
+	 //player.dots[player.curDots].visible = 1;
+	 //player.curDots = (player.curDots + 1) % max_dots;
+	 scene.ip.x = input.x;
+	 scene.ip.y = input.y;
+	 if (input.key != 0) {
+	 scene.c[0] = input.key;}
+	 }*/
+
+
 
 	/*if (input.score1 == 1) { //追記1227
-		//P1の点数追加時のシミュレーション用の動作　本編では削除
-		scorecalc(1);
-	}
-	if (input.score2 == 1) { //追記1227
-		//P2の点数追加時のシミュレーション用の動作　本編では削除
-		scorecalc(2);
-	}*/
+	 //P1の点数追加時のシミュレーション用の動作　本編では削除
+	 scorecalc(1);
+	 }if (input.score2 == 1) { //追記1227
+	 //P2の点数追加時のシミュレーション用の動作　本編では削除
+	 scorecalc(2);
+	 }*/
 
-	/*if (input.key != 0) {
-		scene.c[0] = input.key;
-	}*/
+
 
 //サーブ時プレイヤーの初期位置固定
 	if (scene.g.service == 0) {
 		if ((scene.s.setx + scene.s.sety) % 2 == 0) {
 			scene.ip.y = 364;
-			scene.ibs.y = 364;
+			scene.ibs.x = scene.ip.x - 10;
 			if (scene.ip.x < 122) {
 				scene.ip.x = 122;
-				//ballの初期位置決定
-
 			}
 			if (scene.ip.x > 392) {
 				scene.ip.x = 392;
-				//ballの初期位置決定
 			}
-			scene.ibs.x = scene.ip.x - 10;
+
 		}
 
 		else {
 			scene.ip2.y = 60;
-			scene.ibs.y = 60;
+			scene.ibs.x = scene.ip2.x - 10;
 			if (scene.ip2.x < 122) {
 				scene.ip2.x = 122;
-				//ballの初期位置決定
-
 			}
 			if (scene.ip2.x > 392) {
 				scene.ip2.x = 392;
-				//ballの初期位置決定
 			}
-			scene.ibs.x = scene.ip2.x - 10;
+
 		}
 	}
 
+	//各種スイングによる
 	if (input.w == 1 || input.a == 1 || input.f == 1) {
 		scene.g.service = 1;
 	}
@@ -249,22 +245,9 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scorecalc(1);
 		}
 	}
-
-//打った後にservice == 1になるように
-
-//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
-	/*if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
-	 scene.g.service = 0;
-	 scene.g.flag = 0;
-	 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
-	 }
-
-	 */
-//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
+	//打った後にservice == 1になるように
 	std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
-//std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
-//std::cout << scene.g.flag << "," << scene.ibs.vy << "," << scene.ibs.vx
-//		<< std::endl;
+
 }
 
 void Model::ballmovement() {
