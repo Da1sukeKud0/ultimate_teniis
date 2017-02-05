@@ -77,49 +77,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (scene.ip.y >= 212 && scene.ip.x >= 0 && scene.ip.x <= 606) {
 			scene.ip.x += (input.right - input.left) * 10;
 			scene.ip.y += (input.down - input.up) * 10;
-<<<<<<< HEAD
-				if (input.w != (-1)) { //追記
-					scene.g.change1 = input.w;
-				}
-				if (input.a != (-1)) { //追記
-					scene.g.slice1 = input.a;
-				}
-				if (input.f != (-1)) { //追記
-					scene.g.hissatu1 = input.f;
-				}
-			}
-			else if (id == 0) { //server
-				if (scene.ip.y >= 282) {
-					scene.ip.y += (input.down - input.up) * 10;
-				} else {
-					scene.ip.y = 282;
-				}
-				if (scene.ip.y <= 424) {
-					scene.ip.y += (input.down - input.up) * 10;
-				} else {
-					scene.ip.y = 424;
-				}
-				if (scene.ip.x >= 0) {
-					scene.ip.x += (input.right - input.left) * 10;
-				} else {
-					scene.ip.x = 0;
-				}
-				if (scene.ip.x <= 606) {
-					scene.ip.x += (input.right - input.left) * 10;
-				} else {
-					scene.ip.x = 606;
-				}
-				if (input.w != (-1) && scene.g.chanp == 0) { //追記
-					scene.g.change1 = input.w;
-				}
-				if (input.a != (-1) && scene.g.chanp == 0) { //追記
-					scene.g.slice1 = input.a;
-				}
-				if (input.f != (-1) && scene.g.chanp == 0) { //追記
-					scene.g.hissatu1 = input.f;
-				}
-			}
-=======
 		}
 		if (input.w != (-1)) { //追記
 			scene.g.change1 = input.w;
@@ -161,41 +118,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.g.hissatu1 = input.f;
 		}
 	}
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 
-<<<<<<< HEAD
-			else if (id == 1) { //client
-				if (scene.ip2.y <= 142) {
-					scene.ip2.y += (input.up - input.down) * 10;
-				} else {
-					scene.ip2.y = 142;
-				}
-				if (scene.ip2.y >= 0) {
-					scene.ip2.y += (input.up - input.down) * 10;
-				} else {
-					scene.ip2.y = 0;
-				}
-				if (scene.ip2.x >= 0) {
-					scene.ip2.x += (input.left - input.right) * 10;
-				} else {
-					scene.ip2.x = 0;
-				}
-				if (scene.ip2.x <= 606) {
-					scene.ip2.x += (input.left - input.right) * 10;
-				} else {
-					scene.ip2.x = 606;
-				}
-				if (input.w != (-1) && scene.g.chanp == 1) { //追記
-					scene.g.change2 = input.w;
-				}
-				if (input.a != (-1) && scene.g.chanp == 0) { //追記
-					scene.g.slice2 = input.a;
-				}
-				if (input.f != (-1) && scene.g.chanp == 0) { //追記
-					scene.g.hissatu2 = input.f;
-				}
-			}
-=======
 	else if (id == 1) { //client
 		if (scene.ip2.y <= 212) {
 			scene.ip2.y += (input.up - input.down) * 10;
@@ -220,52 +143,15 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (input.w != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.change2 = input.w;
 		}
-		if (input.a != (-1) && scene.g.chanp == 0) { //追記
+		if (input.a != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.slice2 = input.a;
 		}
-		if (input.f != (-1) && scene.g.chanp == 0) { //追記
+		if (input.f != (-1) && scene.g.chanp == 1) { //追記
 			scene.g.hissatu2 = input.f;
 		}
 	}
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 
-<<<<<<< HEAD
-			/*	if (input.x != (-1)) {
-			 //player.dots[player.curDots].x = input.x;
-			 //player.dots[player.curDots].y = input.y;
-			 //player.dots[player.curDots].visible = 1;
-			 //player.curDots = (player.curDots + 1) % max_dots;
-
-			 //追記
-			 scene.ip.x = input.x;
-			 scene.ip.y = input.y;
-			 }*/
-
-			/*if (input.score1 == 1) { //追記1227
-			 //P1の点数追加時のシミュレーション用の動作　本編では削除
-			 scorecalc(1);
-			 }
-			 if (input.score2 == 1) { //追記1227
-			 //P2の点数追加時のシミュレーション用の動作　本編では削除
-			 scorecalc(2);
-			 }*/
-
-			/*if (input.key != 0) {
-			 scene.c[0] = input.key;
-			 }*/
-
-=======
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 //サーブ時プレイヤーの初期位置固定
-<<<<<<< HEAD
-			if (scene.g.service == 0) {
-				if ((scene.s.setx + scene.s.sety) % 2 == 0) {
-					scene.ip.y = 364;
-					scene.ibs.y = 364;
-					if (scene.ip.x < 122) {
-						scene.ip.x = 122;
-						//ballの初期位置決定
-=======
 	if (scene.g.service == 0) {
 		if ((scene.s.setx + scene.s.sety) % 2 == 0) {
 			scene.ibs.vx = 0;
@@ -281,149 +167,9 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			}
 			scene.ibs.x = scene.ip.x - 10;
 			scene.g.chanp = 0;
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 
-<<<<<<< HEAD
-					}
-					if (scene.ip.x > 392) {
-						scene.ip.x = 392;
-						//ballの初期位置決定
-					}
-					scene.ibs.x = scene.ip.x - 10;
-				}
-
-				else {
-					scene.ip2.y = 60;
-					scene.ibs.y = 60;
-					if (scene.ip2.x < 122) {
-						scene.ip2.x = 122;
-						//ballの初期位置決定
-
-					}
-					if (scene.ip2.x > 392) {
-						scene.ip2.x = 392;
-						//ballの初期位置決定
-					}
-					scene.ibs.x = scene.ip2.x - 10;
-				}
-			}
-
-			if (input.w == 1 || input.a == 1 || input.f == 1) {
-				scene.g.service = 1;
-			}
-
-			//得点判定
-			if (scene.g.chanp == 0) {
-				if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
-					//out的な
-					scorecalc(2);
-				} else if (scene.ibs.y >= 195 && scene.ibs.x >= 606) {
-					//out的な
-					scorecalc(2);
-				} else if (scene.ibs.y <= 195 && scene.ibs.x <= 0) {
-					//out的な
-					scorecalc(1);
-				} else if (scene.ibs.y <= 195 && scene.ibs.x >= 606) {
-					//out的な
-					scorecalc(1);
-				} else if (scene.ibs.x >= 0 && scene.ibs.x <= 606
-						&& scene.ibs.y >= 424) {
-					scorecalc(2);
-				}
-			}
-
-			if (scene.g.chanp == 1) {
-				if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
-					//out的な
-					scorecalc(1);
-				} else if (scene.ibs.y >= 195 && scene.ibs.x >= 606) {
-					//out的な
-					scorecalc(1);
-				} else if (scene.ibs.y <= 195 && scene.ibs.x <= 0) {
-					//out的な
-					scorecalc(2);
-				} else if (scene.ibs.y <= 195 && scene.ibs.x >= 606) {
-					//out的な
-					scorecalc(2);
-				} else if (scene.ibs.x >= 0 && scene.ibs.x <= 606
-						&& scene.ibs.y <= 0) {
-					scorecalc(1);
-				}
-			}
-
-//打った後にservice == 1になるように
-
-//得点後の動作 getpointは0でフラット/1でplayer1の得点/2でplayer2の得点
-			/*if (scene.g.getpoint == 1 || scene.g.getpoint == 2) {
-			 scene.g.service = 0;
-			 scene.g.flag = 0;
-			 //仕様変更によりgetpointは使用していないため必要な場合flagについてはどこかに転記
-			 }
-
-			 */
-//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
-			std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
-//std::cout << scene.ibs.x << "," << scene.ibs.y << std::endl;
-//std::cout << scene.g.flag << "," << scene.ibs.vy << "," << scene.ibs.vx
-//		<< std::endl;
-=======
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 		}
 
-<<<<<<< HEAD
-	void Model::ballmovement() {
-		Manager &mgr = Manager::getInstance();
-		Scene &scene = mgr.scene;
-
-		if (scene.g.change1 == 1) {
-
-			if (scene.g.flag == 0) {
-
-				if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
-						&& scene.ip.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip.y + 40) {
-					scene.ibs.vy = -3;
-					scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 1;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				} else if (scene.ip.x + 20 <= scene.ibs.x
-						&& scene.ibs.x <= scene.ip.x + 90
-						&& scene.ip.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip.y + 40) {
-					scene.ibs.vy = -3;
-					scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 1;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				}
-
-			} else if (scene.g.flag != 0) {
-
-				if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
-						&& scene.ip.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip.y + 40) {
-					scene.ibs.vy = -3;
-					scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 1;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				} else if (scene.ip.x + 20 <= scene.ibs.x
-						&& scene.ibs.x <= scene.ip.x + 90
-						&& scene.ip.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip.y + 40) {
-					scene.ibs.vy = -3;
-					scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 1;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				}
-
-=======
 		else {
 			scene.ibs.vx = 0;
 			scene.ibs.vy = 0;
@@ -432,72 +178,13 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.ibs.x = scene.ip2.x - 10;
 			if (scene.ip2.x < 122) {
 				scene.ip2.x = 122;
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 			}
-			scene.g.change1 = 0;
-		}
-
-		if (scene.g.change2 == 1) {
-
-			if (scene.g.flag == 0) {
-
-				if (scene.ip2.x - 50 <= scene.ibs.x
-						&& scene.ibs.x <= scene.ip2.x + 20
-						&& scene.ip2.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip2.y + 40) {
-					scene.ibs.vy = 3;
-					scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 0;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				} else if (scene.ip2.x + 20 <= scene.ibs.x
-						&& scene.ibs.x <= scene.ip2.x + 90
-						&& scene.ip2.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip2.y + 40) {
-					scene.ibs.vy = 3;
-					scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 0;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				}
-
-			} else if (scene.g.flag != 0) {
-
-				if (scene.ip2.x - 50 <= scene.ibs.x
-						&& scene.ibs.x <= scene.ip2.x + 20
-						&& scene.ip2.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip2.y + 40) {
-					scene.ibs.vy = 3;
-					scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 0;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				} else if (scene.ip2.x + 20 <= scene.ibs.x
-						&& scene.ibs.x <= scene.ip2.x + 90
-						&& scene.ip2.y - 40 <= scene.ibs.y
-						&& scene.ibs.y <= scene.ip2.y + 40) {
-					scene.ibs.vy = 3;
-					scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
-					scene.g.flag += 1;
-					scene.g.chanp = 0;
-					scene.g.slice = 0;
-					scene.g.hissatu = 0;
-				}
-
+			if (scene.ip2.x > 392) {
+				scene.ip2.x = 392;
 			}
-<<<<<<< HEAD
-			scene.g.change2 = 0;
-=======
 			scene.ibs.x = scene.ip2.x - 10;
 			scene.g.chanp = 1;
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 		}
-<<<<<<< HEAD
-		if (scene.g.slice1 == 1) {
-=======
 	}
 
 	//各種スイングによる
@@ -523,7 +210,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 				&& scene.ibs.y >= 424) {
 			scorecalc(2);
 		}
-	}else if (scene.g.chanp == 1) {
+	} else if (scene.g.chanp == 1) {
 		if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
 			//out的な
 			scorecalc(1);
@@ -554,200 +241,303 @@ void Model::ballmovement() {
 
 		if (scene.g.flag == 0) {
 
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp:22/share/home/sdex/2016/team4.git
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
 				scene.ibs.vy = -3;
-				scene.ibs.svx = 0.05;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
-				scene.g.slice = 1;
+				scene.g.slice = 0;
 				scene.g.hissatu = 0;
 			} else if (scene.ip.x + 20 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 90
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
 				scene.ibs.vy = -3;
-				scene.ibs.svx = -0.05;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
-				scene.g.slice = 1;
+				scene.g.slice = 0;
 				scene.g.hissatu = 0;
 			}
-			scene.g.slice1 = 0;
-		}
 
-		if (scene.g.slice2 == 1) {
-			if (scene.ip2.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x + 20
+		} else if (scene.g.flag != 0) {
+
+			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
+				scene.ibs.vy = -3;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 1;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			} else if (scene.ip.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 90
+					&& scene.ip.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip.y + 40) {
+				scene.ibs.vy = -3;
+				scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 1;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			}
+
+		}
+		scene.g.change1 = 0;
+	}
+
+	if (scene.g.change2 == 1) {
+
+		if (scene.g.flag == 0) {
+
+			if (scene.ip2.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 20
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
 				scene.ibs.vy = 3;
-				scene.ibs.svx = 0.05;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
-				scene.g.slice = 1;
+				scene.g.slice = 0;
 				scene.g.hissatu = 0;
 			} else if (scene.ip2.x + 20 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 90
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
 				scene.ibs.vy = 3;
-				scene.ibs.svx = -0.05;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
-				scene.g.slice = 1;
+				scene.g.slice = 0;
 				scene.g.hissatu = 0;
 			}
-			scene.g.slice2 = 0;
+
+		} else if (scene.g.flag != 0) {
+
+			if (scene.ip2.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 20
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 0;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			} else if (scene.ip2.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 90
+					&& scene.ip2.y - 40 <= scene.ibs.y
+					&& scene.ibs.y <= scene.ip2.y + 40) {
+				scene.ibs.vy = 3;
+				scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
+				scene.g.flag += 1;
+				scene.g.chanp = 0;
+				scene.g.slice = 0;
+				scene.g.hissatu = 0;
+			}
+
+		}
+		scene.g.change2 = 0;
+	}
+	if (scene.g.slice1 == 1) {
+		if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -3;
+			scene.ibs.svx = 0.05;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
 			scene.g.slice = 1;
+			scene.g.hissatu = 0;
+		} else if (scene.ip.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip.x + 90
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -3;
+			scene.ibs.svx = -0.05;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
+			scene.g.slice = 1;
+			scene.g.hissatu = 0;
 		}
-		if (scene.g.hissatu1 == 1) {
-			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -10;
-				scene.ibs.vx = 0;
-				scene.g.flag += 1;
-				scene.g.chanp = 1;
-				scene.g.slice = 0;
-				scene.g.hissatu = 0;
-			} else if (scene.ip.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 90
-					&& scene.ip.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -10;
-				scene.ibs.vx = 0;
-				scene.g.flag += 1;
-				scene.g.chanp = 1;
-				scene.g.slice = 0;
-				scene.g.hissatu = 0;
-			}
-			scene.g.hissatu1 = 0;
+		scene.g.slice1 = 0;
+	}
 
+	if (scene.g.slice2 == 1) {
+		if (scene.ip2.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x + 20
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.svx = 0.05;
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.slice = 1;
+			scene.g.hissatu = 0;
+		} else if (scene.ip2.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip2.x + 90
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.svx = -0.05;\
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.slice = 1;
+			scene.g.hissatu = 0;
 		}
-		if (scene.g.hissatu2 == 1) {
-			if (scene.ip2.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x + 20
-					&& scene.ip2.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 3;
-				scene.ibs.vx = 0;
-				scene.g.flag += 1;
-				scene.g.chanp = 0;
-				scene.g.hissatu = 1;
-				scene.g.slice = 0;
-			} else if (scene.ip2.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip2.x + 90
-					&& scene.ip2.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 3;
-				scene.ibs.vx = 0;
-				scene.g.flag += 1;
-				scene.g.chanp = 0;
-				scene.g.hissatu = 1;
-				scene.g.slice = 0;
-			}
-			scene.g.hissatu2 = 0;
+		scene.g.slice2 = 0;
+		scene.g.slice = 1;
+	}
+	if (scene.g.hissatu1 == 1) {
+		if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -10;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
+			scene.g.slice = 0;
+			scene.g.hissatu = 0;
+		} else if (scene.ip.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip.x + 90
+				&& scene.ip.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip.y + 40) {
+			scene.ibs.vy = -10;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 1;
+			scene.g.slice = 0;
+			scene.g.hissatu = 0;
 		}
+		scene.g.hissatu1 = 0;
+
+	}
+	if (scene.g.hissatu2 == 1) {
+		if (scene.ip2.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x + 20
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.hissatu = 1;
+			scene.g.slice = 0;
+		} else if (scene.ip2.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip2.x + 90
+				&& scene.ip2.y - 40 <= scene.ibs.y
+				&& scene.ibs.y <= scene.ip2.y + 40) {
+			scene.ibs.vy = 3;
+			scene.ibs.vx = 0;
+			scene.g.flag += 1;
+			scene.g.chanp = 0;
+			scene.g.hissatu = 1;
+			scene.g.slice = 0;
+		}
+		scene.g.hissatu2 = 0;
+	}
 //scene.ib.x += scene.ib.vx;
 //std::cout << "ibs.vx=" << scene.ibs.vx << ",ibs.vy=" << scene.ibs.vy<< std::endl;
 //std::cout << ",ibs.x=" << scene.ibs.x << ",ibs.y=" << scene.ibs.y<< std::endl;
-		if (scene.g.slice == 1) {
-			scene.ibs.vx += scene.ibs.svx;
-			scene.ibs.y += scene.ibs.vy;
-			scene.ibs.x += scene.ibs.vx;
-		} else if (scene.g.hissatu == 1) {
-			scene.ibs.hvx = GetRandom(1, 10) / 10;
-			scene.ibs.hvy = GetRandom(1, 10) / 10;
-			scene.ibs.vx = scene.ibs.hvx;
-			scene.ibs.vy = scene.ibs.hvy;
-			scene.ibs.y += scene.ibs.vy;
-			scene.ibs.x += scene.ibs.vx;
-		} else {
-			scene.ibs.y += scene.ibs.vy;
-			scene.ibs.x += scene.ibs.vx;
-		}
+	if (scene.g.slice == 1) {
+		scene.ibs.vx += scene.ibs.svx;
+		scene.ibs.y += scene.ibs.vy;
+		scene.ibs.x += scene.ibs.vx;
+	} else if (scene.g.hissatu == 1) {
+		scene.ibs.hvx = GetRandom(1, 10) / 10;
+		scene.ibs.hvy = GetRandom(1, 10) / 10;
+		scene.ibs.vx = scene.ibs.hvx;
+		scene.ibs.vy = scene.ibs.hvy;
+		scene.ibs.y += scene.ibs.vy;
+		scene.ibs.x += scene.ibs.vx;
+	} else {
+		scene.ibs.y += scene.ibs.vy;
+		scene.ibs.x += scene.ibs.vx;
 	}
+}
 //通常得点
-	void Model::scorecalc(int i) {
-		Scene &scene = Manager::getInstance().scene;
-		scene.g.service = 0;
+void Model::scorecalc(int i) {
+	Scene &scene = Manager::getInstance().scene;
 //xの得点
-		switch (i) {
-			case 1:
-			scene.g.flag = 0;
-			cout << "scorecalc呼出テスト" << scene.s.sx << endl;
-			if (scene.s.sx == 3) { //40点以降
-				if (scene.s.sy == 3) {
-					scene.s.sx = 4; //P1がAve
-					break;
-				} else if (scene.s.sy == 4) {
-					scene.s.sx = 3; //P2のAveに追いついたので40:40に
-					scene.s.sy = 3;
-					break;
-				} else { //P2が30点未満なので勝利
-					gameset(1);
-					break;
-				}
-			}
-			if (scene.s.sx == 4) { //P1がAveの状態から勝利
+	switch (i) {
+	case 1:
+		scene.g.service = 0;
+		scene.g.flag = 0;
+		cout << "scorecalc呼出テスト" << scene.s.sx << endl;
+		if (scene.s.sx == 3) { //40点以降
+			if (scene.s.sy == 3) {
+				scene.s.sx = 4; //P1がAve
+				break;
+			} else if (scene.s.sy == 4) {
+				scene.s.sx = 3; //P2のAveに追いついたので40:40に
+				scene.s.sy = 3;
+				break;
+			} else { //P2が30点未満なので勝利
 				gameset(1);
 				break;
 			}
-			if (scene.s.sx <= 2) { //通常得点
-				scene.s.sx++;
-				break;
-			}
+		}
+		if (scene.s.sx == 4) { //P1がAveの状態から勝利
+			gameset(1);
 			break;
+		}
+		if (scene.s.sx <= 2) { //通常得点
+			scene.s.sx++;
+			break;
+		}
+		break;
 
-			case 2:
-			cout << "scorecalc呼出テスト" << scene.s.sy << endl;
-			scene.g.flag = 0;
-			if (scene.s.sy == 3) { //40点以降
-				if (scene.s.sx == 3) {
-					scene.s.sy = 4; //P2がAve
-					break;
-				} else if (scene.s.sx == 4) {
-					scene.s.sy = 3; //P1のAveに追いついたので40:40に
-					scene.s.sx = 3;
-					break;
-				} else { //P1が30点未満なので勝利
-					gameset(2);
-					break;
-				}
-			}
-			if (scene.s.sy == 4) { //P2がAveの状態から勝利
+	case 2:
+		cout << "scorecalc呼出テスト" << scene.s.sy << endl;
+		scene.g.service = 0;
+		scene.g.flag = 0;
+		if (scene.s.sy == 3) { //40点以降
+			if (scene.s.sx == 3) {
+				scene.s.sy = 4; //P2がAve
+				break;
+			} else if (scene.s.sx == 4) {
+				scene.s.sy = 3; //P1のAveに追いついたので40:40に
+				scene.s.sx = 3;
+				break;
+			} else { //P1が30点未満なので勝利
 				gameset(2);
 				break;
 			}
-			if (scene.s.sy <= 2) { //通常得点
-				scene.s.sy++;
-				break;
-			}
+		}
+		if (scene.s.sy == 4) { //P2がAveの状態から勝利
+			gameset(2);
 			break;
 		}
+		if (scene.s.sy <= 2) { //通常得点
+			scene.s.sy++;
+			break;
+		}
+		break;
 	}
+}
 
-	void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
-		Scene &scene = Manager::getInstance().scene;
+void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
+	Scene &scene = Manager::getInstance().scene;
+
+	switch (i) {
+	case 1:
 		scene.g.service = 0;
-
-		switch (i) {
-			case 1:
-			scene.s.sx = scene.s.sy = 0;
-			++scene.s.setx;
-			if (scene.s.setx == 2) {
-				scene.g.win = 1; //P1勝利画面
-			}
-			break;
-
-			case 2:
-			scene.s.sx = scene.s.sy = 0;
-			++scene.s.sety;
-			if (scene.s.sety == 2) {
-				scene.g.win = 2; //P2勝利画面
-			}
-			break;
+		scene.s.sx = scene.s.sy = 0;
+		++scene.s.setx;
+		if (scene.s.setx == 2) {
+			scene.g.win = 1; //P1勝利画面
 		}
+		break;
 
+	case 2:
+		scene.g.service = 0;
+		scene.s.sx = scene.s.sy = 0;
+		++scene.s.sety;
+		if (scene.s.sety == 2) {
+			scene.g.win = 2; //P2勝利画面
+		}
+		break;
 	}
+
+}
