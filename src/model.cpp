@@ -151,33 +151,35 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 	}
 
-/*	if (input.x != (-1)) {
-		//player.dots[player.curDots].x = input.x;
-		//player.dots[player.curDots].y = input.y;
-		//player.dots[player.curDots].visible = 1;
-		//player.curDots = (player.curDots + 1) % max_dots;
+	/*	if (input.x != (-1)) {
+	 //player.dots[player.curDots].x = input.x;
+	 //player.dots[player.curDots].y = input.y;
+	 //player.dots[player.curDots].visible = 1;
+	 //player.curDots = (player.curDots + 1) % max_dots;
 
-		//追記
-		scene.ip.x = input.x;
-		scene.ip.y = input.y;
-	}*/
+	 //追記
+	 scene.ip.x = input.x;
+	 scene.ip.y = input.y;
+	 }*/
 
 	/*if (input.score1 == 1) { //追記1227
-		//P1の点数追加時のシミュレーション用の動作　本編では削除
-		scorecalc(1);
-	}
-	if (input.score2 == 1) { //追記1227
-		//P2の点数追加時のシミュレーション用の動作　本編では削除
-		scorecalc(2);
-	}*/
+	 //P1の点数追加時のシミュレーション用の動作　本編では削除
+	 scorecalc(1);
+	 }
+	 if (input.score2 == 1) { //追記1227
+	 //P2の点数追加時のシミュレーション用の動作　本編では削除
+	 scorecalc(2);
+	 }*/
 
 	/*if (input.key != 0) {
-		scene.c[0] = input.key;
-	}*/
+	 scene.c[0] = input.key;
+	 }*/
 
 //サーブ時プレイヤーの初期位置固定
 	if (scene.g.service == 0) {
 		if ((scene.s.setx + scene.s.sety) % 2 == 0) {
+			scene.ibs.vx = 0;
+			scene.ibs.vy = 0;
 			scene.ip.y = 364;
 			scene.ibs.y = 364;
 			if (scene.ip.x < 122) {
@@ -190,9 +192,12 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 				//ballの初期位置決定
 			}
 			scene.ibs.x = scene.ip.x - 10;
+			scene.g.chanp = 0;
 		}
 
 		else {
+			scene.ibs.vx = 0;
+			scene.ibs.vy = 0;
 			scene.ip2.y = 60;
 			scene.ibs.y = 60;
 			if (scene.ip2.x < 122) {
@@ -205,6 +210,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 				//ballの初期位置決定
 			}
 			scene.ibs.x = scene.ip2.x - 10;
+			scene.g.chanp = 1;
 		}
 	}
 
@@ -415,7 +421,7 @@ void Model::ballmovement() {
 				&& scene.ip2.y - 40 <= scene.ibs.y
 				&& scene.ibs.y <= scene.ip2.y + 40) {
 			scene.ibs.vy = 3;
-			scene.ibs.svx = -0.05;
+			scene.ibs.svx = -0.05;\
 			scene.g.flag += 1;
 			scene.g.chanp = 0;
 			scene.g.slice = 1;

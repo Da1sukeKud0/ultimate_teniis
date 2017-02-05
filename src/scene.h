@@ -36,7 +36,7 @@ struct ballshadow {
 	double vx, vy;
 };
 
-struct imageball
+struct imageball{
 	double x, y;
 	double vx, vy;
 };
