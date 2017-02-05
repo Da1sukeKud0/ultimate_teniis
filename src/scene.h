@@ -24,6 +24,7 @@ struct game {
 	int charactorselect, change1, change2, service, getpoint, getset1, getset2,
 			gameset, cha1, cha2, cha3, cha4, serve, flag, win, chanp;
 	int slice1, slice2, hissatu1, hissatu2, slice, hissatu;
+	int lose;
 };
 
 struct ball {
@@ -62,8 +63,7 @@ class Scene {
 public:
 	char c[2];
 	struct tm tm;
-	game g;//std::cout << scene.g.service << "," << scene.g.flag << "," <<scene.ibs.y<<","<<scene.ibs.vy<<std::endl;
-
+	game g;
 	Players p;
 	Player2 mp2;
 	Player mp;
@@ -81,8 +81,7 @@ public:
 	void init();
 	Scene() {
 		init();
-	}
-	;
+	};
 
 private:
 	char buffer[max_scenelen];

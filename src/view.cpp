@@ -249,8 +249,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 				+ (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
 		scene.bs.y = scene.ibs.y;
 	} else if (scene.id == 1) {
-		scene.mp.x = 300
-				- (1 - (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
+		scene.mp.x = 300 - (1 - (scene.ip.y / 424) * 0.5) * (scene.ip.x - 300);
 		scene.mp.y = 350 - scene.ip.y;
 		scene.mp2.x = 300
 				- (1 - (scene.ip2.y / 424) * 0.5) * (scene.ip2.x - 300);
@@ -267,8 +266,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		scene.mp2.x = 300
 				+ (0.5 + (scene.ip2.y / 424) * 0.5) * (scene.ip2.x - 300);
 		scene.mp2.y = scene.ip2.y;
-		scene.b.x = 300
-				+ (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
+		scene.b.x = 300 + (0.5 + (scene.ib.y / 424) * 0.5) * (scene.ib.x - 300);
 		scene.b.y = scene.ib.y;
 		scene.bs.x = 300
 				+ (0.5 + (scene.ibs.y / 424) * 0.5) * (scene.ibs.x - 300);
@@ -291,7 +289,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	cc->set_source(court, 0, 0);
 	cc->paint();
 	cc->restore();
-
 
 	//alone,server,clientのプレイヤー表示関連
 	if (scene.id == -1) { //スタンドアローン
@@ -319,12 +316,10 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 				cc->paint();
 			}
 		}
-
 		cc->restore();
+
 	} else if (scene.id == 0) { //Player1について
-
 		cc->save();
-
 		if (scene.g.change1 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
@@ -379,13 +374,10 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 				cc->paint();
 			}
 		}
-
 		cc->restore();
 
 	} else if (scene.id == 1) { //Player2について
-
 		cc->save();
-
 		if (scene.g.change2 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
@@ -414,19 +406,16 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 			}
 
 		}
-
 		cc->restore();
 
 		cc->save();
-
 		if (scene.g.change1 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
 			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 			cc->paint();
 		} else if (scene.g.change1 == 1) {
-			if (scene.ip.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 90
+			if (scene.ip.x + 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 90
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
 				myplayer = Cairo::ImageSurface::create_from_png(
@@ -434,7 +423,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 				cc->scale(0.5, 0.5);
 				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 				cc->paint();
-			} else if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
+			} else if (scene.ip.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
 				myplayer = Cairo::ImageSurface::create_from_png(
@@ -444,7 +434,6 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 				cc->paint();
 			}
 		}
-
 		cc->restore();
 	}
 
@@ -614,20 +603,34 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	}
 	cc->restore();
 
-//勝利時の画面表示
+//ゲームセット時の画面表示
 	cc->save();
-	Cairo::RefPtr<Cairo::ImageSurface> win;
+	Cairo::RefPtr<Cairo::ImageSurface> win, lose;
 	if (scene.g.win == 1) {
-		win = Cairo::ImageSurface::create_from_png("win1.png");
-		cc->scale(1.0, 1.0);
-		cc->set_source(win, 0, 100);
-		cc->paint();
+		if (scene.id == 0) {
+			win = Cairo::ImageSurface::create_from_png("win1.png");
+			cc->scale(1.0, 1.0);
+			cc->set_source(win, 0, 100);
+			cc->paint();
+		} else if (scene.id == 1) {
+			lose = Cairo::ImageSurface::create_from_png("lose.png");
+			cc->scale(1.515, 1.515);
+			cc->set_source(lose, 0, 0);
+			cc->paint();
+		}
 	}
 	if (scene.g.win == 2) {
-		win = Cairo::ImageSurface::create_from_png("win2.png");
-		cc->scale(1.0, 1.0);
-		cc->set_source(win, 0, 100);
-		cc->paint();
+		if (scene.id == 1) {
+			win = Cairo::ImageSurface::create_from_png("win2.png");
+			cc->scale(1.0, 1.0);
+			cc->set_source(win, 0, 100);
+			cc->paint();
+		} else if (scene.id == 0) {
+			lose = Cairo::ImageSurface::create_from_png("lose.png");
+			cc->scale(1.515, 1.515);
+			cc->set_source(lose, 0, 0);
+			cc->paint();
+		}
 	}
 	cc->restore();
 

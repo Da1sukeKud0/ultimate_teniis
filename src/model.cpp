@@ -213,16 +213,16 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	} else if (scene.g.chanp == 1) {
 		if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
 			//out的な
-			scorecalc(1);
+			scorecalc(2);
 		} else if (scene.ibs.y >= 195 && scene.ibs.x >= 606) {
 			//out的な
-			scorecalc(1);
+			scorecalc(2);
 		} else if (scene.ibs.y <= 195 && scene.ibs.x <= 0) {
 			//out的な
-			scorecalc(2);
+			scorecalc(1);
 		} else if (scene.ibs.y <= 195 && scene.ibs.x >= 606) {
 			//out的な
-			scorecalc(2);
+			scorecalc(1);
 		} else if (scene.ibs.x >= 0 && scene.ibs.x <= 606 && scene.ibs.y <= 0) {
 			scorecalc(1);
 		}
@@ -459,11 +459,12 @@ void Model::ballmovement() {
 //通常得点
 void Model::scorecalc(int i) {
 	Scene &scene = Manager::getInstance().scene;
+	scene.g.service = 0;
+	scene.g.flag = 0;
 //xの得点
 	switch (i) {
 	case 1:
-		scene.g.service = 0;
-		scene.g.flag = 0;
+
 		cout << "scorecalc呼出テスト" << scene.s.sx << endl;
 		if (scene.s.sx == 3) { //40点以降
 			if (scene.s.sy == 3) {
@@ -490,8 +491,6 @@ void Model::scorecalc(int i) {
 
 	case 2:
 		cout << "scorecalc呼出テスト" << scene.s.sy << endl;
-		scene.g.service = 0;
-		scene.g.flag = 0;
 		if (scene.s.sy == 3) { //40点以降
 			if (scene.s.sx == 3) {
 				scene.s.sy = 4; //P2がAve
@@ -519,10 +518,11 @@ void Model::scorecalc(int i) {
 
 void Model::gameset(int i) { //gamesetって書いちゃったけど1setとった時の動作＋2set先取完全試合終了時の操作を含む
 	Scene &scene = Manager::getInstance().scene;
+	scene.g.service = 0;
+	scene.g.flag = 0;
 
 	switch (i) {
 	case 1:
-		scene.g.service = 0;
 		scene.s.sx = scene.s.sy = 0;
 		++scene.s.setx;
 		if (scene.s.setx == 2) {
@@ -531,7 +531,6 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 		break;
 
 	case 2:
-		scene.g.service = 0;
 		scene.s.sx = scene.s.sy = 0;
 		++scene.s.sety;
 		if (scene.s.sety == 2) {
