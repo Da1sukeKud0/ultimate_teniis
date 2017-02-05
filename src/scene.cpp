@@ -36,6 +36,8 @@ void Scene::receiveScene(char *tmp) {
 	tmp += sizeof(struct imageplayer);
 	ip2 = *(struct imageplayer2 *) tmp;
 	tmp += sizeof(struct imageplayer2);
+	g = *(struct game *) tmp;
+	tmp += sizeof(struct game);
 
 	p.clear(); // まずコンテナを空にして、
 	size = *(char *) tmp;
@@ -79,6 +81,8 @@ char *Scene::packScene(int &len) {
 	tmp += sizeof(struct imageplayer);
 	*(struct imageplayer2 *) tmp = ip2;
 	tmp += sizeof(struct imageplayer2);
+	*(struct game *) tmp = g;
+	tmp += sizeof(struct game);
 
 	*(char *) tmp = p.size();
 	tmp += sizeof(char); // 可変長のデータは、まず個数を送る
