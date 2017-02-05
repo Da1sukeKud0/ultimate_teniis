@@ -88,10 +88,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.g.hissatu1 = input.f;
 		}
 	} else if (id == 0) { //server
-		if (scene.ip.y >= 282) {
+		if (scene.ip.y >= 212) {
 			scene.ip.y += (input.down - input.up) * 10;
 		} else {
-			scene.ip.y = 282;
+			scene.ip.y = 212;
 		}
 		if (scene.ip.y <= 424) {
 			scene.ip.y += (input.down - input.up) * 10;
@@ -120,10 +120,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 	}
 
 	else if (id == 1) { //client
-		if (scene.ip2.y <= 142) {
+		if (scene.ip2.y <= 212) {
 			scene.ip2.y += (input.up - input.down) * 10;
 		} else {
-			scene.ip2.y = 142;
+			scene.ip2.y = 212;
 		}
 		if (scene.ip2.y >= 0) {
 			scene.ip2.y += (input.up - input.down) * 10;
@@ -151,63 +151,13 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 	}
 
-<<<<<<< HEAD
-	/*	if (input.x != (-1)) {
-	 //player.dots[player.curDots].x = input.x;
-	 //player.dots[player.curDots].y = input.y;
-	 //player.dots[player.curDots].visible = 1;
-	 //player.curDots = (player.curDots + 1) % max_dots;
-=======
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
-
-<<<<<<< HEAD
-	 //追記
-	 scene.ip.x = input.x;
-	 scene.ip.y = input.y;
-	 }*/
-=======
-
-	/*	if (input.x != (-1)) {
-	 //player.dots[player.curDots].x = input.x;
-	 //player.dots[player.curDots].y = input.y;
-	 //player.dots[player.curDots].visible = 1;
-	 //player.curDots = (player.curDots + 1) % max_dots;
-	 scene.ip.x = input.x;
-	 scene.ip.y = input.y;
-	 if (input.key != 0) {
-	 scene.c[0] = input.key;}
-	 }*/
-
-
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
-
-	/*if (input.score1 == 1) { //追記1227
-	 //P1の点数追加時のシミュレーション用の動作　本編では削除
-	 scorecalc(1);
-<<<<<<< HEAD
-	 }
-	 if (input.score2 == 1) { //追記1227
-=======
-	 }if (input.score2 == 1) { //追記1227
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
-	 //P2の点数追加時のシミュレーション用の動作　本編では削除
-	 scorecalc(2);
-	 }*/
-
-<<<<<<< HEAD
-	/*if (input.key != 0) {
-	 scene.c[0] = input.key;
-	 }*/
-=======
-
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
-
 //サーブ時プレイヤーの初期位置固定
 	if (scene.g.service == 0) {
 		if ((scene.s.setx + scene.s.sety) % 2 == 0) {
 			scene.ibs.vx = 0;
 			scene.ibs.vy = 0;
 			scene.ip.y = 364;
+			scene.ibs.y = 364;
 			scene.ibs.x = scene.ip.x - 10;
 			if (scene.ip.x < 122) {
 				scene.ip.x = 122;
@@ -215,18 +165,16 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			if (scene.ip.x > 392) {
 				scene.ip.x = 392;
 			}
-<<<<<<< HEAD
 			scene.ibs.x = scene.ip.x - 10;
 			scene.g.chanp = 0;
-=======
 
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 		}
 
 		else {
 			scene.ibs.vx = 0;
 			scene.ibs.vy = 0;
-			scene.ip2.y = 60;
+			scene.ip2.y = 1;
+			scene.ibs.y = 1;
 			scene.ibs.x = scene.ip2.x - 10;
 			if (scene.ip2.x < 122) {
 				scene.ip2.x = 122;
@@ -234,12 +182,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			if (scene.ip2.x > 392) {
 				scene.ip2.x = 392;
 			}
-<<<<<<< HEAD
 			scene.ibs.x = scene.ip2.x - 10;
 			scene.g.chanp = 1;
-=======
-
->>>>>>> branch 'master' of ssh://sdex@www.comp.sd.keio.ac.jp/share/home/sdex/2016/team4.git
 		}
 	}
 
@@ -266,9 +210,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 				&& scene.ibs.y >= 424) {
 			scorecalc(2);
 		}
-	}
-
-	if (scene.g.chanp == 1) {
+	}else if (scene.g.chanp == 1) {
 		if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
 			//out的な
 			scorecalc(1);
@@ -286,7 +228,8 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		}
 	}
 	//打った後にservice == 1になるように
-	std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
+	//std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
+	//std::cout<<scene.g.chanp<<endl;
 
 }
 
