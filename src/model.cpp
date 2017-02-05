@@ -233,6 +233,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scorecalc(1);
 		}
 	}
+
 	//打った後にservice == 1になるように
 	//std::cout << scene.ibs.vx << "," << scene.ibs.vy << std::endl;
 	//std::cout<<scene.g.chanp<<endl;
