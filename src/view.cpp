@@ -283,6 +283,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	 scene.bs.y = scene.ibs.y;
 	 */
 
+	//コート
 	cc->save();
 	Cairo::RefPtr<Cairo::Surface> court, myplayer, myplayer2, ball;
 	court = Cairo::ImageSurface::create_from_png("court.png");
@@ -290,7 +291,10 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	cc->set_source(court, 0, 0);
 	cc->paint();
 	cc->restore();
-	if (scene.id == -1) {
+
+
+	//alone,server,clientのプレイヤー表示関連
+	if (scene.id == -1) { //スタンドアローン
 		cc->save();
 		if (scene.g.change1 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
