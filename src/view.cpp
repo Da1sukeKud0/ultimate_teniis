@@ -44,12 +44,12 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	Manager &mgr = Manager::getInstance();
 	Scene &scene = mgr.scene;
 #else
-bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
-	Cairo::RefPtr<Cairo::Context> cc =
-			this->get_window()->create_cairo_context();
-	Gtk::DrawingArea::on_expose_event(e);
-	Manager &mgr = Manager::getInstance();
-	Scene &scene = mgr.scene;
+	bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
+		Cairo::RefPtr<Cairo::Context> cc =
+		this->get_window()->create_cairo_context();
+		Gtk::DrawingArea::on_expose_event(e);
+		Manager &mgr = Manager::getInstance();
+		Scene &scene = mgr.scene;
 
 #endif
 	if (!scene.valid) {
@@ -539,14 +539,14 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	//得点表示
 	if (scene.id == 0) {
 		cc->save();
-		cc->set_source_rgb(0.1, 0.0, 0.0);
+		cc->set_source_rgb(1.0, 0.0, 0.0);
 		cc->set_font_size(22);
 		cc->move_to(10, 35);
 		cc->show_text(string("P1"));
 		cc->restore();
 
 		cc->save();
-		cc->set_source_rgb(0.1, 0.1, 0.1);
+		cc->set_source_rgb(0.9, 0.9, 0.9);
 		cc->set_font_size(22);
 		cc->move_to(10, 68);
 		cc->show_text(string("P2"));
@@ -624,8 +624,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 			cc->show_text(string("win"));
 		}
 		cc->restore();
-	}
-	if (scene.id == 1) {
+	}else if (scene.id == 1) {
 		cc->save();
 		cc->set_source_rgb(0.1, 0.0, 0.0);
 		cc->set_font_size(22);
