@@ -267,7 +267,7 @@ void Model::ballmovement() {
 		if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 				&& scene.ip.y - 40 <= scene.ibs.y
 				&& scene.ibs.y <= scene.ip.y + 40) {
-			scene.ibs.vy = -3;
+			scene.ibs.vy = -5;
 			scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 			scene.g.flag += 1;
 			scene.g.chanp = 1;
@@ -277,7 +277,7 @@ void Model::ballmovement() {
 				&& scene.ibs.x <= scene.ip.x + 90
 				&& scene.ip.y - 40 <= scene.ibs.y
 				&& scene.ibs.y <= scene.ip.y + 40) {
-			scene.ibs.vy = -3;
+			scene.ibs.vy = -5;
 			scene.ibs.vx = (-(scene.ip.y - scene.ibs.y)) / 10;
 			scene.g.flag += 1;
 			scene.g.chanp = 1;
@@ -293,7 +293,7 @@ void Model::ballmovement() {
 		if (scene.ip2.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip2.x + 20
 				&& scene.ip2.y - 40 <= scene.ibs.y
 				&& scene.ibs.y <= scene.ip2.y + 40) {
-			scene.ibs.vy = 3;
+			scene.ibs.vy = 5;
 			scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
 			scene.g.flag += 1;
 			scene.g.chanp = 0;
@@ -303,7 +303,7 @@ void Model::ballmovement() {
 				&& scene.ibs.x <= scene.ip2.x + 90
 				&& scene.ip2.y - 40 <= scene.ibs.y
 				&& scene.ibs.y <= scene.ip2.y + 40) {
-			scene.ibs.vy = 3;
+			scene.ibs.vy = 5;
 			scene.ibs.vx = (-(scene.ip2.y - scene.ibs.y)) / 10;
 			scene.g.flag += 1;
 			scene.g.chanp = 0;
@@ -319,8 +319,8 @@ void Model::ballmovement() {
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -2;
-				scene.ibs.svx = 0.01;
+				scene.ibs.vy = -4;
+				scene.ibs.svx = 0.02;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
 				scene.g.slice = 2;
@@ -329,8 +329,8 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip.x + 90
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -2;
-				scene.ibs.svx = -0.01;
+				scene.ibs.vy = -4;
+				scene.ibs.svx = -0.02;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
 				scene.g.slice = 2;
@@ -347,8 +347,8 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip2.x + 20
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 2;
-				scene.ibs.svx = 0.01;
+				scene.ibs.vy = 4;
+				scene.ibs.svx = 0.02;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
 				scene.g.slice = 2;
@@ -357,8 +357,8 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip2.x + 90
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 2;
-				scene.ibs.svx = -0.01;
+				scene.ibs.vy = 4;
+				scene.ibs.svx = -0.02;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
 				scene.g.slice = 2;
@@ -374,8 +374,8 @@ void Model::ballmovement() {
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -4;
-				scene.ibs.svx = 0.05;
+				scene.ibs.vy = -7;
+				scene.ibs.svx = 0.07;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
 				scene.g.slice = 1;
@@ -385,8 +385,8 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip.x + 90
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -4;
-				scene.ibs.svx = -0.05;
+				scene.ibs.vy = -7;
+				scene.ibs.svx = -0.07;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
 				scene.g.slice = 1;
@@ -404,8 +404,8 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip2.x + 20
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 4;
-				scene.ibs.svx = 0.05;
+				scene.ibs.vy = 7;
+				scene.ibs.svx = 0.07;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
 				scene.g.slice = 1;
@@ -415,8 +415,8 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip2.x + 90
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 4;
-				scene.ibs.svx = -0.05;
+				scene.ibs.vy = 7;
+				scene.ibs.svx = -0.07;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
 				scene.g.slice = 1;
@@ -433,7 +433,7 @@ void Model::ballmovement() {
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -10;
+				scene.ibs.vy = -18;
 				scene.ibs.vx = 0;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
@@ -444,7 +444,7 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip.x + 90
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -10;
+				scene.ibs.vy = -18;
 				scene.ibs.vx = 0;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
@@ -486,16 +486,14 @@ void Model::ballmovement() {
 			scene.g.hissatu2 = 0;
 		}
 	}
-//scene.ib.x += scene.ib.vx;
-//std::cout << "ibs.vx=" << scene.ibs.vx << ",ibs.vy=" << scene.ibs.vy<< std::endl;
-//std::cout << ",ibs.x=" << scene.ibs.x << ",ibs.y=" << scene.ibs.y<< std::endl;
+
 	if (scene.g.slice == 1 || scene.g.slice == 2) {
 		scene.ibs.vx += scene.ibs.svx;
 		scene.ibs.y += scene.ibs.vy;
 		scene.ibs.x += scene.ibs.vx;
 	} else if (scene.g.hissatu == 1) {
-		scene.ibs.hvx = GetRandom(-10, 10);
-		scene.ibs.hvy = GetRandom(1, 10);
+		scene.ibs.hvx = GetRandom(-20, 20);
+		scene.ibs.hvy = GetRandom(1, 20);
 		scene.ibs.vx = scene.ibs.hvx;
 		scene.ibs.vy = scene.ibs.hvy;
 		scene.ibs.y += scene.ibs.vy;
