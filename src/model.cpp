@@ -88,10 +88,10 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.g.hissatu1 = input.f;
 		}
 	} else if (id == 0) { //server
-		if (scene.ip.y >= 195) {
+		if (scene.ip.y >= 212) {
 			scene.ip.y += (input.down - input.up) * 10;
 		} else {
-			scene.ip.y = 195;
+			scene.ip.y = 212;
 		}
 		if (scene.ip.y <= 424) {
 			scene.ip.y += (input.down - input.up) * 10;

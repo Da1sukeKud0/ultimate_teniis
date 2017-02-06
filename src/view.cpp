@@ -467,7 +467,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 //ボールのエフェクト
     if (scene.g.hissatu == 2) {
         cc->save();
-        ball = Cairo::ImageSurface::create_from_png("fire.png");
+        fire = Cairo::ImageSurface::create_from_png("fire.png");
+        cc->translate(-14,-14);
         cc->scale(1.0, 1.0);
         cc->set_source(fire, scene.bs.x, scene.bs.y);
         cc->paint();
@@ -475,7 +476,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
     if (scene.g.hissatu == 1) {
         cc->save();
-        ball = Cairo::ImageSurface::create_from_png("dark.png");
+        dark = Cairo::ImageSurface::create_from_png("dark.png");
+        cc->translate(-14,-14);
         cc->scale(1.0, 1.0);
         cc->set_source(dark, scene.bs.x, scene.bs.y);
         cc->paint();
@@ -483,7 +485,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
     if (scene.g.slice == 1) {
         cc->save();
-        ball = Cairo::ImageSurface::create_from_png("star.png");
+        star = Cairo::ImageSurface::create_from_png("star.png");
+        cc->translate(-14,-14);
         cc->scale(1.0, 1.0);
         cc->set_source(star, scene.bs.x, scene.bs.y);
         cc->paint();
@@ -491,6 +494,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 //ボールの座標計算
     cc->save();
     ball = Cairo::ImageSurface::create_from_png("ball.png");
+    cc->translate(-14,-14);
     cc->scale(1.0, 1.0);
     cc->set_source(ball, scene.bs.x, scene.bs.y);
     cc->paint();
