@@ -276,7 +276,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	//alone,server,clientのプレイヤー表示関連
 	if (scene.id == -1) { //スタンドアローン
 		cc->save();
-		if (scene.g.change1 == 0 && scene.g.counter1 == 0) {
+		if (scene.g.counter1 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
@@ -303,7 +303,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 		cc->save();
 
-		if (scene.g.change1 == 0 && scene.g.counter1 == 0) {
+		if (scene.g.counter1 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
@@ -337,7 +337,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		cc->restore();
 
 		cc->save();
-		if (scene.g.change2 == 0 && scene.g.counter2 == 0) {
+		if (scene.g.counter2 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
@@ -375,7 +375,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 		cc->save();
 
-		if (scene.g.change2 == 0 && scene.g.counter3 == 0) {
+		if (scene.g.counter3 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
@@ -410,7 +410,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 
 		cc->save();
 
-		if (scene.g.change1 == 0 && scene.g.counter4 == 0) {
+		if (scene.g.counter4 == 0) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
