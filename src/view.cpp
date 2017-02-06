@@ -305,16 +305,17 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 
 		cc->save();
 
-		if (scene.g.change1 == 0) {
+		if (scene.g.change1 == 0
+				&& (scene.g.counter == 0 || scene.g.counter >= 20)) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
 			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
-		} else if (scene.g.change1 == 1) {
-			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 40) {
+		} else if (scene.g.change1 == 1
+				|| (scene.g.counter >= 1 && scene.g.counter <= 19)) {
+			if (scene.ip.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 20) {
 				myplayer = Cairo::ImageSurface::create_from_png(
 						"backhand1.png");
 				cc->scale(1.0, 1.0);
@@ -322,9 +323,8 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 				cc->paint();
 			} else if (scene.ip.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 90
-					&& scene.ip.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 40) {
+					&& scene.ibs.x
+							<= (scene.ip.x + 90 && scene.g.counter <= 19)) {
 				myplayer = Cairo::ImageSurface::create_from_png(
 						"forehand1.png");
 				cc->scale(1.0, 1.0);
@@ -332,38 +332,41 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 				cc->paint();
 			}
+			scene.g.counter++;
+			if (scene.g.counter == 19) {
+				scene.g.counter = 0;
+			}
 		}
 		cc->restore();
-
-		cc->save();
-		if (scene.g.change2 == 0) {
-			myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
+	}
+	cc->save();
+	if (scene.g.change2 == 0
+			&& (scene.g.counter == 0 || scene.g.counter >= 20)) {
+		myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
+		cc->scale(1.0, 1.0);
+		cc->translate(-40, -40);
+		cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
+		cc->paint();
+	} else if (scene.g.change2 == 1
+			|| (scene.g.counter >= 1 && scene.g.counter <= 19)) {
+		if (scene.ip2.x + 20 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip2.x + 90) {
+			myplayer = Cairo::ImageSurface::create_from_png("backhand2.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
 			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 			cc->paint();
-		} else if (scene.g.change2 == 1) {
-			if (scene.ip2.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip2.x + 90
-					&& scene.ip2.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 40) {
-				myplayer = Cairo::ImageSurface::create_from_png(
-						"backhand2.png");
-				cc->scale(1.0, 1.0);
-				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
-				cc->paint();
-			} else if (scene.ip2.x - 50 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip2.x + 20
-					&& scene.ip2.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 40) {
-				myplayer = Cairo::ImageSurface::create_from_png(
-						"forehand2.png");
-				cc->scale(1.0, 1.0);
-				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
-				cc->paint();
-			}
+		} else if (scene.ip2.x - 50 <= scene.ibs.x
+				&& scene.ibs.x <= scene.ip2.x + 20) {
+			myplayer = Cairo::ImageSurface::create_from_png("forehand2.png");
+			cc->scale(1.0, 1.0);
+			cc->translate(-40, -40);
+			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
+			cc->paint();
+		}
+		scene.g.counter++;
+		if (scene.g.counter == 19) {
+			scene.g.counter = 0;
 		}
 
 		cc->restore();
@@ -371,72 +374,73 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	} else if (scene.id == 1) { //Player2について
 
 		cc->save();
-
-		if (scene.g.change2 == 0) {
+		if (scene.g.change2 == 0
+				&& (scene.g.counter == 0 || scene.g.counter >= 20)) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
-			cc->scale(1.0, 1.0);
-			cc->translate(-40, -40);
-			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-			cc->paint();
-		} else if (scene.g.change2 == 1) {
-
-			if (scene.ip2.x - 50 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip2.x + 20
-					&& scene.ip2.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 40) {
-				myplayer = Cairo::ImageSurface::create_from_png(
-						"backhand1.png");
-				cc->scale(1.0, 1.0);
-				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-				cc->paint();
-			} else if (scene.ip2.x + 20 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip2.x + 90
-					&& scene.ip2.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip2.y + 40) {
-				myplayer = Cairo::ImageSurface::create_from_png(
-						"forehand1.png");
-				cc->scale(1.0, 1.0);
-				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
-				cc->paint();
-			}
-
-		}
-
-		cc->restore();
-
-		cc->save();
-
-		if (scene.g.change1 == 0) {
-			myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
 			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 			cc->paint();
-		} else if (scene.g.change1 == 1) {
-			if (scene.ip.x + 20 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 90
-					&& scene.ip.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 40) {
+		} else if (scene.g.change2 == 1
+				|| (scene.g.counter >= 1 && scene.g.counter <= 19)) {
+			if (scene.ip2.x + 20 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 90) {
 				myplayer = Cairo::ImageSurface::create_from_png(
-						"backhand2.png");
+						"backhand1.png");
 				cc->scale(1.0, 1.0);
 				cc->translate(-40, -40);
 				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 				cc->paint();
-			} else if (scene.ip.x - 50 <= scene.ibs.x
-					&& scene.ibs.x <= scene.ip.x + 20
-					&& scene.ip.y - 40 <= scene.ibs.y
-					&& scene.ibs.y <= scene.ip.y + 40) {
+			} else if (scene.ip2.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip2.x + 20) {
 				myplayer = Cairo::ImageSurface::create_from_png(
-						"forehand2.png");
+						"forehand1.png");
 				cc->scale(1.0, 1.0);
 				cc->translate(-40, -40);
 				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 				cc->paint();
 			}
+			scene.g.counter++;
+			if (scene.g.counter == 19) {
+				scene.g.counter = 0;
+			}
 		}
+		cc->restore();
 
+		cc->save();
+
+		if (scene.g.change1 == 0
+				&& (scene.g.counter == 0 || scene.g.counter >= 20)) {
+			myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
+			cc->scale(1.0, 1.0);
+			cc->translate(-40, -40);
+			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+			cc->paint();
+		} else if (scene.g.change1 == 1
+				|| (scene.g.counter >= 1 && scene.g.counter <= 19)) {
+			if (scene.ip.x - 50 <= scene.ibs.x
+					&& scene.ibs.x <= scene.ip.x + 20) {
+				myplayer = Cairo::ImageSurface::create_from_png(
+						"backhand2.png");
+				cc->scale(1.0, 1.0);
+				cc->translate(-40, -40);
+				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+				cc->paint();
+			} else if (scene.ip.x + 20 <= scene.ibs.x
+					&& scene.ibs.x
+							<= (scene.ip.x + 90 && scene.g.counter <= 19)) {
+				myplayer = Cairo::ImageSurface::create_from_png(
+						"forehand2.png");
+				cc->scale(1.0, 1.0);
+				cc->translate(-40, -40);
+				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+				cc->paint();
+			}
+			scene.g.counter++;
+			if (scene.g.counter == 19) {
+				scene.g.counter = 0;
+			}
+		}
 		cc->restore();
 	}
 
@@ -624,8 +628,7 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 			cc->show_text(string("win"));
 		}
 		cc->restore();
-	}
-	else if (scene.id == 1) {
+	} else if (scene.id == 1) {
 		cc->save();
 		cc->set_source_rgb(1.0, 0.0, 0.0);
 		cc->set_font_size(22);
