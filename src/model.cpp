@@ -68,7 +68,7 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 //Player &player = scene.p[id];
 
 	for (int i = 0; i < max_dots; ++i) {
-		//player.dots[i].x += (inp    ut.right - input.left) * 5;
+		//player.dots[i].x += (input.right - input.left) * 5;
 		//player.dots[i].y += (input.down - input.up) * 5;
 	}
 
@@ -166,7 +166,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.ibs.vy = 0;
 			scene.ip.y = 364;
 			scene.ibs.y = 364;
-			scene.ibs.x = scene.ip.x - 10;
 			if (scene.ip.x < 122) {
 				scene.ip.x = 122;
 			}
@@ -185,7 +184,6 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 			scene.ibs.vy = 0;
 			scene.ip2.y = 1;
 			scene.ibs.y = 1;
-			scene.ibs.x = scene.ip2.x - 10;
 			if (scene.ip2.x < 122) {
 				scene.ip2.x = 122;
 			}

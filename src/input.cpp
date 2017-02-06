@@ -66,19 +66,19 @@ void Input::set_key(GdkEventKey* k) {
 	case GDK_KEY_Right:
 		input.right = 1;
 		break;
-	case GDK_KEY_w:
+	case GDK_KEY_f:
 		input.w = 1;
 		break;
-	case GDK_KEY_s: //追記1129
+	case GDK_KEY_e: //追記1129
 		input.score1 = 1; //+=1を=1に変更　1227
 		break;
 	case GDK_KEY_d: //追記1129
 		input.score2 = 1; //+=1を=1に変更　1227
 		break;
-	case GDK_KEY_a: //追記1129
+	case GDK_KEY_w: //追記1129
 		input.a = 1; //+=1を=1に変更　1227
 		break;
-	case GDK_KEY_f: //追記1129
+	case GDK_KEY_a: //追記1129
 		input.f = 1; //+=1を=1に変更　1227
 		break;
 	case GDK_KEY_space:
@@ -122,24 +122,24 @@ void Input::reset_key(GdkEventKey* k) {
 	case GDK_KEY_Right:
 		input.right = 0;
 		break;
-	case GDK_KEY_w:
+	case GDK_KEY_f:
 		input.w = 0;
 		break;
 	case GDK_KEY_space:
 		input.space = 0;
 		break;
 
-	case GDK_KEY_s: //追記1129
+	case GDK_KEY_e: //追記1129
 		input.score1 = 0; //+=0を=0に変更 1227
 		break;
 	case GDK_KEY_d: //追記1129
 		input.score2 = 0; //+=0を=0に変更 1227
 		break;
 
-	case GDK_KEY_a: //追記1129
+	case GDK_KEY_w: //追記1129
 		input.a = 0; //+=1を=1に変更　1227
 		break;
-	case GDK_KEY_f: //追記1129
+	case GDK_KEY_a: //追記1129
 		input.f = 0; //+=1を=1に変更　1227
 		break;
 	case GDK_KEY_1:
