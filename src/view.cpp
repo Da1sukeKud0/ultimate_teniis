@@ -543,7 +543,9 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->set_font_size(22);
 		cc->move_to(10, 35);
 		cc->show_text(string("P1"));
+		cc->restore();
 
+		cc->save();
 		cc->set_source_rgb(0.1, 0.1, 0.1);
 		cc->set_font_size(22);
 		cc->move_to(10, 68);
@@ -629,7 +631,9 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 		cc->set_font_size(22);
 		cc->move_to(10, 35);
 		cc->show_text(string("P2"));
+		cc->restore();
 
+		cc->save();
 		cc->set_source_rgb(0.1, 0.1, 0.1);
 		cc->set_font_size(22);
 		cc->move_to(10, 68);
