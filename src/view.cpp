@@ -375,7 +375,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait1.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
-			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 			cc->paint();
 		} else if (scene.g.change2 == 1 || scene.g.counter3 != 0) {
 			if (scene.ip2.x - 50 <= scene.ibs.x
@@ -384,7 +384,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 						"backhand1.png");
 				cc->scale(1.0, 1.0);
 				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 				cc->paint();
 			} else if (scene.ip2.x + 20 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 90) {
@@ -392,7 +392,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 						"forehand1.png");
 				cc->scale(1.0, 1.0);
 				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
+				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 				cc->paint();
 			}
 			scene.g.counter3++;
@@ -408,7 +408,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 			myplayer = Cairo::ImageSurface::create_from_png("wait2.png");
 			cc->scale(1.0, 1.0);
 			cc->translate(-40, -40);
-			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
+			cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 			cc->paint();
 		} else if (scene.g.change1 == 1 || scene.g.counter4 != 0) {
 			if (scene.ip.x + 20 <= scene.ibs.x
@@ -417,7 +417,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 						"backhand2.png");
 				cc->scale(1.0, 1.0);
 				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
+				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 				cc->paint();
 			} else if (scene.ip.x - 50 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20) {
@@ -425,7 +425,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 						"forehand2.png");
 				cc->scale(1.0, 1.0);
 				cc->translate(-40, -40);
-				cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
+				cc->set_source(myplayer, scene.mp.x, scene.mp.y);
 				cc->paint();
 			}
 			scene.g.counter4++;
@@ -709,6 +709,39 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		}
 		cc->restore();
 	}
+
+	//勝利時の画面表示
+		cc->save();
+		Cairo::RefPtr<Cairo::ImageSurface> win, lose;
+		if (scene.g.win == 1) {
+			if (scene.id == 0) {
+				win = Cairo::ImageSurface::create_from_png("win1.png");
+				cc->scale(1.0, 1.0);
+				cc->set_source(win, 0, 100);
+				cc->paint();
+			}
+			if (scene.id == 1) {
+				lose = Cairo::ImageSurface::create_from_png("lose.png");
+				cc->scale(1.5, 1.5);
+				cc->set_source(lose, 0, 0);
+				cc->paint();
+			}
+		}
+		if (scene.g.win == 2) {
+			if (scene.id == 1) {
+				win = Cairo::ImageSurface::create_from_png("win2.png");
+				cc->scale(1.0, 1.0);
+				cc->set_source(win, 0, 100);
+				cc->paint();
+			}
+			if (scene.id == 0) {
+				lose = Cairo::ImageSurface::create_from_png("lose.png");
+				cc->scale(1.5, 1.5);
+				cc->set_source(lose, 0, 0);
+				cc->paint();
+			}
+		}
+		cc->restore();
 
 #endif
 	scene.valid = false;
