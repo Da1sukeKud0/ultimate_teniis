@@ -36,6 +36,8 @@ void Scene::receiveScene(char *tmp) {
 	tmp += sizeof(struct imageplayer);
 	ip2 = *(struct imageplayer2 *) tmp;
 	tmp += sizeof(struct imageplayer2);
+	g = *(struct game *) tmp;
+	tmp += sizeof(struct game);
 
 	p.clear(); // まずコンテナを空にして、
 	size = *(char *) tmp;
@@ -79,6 +81,8 @@ char *Scene::packScene(int &len) {
 	tmp += sizeof(struct imageplayer);
 	*(struct imageplayer2 *) tmp = ip2;
 	tmp += sizeof(struct imageplayer2);
+	*(struct game *) tmp = g;
+	tmp += sizeof(struct game);
 
 	*(char *) tmp = p.size();
 	tmp += sizeof(char); // 可変長のデータは、まず個数を送る
@@ -102,7 +106,7 @@ void Scene::init(void) {
 	p.clear();
 
 	valid = false;
-	g.flag = 0;
+	//g.flag = 0;
 	g.change1 = 0;
 	g.change2 = 0;
 	g.service = 0;
@@ -110,13 +114,14 @@ void Scene::init(void) {
 	g.getset1 = 0;
 	g.getset2 = 0;
 	g.gameset = 0;
-	g.charactorselect = 0;
-	g.cha1 = 0;
-	g.cha2 = 0;
-	g.cha3 = 0;
-	g.cha4 = 0;
+	//g.charactorselect = 0;
+	//g.cha1 = 0;
+	//g.cha2 = 0;
+	//g.cha3 = 0;
+	//g.cha4 = 0;
 	g.chanp = 0;
 	g.win = 0;
+	g.lose = 0;
 	g.slice = 0;
 	g.slice1 = 0;
 	g.slice2 = 0;

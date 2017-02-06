@@ -24,6 +24,7 @@ struct game {
 	int charactorselect, change1, change2, service, getpoint, getset1, getset2,
 			gameset, cha1, cha2, cha3, cha4, serve, flag, win, chanp;
 	int slice1, slice2, hissatu1, hissatu2, slice, hissatu;
+	int lose;
 };
 
 struct ball {
@@ -36,7 +37,7 @@ struct ballshadow {
 	double vx, vy;
 };
 
-struct imageball {
+struct imageball{
 	double x, y;
 	double vx, vy;
 };
@@ -80,8 +81,7 @@ public:
 	void init();
 	Scene() {
 		init();
-	}
-	;
+	};
 
 private:
 	char buffer[max_scenelen];
