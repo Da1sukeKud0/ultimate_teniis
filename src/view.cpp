@@ -720,9 +720,9 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	Cairo::RefPtr<Cairo::ImageSurface> win, lose;
 	if (scene.g.win == 1) {
 		if (scene.id == 0) {
-			win = Cairo::ImageSurface::create_from_png("win1.png");
+			win = Cairo::ImageSurface::create_from_png("win3.png");
 			cc->scale(1.0, 1.0);
-			cc->set_source(win, 0, 100);
+			cc->set_source(win, 0, 0);
 			cc->paint();
 		}
 		if (scene.id == 1) {
@@ -734,9 +734,9 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 	}
 	if (scene.g.win == 2) {
 		if (scene.id == 1) {
-			win = Cairo::ImageSurface::create_from_png("win2.png");
+			win = Cairo::ImageSurface::create_from_png("win3.png");
 			cc->scale(1.0, 1.0);
-			cc->set_source(win, 0, 100);
+			cc->set_source(win, 0, 0);
 			cc->paint();
 		}
 		if (scene.id == 0) {
