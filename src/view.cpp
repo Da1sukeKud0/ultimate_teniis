@@ -659,7 +659,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		} else if (scene.s.sy == 4) {
 			cc->set_font_size(19);
 			cc->move_to(43, 35);
-			cc->show_text(string("Ave"));
+			cc->show_text(string("Ad."));
 		}
 
 		if (scene.s.sx == 0) {
@@ -681,7 +681,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		} else if (scene.s.sx == 4) {
 			cc->set_font_size(19);
 			cc->move_to(43, 68);
-			cc->show_text(string("Ave"));
+			cc->show_text(string("Ad."));
 		}
 
 		//セット数表示
