@@ -133,7 +133,8 @@ void Scene::init(void) {
     g.hissatulimit2=0;
     g.normalslice1=0;
     g.normalslice2=0;
-    g.counter=0;
+    g.counter1=0;
+    g.counter2=0;
     mp.x = 0;
     mp.y = 0;
     mp2.x = 0;

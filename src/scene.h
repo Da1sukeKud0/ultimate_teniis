@@ -24,7 +24,7 @@ struct game {
     int charactorselect, change1, change2, service, getpoint, getset1, getset2,
             gameset, cha1, cha2, cha3, cha4, serve, flag, win, chanp;
     int slice1, slice2, hissatu1, hissatu2, normalslice1, normalslice2;
-    int slicelimit1,slicelimit2,hissatulimit1, hissatulimit2, slice, hissatu,counter;
+    int slicelimit1,slicelimit2,hissatulimit1, hissatulimit2, slice, hissatu,counter1,counter2;
 };
 
 struct ball {
