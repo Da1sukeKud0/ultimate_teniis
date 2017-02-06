@@ -534,90 +534,181 @@ bool MyDrawingArea::on_expose_event(GdkEventExpose* e) {
 	cc->move_to(74, 8);
 	cc->line_to(74, 72);
 	cc->stroke();
+	cc->restore();
 
-	cc->set_font_size(22);
-	cc->move_to(10, 35);
-	cc->show_text(string("P1"));
+	//得点表示
+	if (scene.id == 0) {
+		cc->save();
+		cc->set_source_rgb(0.1, 0.0, 0.0);
+		cc->set_font_size(22);
+		cc->move_to(10, 35);
+		cc->show_text(string("P1"));
 
-	cc->set_font_size(22);
-	cc->move_to(10, 68);
-	cc->show_text(string("P2"));
+		cc->set_source_rgb(0.1, 0.1, 0.1);
+		cc->set_font_size(22);
+		cc->move_to(10, 68);
+		cc->show_text(string("P2"));
 
-//得点表示
-	if (scene.s.sx == 0) {
-		cc->set_font_size(22);
-		cc->move_to(43, 35);
-		cc->show_text(string("0"));
-	} else if (scene.s.sx == 1) {
-		cc->set_font_size(22);
-		cc->move_to(43, 35);
-		cc->show_text(string("15"));
-	} else if (scene.s.sx == 2) {
-		cc->set_font_size(22);
-		cc->move_to(43, 35);
-		cc->show_text(string("30"));
-	} else if (scene.s.sx == 3) {
-		cc->set_font_size(22);
-		cc->move_to(43, 35);
-		cc->show_text(string("40"));
-	} else if (scene.s.sx == 4) {
-		cc->set_font_size(19);
-		cc->move_to(43, 35);
-		cc->show_text(string("Ave"));
-	}
+		if (scene.s.sx == 0) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("0"));
+		} else if (scene.s.sx == 1) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("15"));
+		} else if (scene.s.sx == 2) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("30"));
+		} else if (scene.s.sx == 3) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("40"));
+		} else if (scene.s.sx == 4) {
+			cc->set_font_size(19);
+			cc->move_to(43, 35);
+			cc->show_text(string("Ave"));
+		}
 
-	if (scene.s.sy == 0) {
-		cc->set_font_size(22);
-		cc->move_to(43, 68);
-		cc->show_text(string("0"));
-	} else if (scene.s.sy == 1) {
-		cc->set_font_size(22);
-		cc->move_to(43, 68);
-		cc->show_text(string("15"));
-	} else if (scene.s.sy == 2) {
-		cc->set_font_size(22);
-		cc->move_to(43, 68);
-		cc->show_text(string("30"));
-	} else if (scene.s.sy == 3) {
-		cc->set_font_size(22);
-		cc->move_to(43, 68);
-		cc->show_text(string("40"));
-	} else if (scene.s.sy == 4) {
-		cc->set_font_size(19);
-		cc->move_to(43, 68);
-		cc->show_text(string("Ave"));
-	}
+		if (scene.s.sy == 0) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("0"));
+		} else if (scene.s.sy == 1) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("15"));
+		} else if (scene.s.sy == 2) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("30"));
+		} else if (scene.s.sy == 3) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("40"));
+		} else if (scene.s.sy == 4) {
+			cc->set_font_size(19);
+			cc->move_to(43, 68);
+			cc->show_text(string("Ave"));
+		}
 
 //セット数表示
-	if (scene.s.setx == 0) {
-//cout << "関数実行テスト" << endl;
-		cc->set_font_size(22);
-		cc->move_to(76, 35);
-		cc->show_text(string("0"));
-	} else if (scene.s.setx == 1) {
-		cc->set_font_size(22);
-		cc->move_to(76, 35);
-		cc->show_text(string("1"));
-	} else if (scene.s.setx == 2) {
-		cc->set_font_size(19);
-		cc->move_to(76, 35);
-		cc->show_text(string("win"));
-	}
+		if (scene.s.setx == 0) {
+			cc->set_font_size(22);
+			cc->move_to(76, 35);
+			cc->show_text(string("0"));
+		} else if (scene.s.setx == 1) {
+			cc->set_font_size(22);
+			cc->move_to(76, 35);
+			cc->show_text(string("1"));
+		} else if (scene.s.setx == 2) {
+			cc->set_font_size(19);
+			cc->move_to(76, 35);
+			cc->show_text(string("win"));
+		}
 
-	if (scene.s.sety == 0) {
-		cc->set_font_size(22);
-		cc->move_to(76, 68);
-		cc->show_text(string("0"));
-	} else if (scene.s.sety == 1) {
-		cc->set_font_size(22);
-		cc->move_to(76, 68);
-		cc->show_text(string("1"));
-	} else if (scene.s.sety == 2) {
-		cc->set_font_size(19);
-		cc->move_to(76, 68);
-		cc->show_text(string("win"));
+		if (scene.s.sety == 0) {
+			cc->set_font_size(22);
+			cc->move_to(76, 68);
+			cc->show_text(string("0"));
+		} else if (scene.s.sety == 1) {
+			cc->set_font_size(22);
+			cc->move_to(76, 68);
+			cc->show_text(string("1"));
+		} else if (scene.s.sety == 2) {
+			cc->set_font_size(19);
+			cc->move_to(76, 68);
+			cc->show_text(string("win"));
+		}
+		cc->restore();
 	}
-	cc->restore();
+	if (scene.id == 1) {
+		cc->save();
+		cc->set_source_rgb(0.1, 0.0, 0.0);
+		cc->set_font_size(22);
+		cc->move_to(10, 35);
+		cc->show_text(string("P2"));
+
+		cc->set_source_rgb(0.1, 0.1, 0.1);
+		cc->set_font_size(22);
+		cc->move_to(10, 68);
+		cc->show_text(string("P1"));
+
+		if (scene.s.sy == 0) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("0"));
+		} else if (scene.s.sy == 1) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("15"));
+		} else if (scene.s.sy == 2) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("30"));
+		} else if (scene.s.sy == 3) {
+			cc->set_font_size(22);
+			cc->move_to(43, 35);
+			cc->show_text(string("40"));
+		} else if (scene.s.sy == 4) {
+			cc->set_font_size(19);
+			cc->move_to(43, 35);
+			cc->show_text(string("Ave"));
+		}
+
+		if (scene.s.sx == 0) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("0"));
+		} else if (scene.s.sx == 1) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("15"));
+		} else if (scene.s.sx == 2) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("30"));
+		} else if (scene.s.sx == 3) {
+			cc->set_font_size(22);
+			cc->move_to(43, 68);
+			cc->show_text(string("40"));
+		} else if (scene.s.sx == 4) {
+			cc->set_font_size(19);
+			cc->move_to(43, 68);
+			cc->show_text(string("Ave"));
+		}
+
+		//セット数表示
+		if (scene.s.sety == 0) {
+			cc->set_font_size(22);
+			cc->move_to(76, 35);
+			cc->show_text(string("0"));
+		} else if (scene.s.sety == 1) {
+			cc->set_font_size(22);
+			cc->move_to(76, 35);
+			cc->show_text(string("1"));
+		} else if (scene.s.sety == 2) {
+			cc->set_font_size(19);
+			cc->move_to(76, 35);
+			cc->show_text(string("win"));
+		}
+
+		if (scene.s.setx == 0) {
+			cc->set_font_size(22);
+			cc->move_to(76, 68);
+			cc->show_text(string("0"));
+		} else if (scene.s.setx == 1) {
+			cc->set_font_size(22);
+			cc->move_to(76, 68);
+			cc->show_text(string("1"));
+		} else if (scene.s.setx == 2) {
+			cc->set_font_size(19);
+			cc->move_to(76, 68);
+			cc->show_text(string("win"));
+		}
+		cc->restore();
+	}
 
 //勝利時の画面表示
 	cc->save();
