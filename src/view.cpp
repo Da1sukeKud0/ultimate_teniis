@@ -626,14 +626,14 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 		cc->restore();
 	}else if (scene.id == 1) {
 		cc->save();
-		cc->set_source_rgb(0.1, 0.0, 0.0);
+		cc->set_source_rgb(1.0, 0.0, 0.0);
 		cc->set_font_size(22);
 		cc->move_to(10, 35);
 		cc->show_text(string("P2"));
 		cc->restore();
 
 		cc->save();
-		cc->set_source_rgb(0.1, 0.1, 0.1);
+		cc->set_source_rgb(0.9, 0.9, 0.9);
 		cc->set_font_size(22);
 		cc->move_to(10, 68);
 		cc->show_text(string("P1"));
