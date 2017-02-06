@@ -311,7 +311,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 			cc->paint();
 		} else if (scene.g.change1 == 1 || scene.g.counter1 != 0
 				|| scene.g.slice1 == 1 || scene.g.hissatu1 == 1
-				|| scene.g.normalslice1) {
+				|| scene.g.normalslice1 == 1) {
 			if (scene.ip.x - 50 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 20) {
 				myplayer = Cairo::ImageSurface::create_from_png(
@@ -344,8 +344,8 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 			cc->paint();
 		} else if (scene.g.change2 == 1 || scene.g.counter2 != 0
-				|| scene.g.slice2 == 0 || scene.g.normalslice2 == 0
-				|| scene.g.hissatu == 0) {
+				|| scene.g.slice2 == 1 || scene.g.normalslice2 == 1
+				|| scene.g.hissatu == 1) {
 			if (scene.ip2.x + 20 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 90) {
 				myplayer = Cairo::ImageSurface::create_from_png(
@@ -382,8 +382,8 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 			cc->set_source(myplayer, scene.mp2.x, scene.mp2.y);
 			cc->paint();
 		} else if (scene.g.change2 == 1 || scene.g.counter2 != 0
-				|| scene.g.slice2 == 0 || scene.g.normalslice2 == 0
-				|| scene.g.hissatu == 0) {
+				|| scene.g.slice2 == 1 || scene.g.normalslice2 == 1
+				|| scene.g.hissatu == 1) {
 			if (scene.ip2.x - 50 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip2.x + 20) {
 				myplayer = Cairo::ImageSurface::create_from_png(
@@ -418,7 +418,7 @@ bool MyDrawingArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cc) {
 			cc->paint();
 		} else if (scene.g.change1 == 1 || scene.g.counter4 != 0
 				|| scene.g.slice1 == 1 || scene.g.hissatu1 == 1
-				|| scene.g.normalslice1) {
+				|| scene.g.normalslice1 == 1) {
 			if (scene.ip.x + 20 <= scene.ibs.x
 					&& scene.ibs.x <= scene.ip.x + 90) {
 				myplayer = Cairo::ImageSurface::create_from_png(
