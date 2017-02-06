@@ -374,7 +374,7 @@ void Model::ballmovement() {
 			if (scene.ip.x - 50 <= scene.ibs.x && scene.ibs.x <= scene.ip.x + 20
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -3;
+				scene.ibs.vy = -4;
 				scene.ibs.svx = 0.05;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
@@ -385,7 +385,7 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip.x + 90
 					&& scene.ip.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip.y + 40) {
-				scene.ibs.vy = -3;
+				scene.ibs.vy = -4;
 				scene.ibs.svx = -0.05;
 				scene.g.flag += 1;
 				scene.g.chanp = 1;
@@ -404,7 +404,7 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip2.x + 20
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 3;
+				scene.ibs.vy = 4;
 				scene.ibs.svx = 0.05;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
@@ -415,7 +415,7 @@ void Model::ballmovement() {
 					&& scene.ibs.x <= scene.ip2.x + 90
 					&& scene.ip2.y - 40 <= scene.ibs.y
 					&& scene.ibs.y <= scene.ip2.y + 40) {
-				scene.ibs.vy = 3;
+				scene.ibs.vy = 4;
 				scene.ibs.svx = -0.05;
 				scene.g.flag += 1;
 				scene.g.chanp = 0;
