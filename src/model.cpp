@@ -102,6 +102,11 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		} else {
 			scene.ip.y = 212;
 		}
+		if (scene.ip.y <= 424) {
+			scene.ip.y += (input.down - input.up) * 10;
+		} else {
+			scene.ip.y = 424;
+		}
 		if (scene.ip.x >= 0) {
 			scene.ip.x += (input.right - input.left) * 10;
 		} else {
@@ -130,9 +135,14 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	else if (id == 1) { //client
 		if (scene.ip2.y <= 212) {
-			scene.ip2.y += (input.down - input.up) * 10;
+			scene.ip2.y += (input.up - input.down) * 10;
 		} else {
 			scene.ip2.y = 212;
+		}
+		if (scene.ip2.y >= 0) {
+			scene.ip2.y += (input.up - input.down) * 10;
+		} else {
+			scene.ip2.y = 0;
 		}
 		if (scene.ip2.x >= 0) {
 			scene.ip2.x += (input.left - input.right) * 10;
