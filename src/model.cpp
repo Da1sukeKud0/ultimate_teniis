@@ -207,20 +207,23 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 
 	//得点判定
 	if (scene.g.chanp == 0) {
-		if (scene.ibs.y >= 225 && scene.ibs.x <= 0) {
+		if (scene.ibs.y >= 225 && scene.ibs.x <= -30) {
 			//out的な
 			scorecalc(2);
-		} else if (scene.ibs.y >= 225 && scene.ibs.x >= 606) {
+		} else if (scene.ibs.y >= 225 && scene.ibs.x >= 630) {
 			//out的な
 			scorecalc(2);
-		} else if (scene.ibs.y <= 225 && scene.ibs.x <= 0) {
+		} else if (scene.ibs.y <= 225 && scene.ibs.x <= -30) {
 			//out的な
 			scorecalc(1);
-		} else if (scene.ibs.y <= 225 && scene.ibs.x >= 606) {
+		} else if (scene.ibs.y <= 225 && scene.ibs.x >= 630) {
 			//out的な
 			scorecalc(1);
 		} else if (scene.ibs.y <= 225 && scene.ibs.y >= 195 && scene.ibs.x >= 0
 				&& scene.ibs.x <= 50) {
+			scorecalc(1);
+		} else if (scene.ibs.y <= 225 && scene.ibs.y >= 195
+				&& scene.ibs.x >= 556 && scene.ibs.x <= 606) {
 			scorecalc(1);
 		} else if (scene.ibs.x >= 0 && scene.ibs.x <= 606
 				&& scene.ibs.y >= 454) {
@@ -230,19 +233,22 @@ void Model::stepPlayer(int fd) { // 各プレイヤーの動作を行う。公�
 		if (scene.ibs.y >= 195 && scene.ibs.x <= 0) {
 			//out的な
 			scorecalc(2);
-		} else if (scene.ibs.y >= 195 && scene.ibs.x >= 606) {
+		} else if (scene.ibs.y >= 195 && scene.ibs.x >= 630) {
 			//out的な
 			scorecalc(2);
 		} else if (scene.ibs.y <= 195 && scene.ibs.x <= 0) {
 			//out的な
 			scorecalc(1);
-		} else if (scene.ibs.y <= 195 && scene.ibs.x >= 606) {
+		} else if (scene.ibs.y <= 195 && scene.ibs.x >= 630) {
 			//out的な
 			scorecalc(1);
 		} else if (scene.ibs.y <= 225 && scene.ibs.y >= 195 && scene.ibs.x >= 0
 				&& scene.ibs.x <= 50) {
 			scorecalc(2);
-		} else if (scene.ibs.x >= 0 && scene.ibs.x <= 606
+		} else if (scene.ibs.y <= 225 && scene.ibs.y >= 195
+				&& scene.ibs.x >= 556 && scene.ibs.x <= 606) {
+			scorecalc(2);
+		} else if (scene.ibs.x >= -30 && scene.ibs.x <= 630
 				&& scene.ibs.y <= -30) {
 			scorecalc(1);
 		}
