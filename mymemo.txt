@@ -1,8 +1,5 @@
-4班　工藤大輔です。
-
-テニスの王子様
-
 /*
+ * テニスの王子様
  * model.cpp
  * 入力データInputDataの内容を場面Sceneに反映させる
  * 不公平にならないよう注意が必要
@@ -255,13 +252,9 @@ void Model::gameset(int i) { //gamesetって書いちゃったけど1setとっ�
 	//gameset時の変更とメッセージ
 }
 
-原田慶也です。
-これから一緒によろしくお願いします。
-テニスゲームの詳細を考えましょう。
-
-テニスの王子様は読んだことありません。
-
-alias team4='echo -e "### team4 compile and run ###\n" && cd /home/keiya/workspace/team4 && make && ./sample'/*
+/* 
+ * テニスの王子様は読んだことありません。
+ * alias team4='echo -e "### team4 compile and run ###\n" && cd /home/keiya/workspace/team4 && make && ./sample'/*
  * scene.h
  * 表示するデータを定義するSceneクラス
  */
