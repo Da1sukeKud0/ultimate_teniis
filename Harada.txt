@@ -1,7 +1,0 @@
-原田慶也です。
-これから一緒によろしくお願いします。
-テニスゲームの詳細を考えましょう。
-
-テニスの王子様は読んだことありません。
-
-alias team4='echo -e "### team4 compile and run ###\n" && cd /home/keiya/workspace/team4 && make && ./sample'
